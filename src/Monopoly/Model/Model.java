@@ -6,7 +6,9 @@ import javafx.beans.property.StringProperty;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Janos on 2016.04.04..
@@ -16,6 +18,7 @@ public class Model {
     private ArrayList<Player> players;
     private int currentPlayer; //TODO: should use IntegerProperty instead of int
     private List<MonopolyProperty> allMonopolyProperties = new ArrayList<>();
+    private Map<Integer, Object> boardElements = new HashMap<Integer, Object>();
     private MonopolyLogger monopolyLogger;
     private MonopolyChat monopolyChat;
 
@@ -44,8 +47,11 @@ public class Model {
 
         //Create properties, one per field
         for (int i = 0; i < 39; i++) {
-            allMonopolyProperties.add(new MonopolyProperty("TestProperty " + i, 10));
+            allMonopolyProperties.add(new MonopolyProperty("TestProperty " + i, 10, 200));
         }
+
+        fillBoardWithPropertiesAndFields();
+
 
         monopolyLogger = new MonopolyLogger();
         monopolyChat = new MonopolyChat();
@@ -116,17 +122,25 @@ public class Model {
     }
 
     //diceValues
-    public IntegerProperty getFirstDiceProperty() { return firstDiceProperty; }
+    public IntegerProperty getFirstDiceProperty() {
+        return firstDiceProperty;
+    }
 
-    public int getFirstDiceValue() { return firstDiceProperty.getValue(); }
+    public int getFirstDiceValue() {
+        return firstDiceProperty.getValue();
+    }
 
     public void setFirstDiceValue(int value) {
         firstDiceProperty.setValue(value);
     }
 
-    public IntegerProperty getSecondDiceProperty() { return secondDiceProperty; }
+    public IntegerProperty getSecondDiceProperty() {
+        return secondDiceProperty;
+    }
 
-    public int getSecondDiceValue() { return secondDiceProperty.getValue(); }
+    public int getSecondDiceValue() {
+        return secondDiceProperty.getValue();
+    }
 
     public void setSecondDiceValue(int value) {
         secondDiceProperty.setValue(value);
@@ -148,5 +162,59 @@ public class Model {
 
     public void saveGame(File file) {
         //TODO: implement save method
+    }
+
+    private void fillBoardWithPropertiesAndFields() {
+        boardElements.put(0, new Field("Start"));
+        boardElements.put(1, new MonopolyProperty("Mediterranean Avenua", 3, 60));
+        boardElements.put(2, new Field("Community Chest"));
+        boardElements.put(3, new MonopolyProperty("Baltic Avenue", 3, 60));
+        boardElements.put(4, new Field("Income Tax"));
+        boardElements.put(5, new MonopolyProperty("Reading Railroad", 0, 200));
+        boardElements.put(6, new MonopolyProperty("Oriental Avenue", 3, 100));
+        boardElements.put(7, new Field("Chance"));
+        boardElements.put(8, new MonopolyProperty("Vermont Avenue", 3, 100));
+        boardElements.put(9, new MonopolyProperty("Connecticut Avenue", 3, 120));
+        boardElements.put(10, new Field("Jail"));
+
+        boardElements.put(11, new MonopolyProperty("St. Charles Place", 3, 140));
+        boardElements.put(12, new MonopolyProperty("Electric Company", 0, 150));
+        boardElements.put(13, new MonopolyProperty("States Avenue", 3, 140));
+        boardElements.put(14, new MonopolyProperty("Virginia Avenue", 3, 160));
+        boardElements.put(15, new MonopolyProperty("Pensylvania Raildoad", 0, 200));
+        boardElements.put(16, new MonopolyProperty("ST. James Place", 3, 180));
+        boardElements.put(17, new Field("Community Chest"));
+        boardElements.put(18, new MonopolyProperty("Tenesse Avenue", 3, 180));
+        boardElements.put(19, new MonopolyProperty("New York Avenue", 3, 200));
+        boardElements.put(20, new Field("Free Parking"));
+
+        boardElements.put(21, new MonopolyProperty("Kentucky Avenue", 3, 220));
+        boardElements.put(22, new Field("Chance"));
+        boardElements.put(23, new MonopolyProperty("Indiana Avenue", 3, 220));
+        boardElements.put(24, new MonopolyProperty("Illinois Avenue", 3, 240));
+        boardElements.put(25, new MonopolyProperty("B. & O. Railroad", 0, 200));
+        boardElements.put(26, new MonopolyProperty("Atlantic Avenue", 3, 260));
+        boardElements.put(27, new MonopolyProperty("Ventnor Avenue", 3, 260));
+        boardElements.put(28, new MonopolyProperty("Water Works", 0, 150));
+        boardElements.put(29, new MonopolyProperty("Marvin Gardens", 3, 280));
+        boardElements.put(30, new Field("Go To Jail"));
+
+        boardElements.put(31, new MonopolyProperty("Pacific Avenue", 3, 300));
+        boardElements.put(32, new MonopolyProperty("North Carolina Avenue", 3, 300));
+        boardElements.put(33, new Field("Community Chest"));
+        boardElements.put(34, new MonopolyProperty("Pensilvania Avenue", 3, 320));
+        boardElements.put(35, new MonopolyProperty("Short Line", 0, 200));
+        boardElements.put(36, new Field("Chance"));
+        boardElements.put(37, new MonopolyProperty("Park Place", 3, 350));
+        boardElements.put(38, new Field("Luxury Tax"));
+        boardElements.put(39, new MonopolyProperty("Board Walk", 3, 400));
+
+    }
+
+    public Boolean isActFieldProperty() {
+        if(boardElements.get(getPlayer(getCurrentPlayer()).getPosition()) instanceof MonopolyProperty ){
+            return true;
+        }
+        return false;
     }
 }

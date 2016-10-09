@@ -1,6 +1,7 @@
 package Monopoly.Controller;
 
 import Monopoly.Model.Model;
+import Monopoly.Model.MonopolyProperty;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -892,6 +893,12 @@ public class Controller implements Initializable {
         });
 
         new Thread(task).start();
+        if(model.isActFieldProperty()){
+            buyPropertyButton.setDisable(false);
+        }
+        else {
+            buyPropertyButton.setDisable(true);
+        }
     }
 
 

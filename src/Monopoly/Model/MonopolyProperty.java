@@ -1,22 +1,22 @@
 package Monopoly.Model;
 
-/**
- * Created by zoltankis on 2016. 04. 25..
- */
 public class MonopolyProperty {
 
     private String propertyName;
+    private int prices;
     private int maxSize;
     private int actSize;
     private Player owner;
     private int numberOfHotels;
     private int getNumberOfHouses;
+    private int price;
 
 
-    public MonopolyProperty(String propertyName, int maxSize) {
+    public MonopolyProperty(String propertyName, int maxSize, int price) {
         this.propertyName = propertyName;
         this.maxSize = maxSize;
         actSize = 0;
+        this.price=price;
     }
 
     public int calculateRent() {
