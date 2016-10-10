@@ -1,17 +1,12 @@
 package Monopoly.Model;
 
 import javafx.beans.property.*;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Janos on 2016.04.04..
- */
+
 public class Player {
     private IntegerProperty moneyProperty;
     private StringProperty moneyTextProperty;
@@ -19,9 +14,13 @@ public class Player {
     private StringProperty nameProperty;
     private IntegerProperty positionProperty;
 
+    private IntegerProperty diceRollsLeftProperty;
+
     private boolean inGame;
 
-    private ListProperty<MonopolyProperty> monopolyPropertiesObserveble = new <MonopolyProperty>SimpleListProperty();
+    private boolean inJail;
+
+    private ListProperty<MonopolyProperty> monopolyPropertiesObservable = new <MonopolyProperty>SimpleListProperty();
     private List<MonopolyProperty> monopolyProperties = new ArrayList<>();
 
 
@@ -48,7 +47,11 @@ public class Player {
 
         positionProperty = new SimpleIntegerProperty(0);
 
+        diceRollsLeftProperty = new SimpleIntegerProperty(3);
+
         inGame = true;
+
+        inJail = false;
 
     }
 
@@ -63,6 +66,23 @@ public class Player {
 
     public IntegerProperty moneyProperty() {
         return moneyProperty;
+    }
+
+    //diceRollsLeftProperty getter/setter
+    public int getDiceRollsLeft() {
+        return diceRollsLeftProperty.get();
+    }
+
+    public void setDiceRollsLeft(int value) {
+        diceRollsLeftProperty.set(value);
+    }
+
+    public void decreaseDiceRollsLeft() {
+        diceRollsLeftProperty.set(getDiceRollsLeft()-1);
+    }
+
+    public IntegerProperty diceRollsLeftProperty() {
+        return diceRollsLeftProperty;
     }
 
     //moneyTextProperty getter/setter
@@ -119,13 +139,22 @@ public class Player {
         inGame = value;
     }
 
+    //inJail getter/setter
+    public boolean getInJail() {
+        return inJail;
+    }
+
+    public void setInJail(boolean value) {
+        inJail = value;
+    }
+
     public ListProperty<MonopolyProperty> getMonopolyProperties() {
-        return monopolyPropertiesObserveble;
+        return monopolyPropertiesObservable;
     }
 
     //Add a property to the player (not necessary in the final version)
     public void ownNewProperty(MonopolyProperty name) {
         monopolyProperties.add(name);
-        monopolyPropertiesObserveble.set(FXCollections.observableArrayList(monopolyProperties));
+        monopolyPropertiesObservable.set(FXCollections.observableArrayList(monopolyProperties));
     }
 }

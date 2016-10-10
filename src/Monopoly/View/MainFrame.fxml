@@ -25,11 +25,6 @@
                   <MenuItem mnemonicParsing="false" onAction="#exitMenuItemClicked" text="Exit" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Options">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Settings" />
-            </items>
-          </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#rulesMenuItemClicked" text="Rules" />
@@ -115,6 +110,26 @@
                                                             <Font name="System Bold" size="24.0" />
                                                          </font>
                                                       </Label>
+                                                      <ImageView fx:id="jailField_player2" fitHeight="25.0" fitWidth="27.0" layoutX="14.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../Images/pieceRed.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <ImageView fx:id="jailField_player3" fitHeight="25.0" fitWidth="27.0" layoutX="60.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../Images/pieceYellow.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <ImageView fx:id="jailField_player1" fitHeight="25.0" fitWidth="27.0" layoutX="60.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../Images/pieceGreen.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <ImageView fx:id="jailField_player0" fitHeight="25.0" fitWidth="27.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../Images/pieceBlue.png" />
+                                                         </image>
+                                                      </ImageView>
                                                    </children></Pane>
                                              </children>
                                           </AnchorPane>
@@ -1135,14 +1150,14 @@
       </AnchorPane>
     <AnchorPane layoutY="31.0" minHeight="0.0" minWidth="0.0" prefHeight="738.0" prefWidth="284.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1082.0" AnchorPane.topAnchor="31.0" SplitPane.resizableWithParent="false">
          <children>
-            <Button fx:id="rollDiceButton" layoutX="11.0" layoutY="563.0" mnemonicParsing="false" onAction="#rollDiceButtonClicked" prefHeight="35.0" prefWidth="263.0" text="Roll dice" AnchorPane.bottomAnchor="140.0" />
-            <Button fx:id="buyPropertyButton" layoutX="11.0" layoutY="604.0" mnemonicParsing="false" onAction="#buyPropertyButtonClicked" prefHeight="35.0" prefWidth="263.0" text="Buy property" AnchorPane.bottomAnchor="99.0" />
-            <Button fx:id="sellPropertyButton" layoutX="11.0" layoutY="645.0" mnemonicParsing="false" onAction="#sellPropertyButtonClicked" prefHeight="35.0" prefWidth="263.0" text="Sell Property" AnchorPane.bottomAnchor="58.0" />
-            <TabPane layoutX="14.0" layoutY="14.0" prefHeight="535.0" prefWidth="253.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="189.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+            <Button fx:id="rollDiceButton" layoutX="11.0" layoutY="505.0" mnemonicParsing="false" onAction="#rollDiceButtonClicked" prefHeight="35.0" prefWidth="263.0" text="Roll dice" AnchorPane.bottomAnchor="198.0" />
+            <Button fx:id="buyPropertyButton" layoutX="11.0" layoutY="546.0" mnemonicParsing="false" onAction="#buyPropertyButtonClicked" prefHeight="35.0" prefWidth="263.0" text="Buy property" AnchorPane.bottomAnchor="157.0" />
+            <Button fx:id="sellPropertyButton" layoutX="11.0" layoutY="587.0" mnemonicParsing="false" onAction="#sellPropertyButtonClicked" prefHeight="35.0" prefWidth="263.0" text="Sell Property" AnchorPane.bottomAnchor="116.0" />
+            <TabPane layoutX="14.0" layoutY="14.0" prefHeight="486.0" prefWidth="253.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="238.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
               <tabs>
                 <Tab fx:id="player0Tab" text="Player1">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="438.0" prefWidth="253.0">
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="454.0" prefWidth="253.0">
                            <children>
                               <ListView fx:id="player0PropertyList" layoutX="15.0" layoutY="67.0" prefHeight="425.0" prefWidth="224.0" AnchorPane.bottomAnchor="14.0" AnchorPane.topAnchor="67.0" />
                               <Label layoutX="14.0" layoutY="14.0" text="Money:" />
@@ -1190,7 +1205,12 @@
                   </Tab>
               </tabs>
             </TabPane>
-            <Button fx:id="mortgageButton" layoutX="11.0" layoutY="686.0" mnemonicParsing="false" onAction="#mortgageButtonClicked" prefHeight="35.0" prefWidth="263.0" text="Mortgage" AnchorPane.bottomAnchor="17.0" />
+            <Button fx:id="mortgageButton" layoutX="11.0" layoutY="628.0" mnemonicParsing="false" onAction="#mortgageButtonClicked" prefHeight="35.0" prefWidth="263.0" text="Mortgage" AnchorPane.bottomAnchor="75.0" />
+            <Button fx:id="endTurnButton" layoutX="11.0" layoutY="670.0" mnemonicParsing="false" onAction="#endTurnButtonClicked" prefHeight="53.0" prefWidth="263.0" text="End turn" AnchorPane.bottomAnchor="15.0">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </children>

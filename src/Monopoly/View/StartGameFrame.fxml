@@ -33,5 +33,6 @@
       <Label fx:id="errorMsgLabel2" layoutX="340.0" layoutY="365.0" textFill="RED" />
       <Label fx:id="errorMsgLabel3" layoutX="340.0" layoutY="396.0" textFill="RED" />
       <Label fx:id="errorMsgLabel4" layoutX="340.0" layoutY="427.0" textFill="RED" />
+      <Label fx:id="errorLabel" layoutX="360.0" layoutY="384.0" textFill="RED" />
    </children>
 </AnchorPane>

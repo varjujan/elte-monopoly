@@ -20,8 +20,6 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 
@@ -47,6 +45,8 @@ public class Controller implements Initializable {
         new Image(Controller.class.getResourceAsStream("/Images/diceFour.png")),
         new Image(Controller.class.getResourceAsStream("/Images/diceFive.png")),
         new Image(Controller.class.getResourceAsStream("/Images/diceSix.png")));
+
+    //region FXML stuff
 
     @FXML
     private javafx.scene.control.ListView logPropertyList;
@@ -164,9 +164,6 @@ public class Controller implements Initializable {
 
     @FXML
     private ImageView field24_player0;
-
-    @FXML
-    private SplitPane splitPane1;
 
     @FXML
     private ImageView field16_player3;
@@ -594,6 +591,20 @@ public class Controller implements Initializable {
     @FXML
     private ImageView secondDiceImage;
 
+    @FXML
+    private ImageView jailField_player0;
+
+    @FXML
+    private ImageView jailField_player1;
+
+    @FXML
+    private ImageView jailField_player2;
+
+    @FXML
+    private ImageView jailField_player3;
+
+    //endregion
+
     public Controller() {
         model = new Model();
         rand = new Random();
@@ -627,6 +638,8 @@ public class Controller implements Initializable {
         player1Tab.textProperty().bindBidirectional(model.nameProperty(1));
         player2Tab.textProperty().bindBidirectional(model.nameProperty(2));
         player3Tab.textProperty().bindBidirectional(model.nameProperty(3));
+
+        //region Ugly stepPlayer bindings
 
         field0_player0.imageProperty().bind(Bindings.when(model.positionProperty(0).isEqualTo(0)).then(pieceBlueImage).otherwise(emptyImage));
         field1_player0.imageProperty().bind(Bindings.when(model.positionProperty(0).isEqualTo(1)).then(pieceBlueImage).otherwise(emptyImage));
@@ -792,6 +805,65 @@ public class Controller implements Initializable {
         field38_player3.imageProperty().bind(Bindings.when(model.positionProperty(3).isEqualTo(38)).then(pieceYellowImage).otherwise(emptyImage));
         field39_player3.imageProperty().bind(Bindings.when(model.positionProperty(3).isEqualTo(39)).then(pieceYellowImage).otherwise(emptyImage));
 
+        jailField_player0.imageProperty().bind(Bindings.when(model.positionProperty(0).isEqualTo(-1)).then(pieceBlueImage).otherwise(emptyImage));
+        jailField_player1.imageProperty().bind(Bindings.when(model.positionProperty(1).isEqualTo(-1)).then(pieceGreenImage).otherwise(emptyImage));
+        jailField_player2.imageProperty().bind(Bindings.when(model.positionProperty(2).isEqualTo(-1)).then(pieceRedImage).otherwise(emptyImage));
+        jailField_player3.imageProperty().bind(Bindings.when(model.positionProperty(3).isEqualTo(-1)).then(pieceYellowImage).otherwise(emptyImage));
+
+        //endregion
+
+        //region Ugly rollDiceButton listeners
+
+        model.currentPlayerIndexProperty().addListener((obs, oldValue, newValue) -> {
+            if(model.getCurrentPlayer().getDiceRollsLeft() == 0){
+                rollDiceButton.disableProperty().set(true);
+            }else{
+                rollDiceButton.disableProperty().set(false);
+            }
+        });
+
+        model.getPlayer(0).diceRollsLeftProperty().addListener((obs, oldValue, newValue) -> {
+            if(model.getCurrentPlayerIndex() == 0){
+                if(model.getPlayer(0).getDiceRollsLeft() == 0){
+                    rollDiceButton.disableProperty().set(true);
+                }else{
+                    rollDiceButton.disableProperty().set(false);
+                }
+            }
+        });
+
+        model.getPlayer(1).diceRollsLeftProperty().addListener((obs, oldValue, newValue) -> {
+            if(model.getCurrentPlayerIndex() == 1){
+                if(model.getPlayer(1).getDiceRollsLeft() == 0){
+                    rollDiceButton.disableProperty().set(true);
+                }else{
+                    rollDiceButton.disableProperty().set(false);
+                }
+            }
+        });
+
+        model.getPlayer(2).diceRollsLeftProperty().addListener((obs, oldValue, newValue) -> {
+            if(model.getCurrentPlayerIndex() == 2){
+                if(model.getPlayer(2).getDiceRollsLeft() == 0){
+                    rollDiceButton.disableProperty().set(true);
+                }else{
+                    rollDiceButton.disableProperty().set(false);
+                }
+            }
+        });
+
+        model.getPlayer(3).diceRollsLeftProperty().addListener((obs, oldValue, newValue) -> {
+            if(model.getCurrentPlayerIndex() == 3){
+                if(model.getPlayer(3).getDiceRollsLeft() == 0){
+                    rollDiceButton.disableProperty().set(true);
+                }else{
+                    rollDiceButton.disableProperty().set(false);
+                }
+            }
+        });
+
+        //endregion
+
         model.getFirstDiceProperty().addListener((obs, oldValue, newValue) -> {
             if((Integer)newValue == 0){
                 firstDiceImage.setImage(emptyImage);
@@ -812,7 +884,7 @@ public class Controller implements Initializable {
 
     @FXML
     void newGameMenuItemClicked(ActionEvent event) {
-
+        //TODO
     }
 
     @FXML
@@ -827,7 +899,7 @@ public class Controller implements Initializable {
 
     @FXML
     void loadGameMenuItemClicked(ActionEvent event) {
-
+        //TODO
     }
 
     @FXML
@@ -850,25 +922,42 @@ public class Controller implements Initializable {
 
     @FXML
     void rulesMenuItemClicked(ActionEvent event) {
-
+        //TODO
     }
 
     @FXML
     void aboutMenuItemClicked(ActionEvent event) {
-
+        //TODO
     }
 
     @FXML
     void rollDiceButtonClicked(ActionEvent event) {
-        rollDiceButton.setDisable(true);
-
         int firstDiceValue = rand.nextInt(6) + 1;
         int secondDiceValue = rand.nextInt(6) + 1;
 
-        //TODO: handle cases where (firstDiceValue == secondDiceValue)
-
         model.setFirstDiceValue(firstDiceValue);
         model.setSecondDiceValue(secondDiceValue);
+
+        model.getMonopolyLogger().writeToLogger(model.getName(model.getCurrentPlayerIndex()) + " rolled " + firstDiceValue + " + " + secondDiceValue);
+
+        if(firstDiceValue == secondDiceValue){
+            model.getPlayer(model.getCurrentPlayerIndex()).decreaseDiceRollsLeft();
+            if(model.getPlayer(model.getCurrentPlayerIndex()).getDiceRollsLeft() == 0){
+                model.setPosition(model.getCurrentPlayerIndex(), -1); //send that cheater bi*** to jail
+                model.getCurrentPlayer().setInJail(true);
+
+                model.getMonopolyLogger().writeToLogger(model.getName(model.getCurrentPlayerIndex()) + " has to go to jail");
+                nextPlayer();
+                return;
+            }else{
+                model.getMonopolyLogger().writeToLogger(model.getName(model.getCurrentPlayerIndex()) + " can roll again");
+            }
+        }else{
+            model.getCurrentPlayer().setDiceRollsLeft(0);
+        }
+
+        int tmpDiceRollsLeft = model.getCurrentPlayer().getDiceRollsLeft();
+        model.getCurrentPlayer().setDiceRollsLeft(0);
 
         int stepValue = firstDiceValue + secondDiceValue;
 
@@ -884,11 +973,12 @@ public class Controller implements Initializable {
             }
         };
 
-        task.messageProperty().addListener((obs, oldMessage, newMessage) -> model.step(model.getCurrentPlayer(), 1));
+        task.messageProperty().addListener((obs, oldMessage, newMessage) -> model.step(model.getCurrentPlayerIndex(), 1));
         task.stateProperty().addListener((observableValue, oldState, newState) -> {
             if (newState == Worker.State.SUCCEEDED) {
-                model.nextPlayer();
-                rollDiceButton.setDisable(false);
+                //TODO: handle step result
+
+                model.getCurrentPlayer().setDiceRollsLeft(tmpDiceRollsLeft); //enable dRB if player rolled double
             }
         });
 
@@ -898,6 +988,15 @@ public class Controller implements Initializable {
         }
         else {
             buyPropertyButton.setDisable(true);
+        }
+    }
+
+    private void nextPlayer() {
+        model.nextPlayer();
+        if(!model.getCurrentPlayer().getInJail()){
+            model.getCurrentPlayer().setDiceRollsLeft(3);
+        }else{
+            //TODO: handle actions in jail
         }
     }
 
@@ -918,9 +1017,14 @@ public class Controller implements Initializable {
     }
 
     @FXML
+    void endTurnButtonClicked(ActionEvent event) {
+        nextPlayer();
+    }
+
+    @FXML
     void sendButtonClicked(ActionEvent event) {
         model.getMonopolyChat().writeToChat("[" +
-                model.getPlayer(model.getCurrentPlayer()).getName() +
+                model.getPlayer(model.getCurrentPlayerIndex()).getName() +
                 "]: " +
                 sendButtonTextField.getText());
         sendButtonTextField.setText("");

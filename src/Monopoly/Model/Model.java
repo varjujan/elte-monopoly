@@ -16,7 +16,7 @@ import java.util.Map;
 public class Model {
 
     private ArrayList<Player> players;
-    private int currentPlayer; //TODO: should use IntegerProperty instead of int
+    private IntegerProperty currentPlayerIndexProperty;
     private List<MonopolyProperty> allMonopolyProperties = new ArrayList<>();
     private Map<Integer, Object> boardElements = new HashMap<Integer, Object>();
     private MonopolyLogger monopolyLogger;
@@ -25,21 +25,23 @@ public class Model {
     private IntegerProperty firstDiceProperty;
     private IntegerProperty secondDiceProperty;
 
+    private IntegerProperty currentDiceRollsLeft;
+
     public Model() {
-        players = new ArrayList<Player>();
+        players = new ArrayList<>();
         players.add(new Player(5000, "Egyeske"));
         players.add(new Player(5000, "Ketteske"));
         players.add(new Player(5000, "Harmaska"));
         players.add(new Player(5000, "Negyeske"));
 
-        currentPlayer = 0;
+        currentPlayerIndexProperty = new SimpleIntegerProperty(0);
 
         firstDiceProperty = new SimpleIntegerProperty(0);
         secondDiceProperty = new SimpleIntegerProperty(0);
     }
 
     public Model(String player1Name, String player2Name, String player3Name, String player4Name) {
-        players = new ArrayList<Player>();
+        players = new ArrayList<>();
         players.add(new Player(5000, player1Name));
         players.add(new Player(5000, player2Name));
         players.add(new Player(5000, player3Name));
@@ -55,8 +57,8 @@ public class Model {
 
         monopolyLogger = new MonopolyLogger();
         monopolyChat = new MonopolyChat();
-        currentPlayer = 0;
-        monopolyLogger.writeToLogger("Next player: " + players.get(currentPlayer).getName());
+        currentPlayerIndexProperty = new SimpleIntegerProperty(0);
+        monopolyLogger.writeToLogger("Next player: " + getCurrentPlayer().getName());
 
         firstDiceProperty = new SimpleIntegerProperty(0);
         secondDiceProperty = new SimpleIntegerProperty(0);
@@ -93,6 +95,11 @@ public class Model {
         return players.get(ind).positionProperty();
     }
 
+    //player diceRollsLeft
+    public IntegerProperty currentDiceRollsLeftProperty() {
+        return getCurrentPlayer().diceRollsLeftProperty();
+    }
+
     public int getPosition(int ind) {
         return players.get(ind).getPosition();
     }
@@ -106,15 +113,27 @@ public class Model {
     }
 
     //currentPlayer
-    public int getCurrentPlayer() {
-        return currentPlayer;
+    public Player getCurrentPlayer() {
+        return players.get(currentPlayerIndexProperty.get());
+    }
+
+    public int getCurrentPlayerIndex() {
+        return currentPlayerIndexProperty.get();
+    }
+
+    public void setCurrentPlayerIndexProperty(int value){
+        currentPlayerIndexProperty.setValue(value);
+    }
+
+    public IntegerProperty currentPlayerIndexProperty(){
+        return currentPlayerIndexProperty;
     }
 
     public void nextPlayer() {
         do {
-            currentPlayer = (currentPlayer + 1) % 4;
-        } while (!players.get(currentPlayer).getInGame());
-        monopolyLogger.writeToLogger("Next player: " + players.get(currentPlayer).getName());
+            setCurrentPlayerIndexProperty((getCurrentPlayerIndex() + 1) % 4);
+        } while (!getCurrentPlayer().getInGame());
+        monopolyLogger.writeToLogger("Next player: " + getCurrentPlayer().getName());
     }
 
     public Player getPlayer(int playerIndex) {
@@ -148,8 +167,8 @@ public class Model {
 
     //buyProperty
     public void buyActProperty() {
-        players.get(currentPlayer - 1).ownNewProperty(allMonopolyProperties.get(players.get(currentPlayer - 1).getPosition()));
-        monopolyLogger.writeToLogger("Player " + players.get(currentPlayer - 1).getName() + " bought property: " + allMonopolyProperties.get(players.get(currentPlayer - 1).getPosition()));
+        getCurrentPlayer().ownNewProperty(allMonopolyProperties.get(getCurrentPlayer().getPosition()));
+        monopolyLogger.writeToLogger("Player " + getCurrentPlayer().getName() + " bought property: " + allMonopolyProperties.get(getCurrentPlayer().getPosition()));
     }
 
     public MonopolyLogger getMonopolyLogger() {
@@ -212,7 +231,7 @@ public class Model {
     }
 
     public Boolean isActFieldProperty() {
-        if(boardElements.get(getPlayer(getCurrentPlayer()).getPosition()) instanceof MonopolyProperty ){
+        if(boardElements.get(getCurrentPlayer().getPosition()) instanceof MonopolyProperty ){
             return true;
         }
         return false;

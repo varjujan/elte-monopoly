@@ -27,6 +27,9 @@ public class StartGameController implements Initializable {
     }
 
     @FXML
+    private Label errorLabel;
+
+    @FXML
     private TextField player2NameLabel;
 
     @FXML
@@ -86,6 +89,22 @@ public class StartGameController implements Initializable {
             error = true;
         }else{
             errorMsgLabel4.setText("");
+        }
+
+        if(!error){
+            if(player1NameLabel.getText().equals(player2NameLabel.getText()) ||
+                    player1NameLabel.getText().equals(player3NameLabel.getText()) ||
+                    player1NameLabel.getText().equals(player4NameLabel.getText()) ||
+                    player2NameLabel.getText().equals(player3NameLabel.getText()) ||
+                    player2NameLabel.getText().equals(player4NameLabel.getText()) ||
+                    player3NameLabel.getText().equals(player4NameLabel.getText())){
+                errorLabel.setText("Names must be different");
+                error = true;
+            }else{
+                errorLabel.setText("");
+            }
+        }else{
+            errorLabel.setText("");
         }
 
         if(error) return;
