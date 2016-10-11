@@ -36,4 +36,8 @@ public class MonopolyProperty {
     public String toString() {
         return propertyName;
     }
+
+    public int getPrice(){
+        return price;
+    }
 }

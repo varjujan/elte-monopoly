@@ -17,7 +17,6 @@ public class Model {
 
     private ArrayList<Player> players;
     private IntegerProperty currentPlayerIndexProperty;
-    private List<MonopolyProperty> allMonopolyProperties = new ArrayList<>();
     private Map<Integer, Object> boardElements = new HashMap<Integer, Object>();
     private MonopolyLogger monopolyLogger;
     private MonopolyChat monopolyChat;
@@ -29,10 +28,10 @@ public class Model {
 
     public Model() {
         players = new ArrayList<>();
-        players.add(new Player(5000, "Egyeske"));
-        players.add(new Player(5000, "Ketteske"));
-        players.add(new Player(5000, "Harmaska"));
-        players.add(new Player(5000, "Negyeske"));
+        players.add(new Player(200, "Egyeske"));
+        players.add(new Player(200, "Ketteske"));
+        players.add(new Player(200, "Harmaska"));
+        players.add(new Player(200, "Negyeske"));
 
         currentPlayerIndexProperty = new SimpleIntegerProperty(0);
 
@@ -42,15 +41,10 @@ public class Model {
 
     public Model(String player1Name, String player2Name, String player3Name, String player4Name) {
         players = new ArrayList<>();
-        players.add(new Player(5000, player1Name));
-        players.add(new Player(5000, player2Name));
-        players.add(new Player(5000, player3Name));
-        players.add(new Player(5000, player4Name));
-
-        //Create properties, one per field
-        for (int i = 0; i < 39; i++) {
-            allMonopolyProperties.add(new MonopolyProperty("TestProperty " + i, 10, 200));
-        }
+        players.add(new Player(200, player1Name));
+        players.add(new Player(200, player2Name));
+        players.add(new Player(200, player3Name));
+        players.add(new Player(200, player4Name));
 
         fillBoardWithPropertiesAndFields();
 
@@ -167,8 +161,16 @@ public class Model {
 
     //buyProperty
     public void buyActProperty() {
-        getCurrentPlayer().ownNewProperty(allMonopolyProperties.get(getCurrentPlayer().getPosition()));
-        monopolyLogger.writeToLogger("Player " + getCurrentPlayer().getName() + " bought property: " + allMonopolyProperties.get(getCurrentPlayer().getPosition()));
+            //player money - property price
+            getCurrentPlayer().setMoney(getCurrentPlayer().getMoney() - ((MonopolyProperty) boardElements.get(getCurrentPlayer().getPosition())).getPrice());
+
+        //add the property to the player property list
+        getCurrentPlayer().ownNewProperty((MonopolyProperty) boardElements.get(getCurrentPlayer().getPosition()));
+
+        //set the owner of the property on the model
+        ((MonopolyProperty) boardElements.get(getCurrentPlayer().getPosition())).setOwner(getCurrentPlayer());
+
+        monopolyLogger.writeToLogger("Player " + getCurrentPlayer().getName() + " bought property: " + boardElements.get(getCurrentPlayer().getPosition()).toString());
     }
 
     public MonopolyLogger getMonopolyLogger() {
@@ -231,9 +233,18 @@ public class Model {
     }
 
     public Boolean isActFieldProperty() {
-        if(boardElements.get(getCurrentPlayer().getPosition()) instanceof MonopolyProperty ){
+        System.out.println(getCurrentPlayer().getPosition());
+        if (boardElements.get(getCurrentPlayer().getPosition()) instanceof MonopolyProperty) {
             return true;
         }
         return false;
+    }
+
+    public boolean checkPropertyHasOwner() {
+        return !(((MonopolyProperty) boardElements.get(getCurrentPlayer().getPosition())).getOwner() == null);
+    }
+
+    public boolean checkPlayerHasEnoughMoney(){
+        return (getCurrentPlayer().getMoney() - ((MonopolyProperty) boardElements.get(getCurrentPlayer().getPosition())).getPrice()) > 0;
     }
 }

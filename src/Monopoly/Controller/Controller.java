@@ -634,6 +634,8 @@ public class Controller implements Initializable {
         //Bind with the logger
         chatTextArea.textProperty().bindBidirectional(model.getMonopolyChat().getMonopolyChatObservable());
 
+        buyPropertyButton.setDisable(true);
+
         player0Tab.textProperty().bindBidirectional(model.nameProperty(0));
         player1Tab.textProperty().bindBidirectional(model.nameProperty(1));
         player2Tab.textProperty().bindBidirectional(model.nameProperty(2));
@@ -977,18 +979,19 @@ public class Controller implements Initializable {
         task.stateProperty().addListener((observableValue, oldState, newState) -> {
             if (newState == Worker.State.SUCCEEDED) {
                 //TODO: handle step result
+                //Set Buy Property field - check if it is property or it has an owner or player has enough money
+                if (model.isActFieldProperty() && !model.checkPropertyHasOwner() && model.checkPlayerHasEnoughMoney()) {
+                    buyPropertyButton.setDisable(false);
+                } else {
+                    buyPropertyButton.setDisable(true);
+                }
 
                 model.getCurrentPlayer().setDiceRollsLeft(tmpDiceRollsLeft); //enable dRB if player rolled double
             }
         });
 
         new Thread(task).start();
-        if(model.isActFieldProperty()){
-            buyPropertyButton.setDisable(false);
-        }
-        else {
-            buyPropertyButton.setDisable(true);
-        }
+
     }
 
     private void nextPlayer() {
@@ -1004,6 +1007,7 @@ public class Controller implements Initializable {
     @FXML
     void buyPropertyButtonClicked(ActionEvent event) {
         model.buyActProperty();
+        buyPropertyButton.setDisable(true);
     }
 
     @FXML
