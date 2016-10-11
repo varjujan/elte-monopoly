@@ -906,10 +906,11 @@ public class Controller implements Initializable {
 
     @FXML
     void exitMenuItemClicked(ActionEvent event) {
-        Dialog dialog = new Alert(Alert.AlertType.CONFIRMATION, "Save game before exit?", ButtonType.YES, ButtonType.NO);
-        dialog.showAndWait();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Save game before exit?", ButtonType.YES, ButtonType.NO);
+        alert.setHeaderText(null);
+        alert.showAndWait();
 
-        if (dialog.getResult() == ButtonType.YES) {
+        if (alert.getResult() == ButtonType.YES) {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Save game");
             File file = fileChooser.showSaveDialog((Stage) ((Node) rollDiceButton).getScene().getWindow());

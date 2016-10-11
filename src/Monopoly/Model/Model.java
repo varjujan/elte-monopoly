@@ -187,7 +187,7 @@ public class Model {
 
     private void fillBoardWithPropertiesAndFields() {
         boardElements.put(0, new Field("Start"));
-        boardElements.put(1, new MonopolyProperty("Mediterranean Avenua", 3, 60));
+        boardElements.put(1, new MonopolyProperty("Mediterranean Avenue", 3, 60));
         boardElements.put(2, new Field("Community Chest"));
         boardElements.put(3, new MonopolyProperty("Baltic Avenue", 3, 60));
         boardElements.put(4, new Field("Income Tax"));
@@ -202,10 +202,10 @@ public class Model {
         boardElements.put(12, new MonopolyProperty("Electric Company", 0, 150));
         boardElements.put(13, new MonopolyProperty("States Avenue", 3, 140));
         boardElements.put(14, new MonopolyProperty("Virginia Avenue", 3, 160));
-        boardElements.put(15, new MonopolyProperty("Pensylvania Raildoad", 0, 200));
+        boardElements.put(15, new MonopolyProperty("Pennsylvania Railroad", 0, 200));
         boardElements.put(16, new MonopolyProperty("ST. James Place", 3, 180));
         boardElements.put(17, new Field("Community Chest"));
-        boardElements.put(18, new MonopolyProperty("Tenesse Avenue", 3, 180));
+        boardElements.put(18, new MonopolyProperty("Tennessee Avenue", 3, 180));
         boardElements.put(19, new MonopolyProperty("New York Avenue", 3, 200));
         boardElements.put(20, new Field("Free Parking"));
 
@@ -223,7 +223,7 @@ public class Model {
         boardElements.put(31, new MonopolyProperty("Pacific Avenue", 3, 300));
         boardElements.put(32, new MonopolyProperty("North Carolina Avenue", 3, 300));
         boardElements.put(33, new Field("Community Chest"));
-        boardElements.put(34, new MonopolyProperty("Pensilvania Avenue", 3, 320));
+        boardElements.put(34, new MonopolyProperty("Pennsylvania Avenue", 3, 320));
         boardElements.put(35, new MonopolyProperty("Short Line", 0, 200));
         boardElements.put(36, new Field("Chance"));
         boardElements.put(37, new MonopolyProperty("Park Place", 3, 350));
