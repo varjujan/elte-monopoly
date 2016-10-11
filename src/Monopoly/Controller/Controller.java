@@ -39,12 +39,12 @@ public class Controller implements Initializable {
     private static WritableImage emptyImage = new WritableImage(50, 68);
 
     private static ObservableList<Image> diceImageList = FXCollections.observableArrayList(
-        new Image(Controller.class.getResourceAsStream("/Images/diceOne.png")),
-        new Image(Controller.class.getResourceAsStream("/Images/diceTwo.png")),
-        new Image(Controller.class.getResourceAsStream("/Images/diceThree.png")),
-        new Image(Controller.class.getResourceAsStream("/Images/diceFour.png")),
-        new Image(Controller.class.getResourceAsStream("/Images/diceFive.png")),
-        new Image(Controller.class.getResourceAsStream("/Images/diceSix.png")));
+            new Image(Controller.class.getResourceAsStream("/Images/diceOne.png")),
+            new Image(Controller.class.getResourceAsStream("/Images/diceTwo.png")),
+            new Image(Controller.class.getResourceAsStream("/Images/diceThree.png")),
+            new Image(Controller.class.getResourceAsStream("/Images/diceFour.png")),
+            new Image(Controller.class.getResourceAsStream("/Images/diceFive.png")),
+            new Image(Controller.class.getResourceAsStream("/Images/diceSix.png")));
 
     //region FXML stuff
 
@@ -817,48 +817,48 @@ public class Controller implements Initializable {
         //region Ugly rollDiceButton listeners
 
         model.currentPlayerIndexProperty().addListener((obs, oldValue, newValue) -> {
-            if(model.getCurrentPlayer().getDiceRollsLeft() == 0){
+            if (model.getCurrentPlayer().getDiceRollsLeft() == 0) {
                 rollDiceButton.disableProperty().set(true);
-            }else{
+            } else {
                 rollDiceButton.disableProperty().set(false);
             }
         });
 
         model.getPlayer(0).diceRollsLeftProperty().addListener((obs, oldValue, newValue) -> {
-            if(model.getCurrentPlayerIndex() == 0){
-                if(model.getPlayer(0).getDiceRollsLeft() == 0){
+            if (model.getCurrentPlayerIndex() == 0) {
+                if (model.getPlayer(0).getDiceRollsLeft() == 0) {
                     rollDiceButton.disableProperty().set(true);
-                }else{
+                } else {
                     rollDiceButton.disableProperty().set(false);
                 }
             }
         });
 
         model.getPlayer(1).diceRollsLeftProperty().addListener((obs, oldValue, newValue) -> {
-            if(model.getCurrentPlayerIndex() == 1){
-                if(model.getPlayer(1).getDiceRollsLeft() == 0){
+            if (model.getCurrentPlayerIndex() == 1) {
+                if (model.getPlayer(1).getDiceRollsLeft() == 0) {
                     rollDiceButton.disableProperty().set(true);
-                }else{
+                } else {
                     rollDiceButton.disableProperty().set(false);
                 }
             }
         });
 
         model.getPlayer(2).diceRollsLeftProperty().addListener((obs, oldValue, newValue) -> {
-            if(model.getCurrentPlayerIndex() == 2){
-                if(model.getPlayer(2).getDiceRollsLeft() == 0){
+            if (model.getCurrentPlayerIndex() == 2) {
+                if (model.getPlayer(2).getDiceRollsLeft() == 0) {
                     rollDiceButton.disableProperty().set(true);
-                }else{
+                } else {
                     rollDiceButton.disableProperty().set(false);
                 }
             }
         });
 
         model.getPlayer(3).diceRollsLeftProperty().addListener((obs, oldValue, newValue) -> {
-            if(model.getCurrentPlayerIndex() == 3){
-                if(model.getPlayer(3).getDiceRollsLeft() == 0){
+            if (model.getCurrentPlayerIndex() == 3) {
+                if (model.getPlayer(3).getDiceRollsLeft() == 0) {
                     rollDiceButton.disableProperty().set(true);
-                }else{
+                } else {
                     rollDiceButton.disableProperty().set(false);
                 }
             }
@@ -867,18 +867,18 @@ public class Controller implements Initializable {
         //endregion
 
         model.getFirstDiceProperty().addListener((obs, oldValue, newValue) -> {
-            if((Integer)newValue == 0){
+            if ((Integer) newValue == 0) {
                 firstDiceImage.setImage(emptyImage);
-            }else{
-                firstDiceImage.setImage(diceImageList.get((Integer)newValue - 1));
+            } else {
+                firstDiceImage.setImage(diceImageList.get((Integer) newValue - 1));
             }
         });
 
         model.getSecondDiceProperty().addListener((obs, oldValue, newValue) -> {
-            if((Integer)newValue == 0){
+            if ((Integer) newValue == 0) {
                 secondDiceImage.setImage(emptyImage);
-            }else{
-                secondDiceImage.setImage(diceImageList.get((Integer)newValue - 1));
+            } else {
+                secondDiceImage.setImage(diceImageList.get((Integer) newValue - 1));
             }
         });
     }
@@ -942,19 +942,19 @@ public class Controller implements Initializable {
 
         model.getMonopolyLogger().writeToLogger(model.getName(model.getCurrentPlayerIndex()) + " rolled " + firstDiceValue + " + " + secondDiceValue);
 
-        if(firstDiceValue == secondDiceValue){
+        if (firstDiceValue == secondDiceValue) {
             model.getPlayer(model.getCurrentPlayerIndex()).decreaseDiceRollsLeft();
-            if(model.getPlayer(model.getCurrentPlayerIndex()).getDiceRollsLeft() == 0){
+            if (model.getPlayer(model.getCurrentPlayerIndex()).getDiceRollsLeft() == 0) {
                 model.setPosition(model.getCurrentPlayerIndex(), -1); //send that cheater bi*** to jail
                 model.getCurrentPlayer().setInJail(true);
 
                 model.getMonopolyLogger().writeToLogger(model.getName(model.getCurrentPlayerIndex()) + " has to go to jail");
                 nextPlayer();
                 return;
-            }else{
+            } else {
                 model.getMonopolyLogger().writeToLogger(model.getName(model.getCurrentPlayerIndex()) + " can roll again");
             }
-        }else{
+        } else {
             model.getCurrentPlayer().setDiceRollsLeft(0);
         }
 
@@ -996,9 +996,9 @@ public class Controller implements Initializable {
 
     private void nextPlayer() {
         model.nextPlayer();
-        if(!model.getCurrentPlayer().getInJail()){
+        if (!model.getCurrentPlayer().getInJail()) {
             model.getCurrentPlayer().setDiceRollsLeft(3);
-        }else{
+        } else {
             //TODO: handle actions in jail
         }
     }

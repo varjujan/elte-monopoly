@@ -103,21 +103,16 @@
                                                       <Image url="@../../Images/pieceRed.png" />
                                                    </image>
                                                 </ImageView>
-                                                <Pane layoutX="32.0" layoutY="2.0" prefHeight="71.0" prefWidth="89.0" style="-fx-background-image: url(&quot;/Images/jailImage.png&quot;); -fx-background-size: stretch;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <AnchorPane layoutX="37.0" prefHeight="75.0" prefWidth="75.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <children>
-                                                      <Label layoutX="16.0" layoutY="18.0" text="J a i l">
+                                                      <Label layoutX="16.0" layoutY="19.0" text="J a i l">
                                                          <font>
                                                             <Font name="System Bold" size="24.0" />
                                                          </font>
                                                       </Label>
-                                                      <ImageView fx:id="jailField_player2" fitHeight="25.0" fitWidth="27.0" layoutX="14.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fx:id="jailField_player0" fitHeight="25.0" fitWidth="27.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
-                                                            <Image url="@../../Images/pieceRed.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                      <ImageView fx:id="jailField_player3" fitHeight="25.0" fitWidth="27.0" layoutX="60.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@../../Images/pieceYellow.png" />
+                                                            <Image url="@../../Images/pieceBlue.png" />
                                                          </image>
                                                       </ImageView>
                                                       <ImageView fx:id="jailField_player1" fitHeight="25.0" fitWidth="27.0" layoutX="60.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
@@ -125,12 +120,23 @@
                                                             <Image url="@../../Images/pieceGreen.png" />
                                                          </image>
                                                       </ImageView>
-                                                      <ImageView fx:id="jailField_player0" fitHeight="25.0" fitWidth="27.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fx:id="jailField_player3" fitHeight="25.0" fitWidth="27.0" layoutX="60.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
-                                                            <Image url="@../../Images/pieceBlue.png" />
+                                                            <Image url="@../../Images/pieceYellow.png" />
                                                          </image>
                                                       </ImageView>
-                                                   </children></Pane>
+                                                      <ImageView fx:id="jailField_player2" fitHeight="25.0" fitWidth="27.0" layoutX="10.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../Images/pieceRed.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <ImageView fitHeight="75.0" fitWidth="83.0" layoutX="-1.0" layoutY="3.0" pickOnBounds="true" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <image>
+                                                            <Image url="@../../Images/jailImage.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </children>
+                                                </AnchorPane>
                                              </children>
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.columnIndex="10" GridPane.rowIndex="10">

@@ -115,11 +115,11 @@ public class Model {
         return currentPlayerIndexProperty.get();
     }
 
-    public void setCurrentPlayerIndexProperty(int value){
+    public void setCurrentPlayerIndexProperty(int value) {
         currentPlayerIndexProperty.setValue(value);
     }
 
-    public IntegerProperty currentPlayerIndexProperty(){
+    public IntegerProperty currentPlayerIndexProperty() {
         return currentPlayerIndexProperty;
     }
 
