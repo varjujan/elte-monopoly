@@ -1,6 +1,6 @@
-package Monopoly.View;
+package monopoly.View;
 
-import Monopoly.Controller.StartGameController;
+import monopoly.controller.StartGameController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

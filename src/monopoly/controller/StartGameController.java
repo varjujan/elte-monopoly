@@ -1,6 +1,6 @@
-package Monopoly.Controller;
+package monopoly.controller;
 
-import Monopoly.Model.Model;
+import monopoly.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -112,7 +112,7 @@ public class StartGameController implements Initializable {
         final Model model = new Model(player1NameLabel.getText(), player2NameLabel.getText(), player3NameLabel.getText(), player4NameLabel.getText());
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/Monopoly/View/MainFrame.fxml"));
+        loader.setLocation(getClass().getResource("/monopoly/View/MainFrame.fxml"));
         loader.setControllerFactory(aClass -> new Controller(model));
 
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();

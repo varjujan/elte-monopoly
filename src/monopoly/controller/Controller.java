@@ -1,7 +1,6 @@
-package Monopoly.Controller;
+package monopoly.controller;
 
-import Monopoly.Model.Model;
-import Monopoly.Model.MonopolyProperty;
+import monopoly.model.Model;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
