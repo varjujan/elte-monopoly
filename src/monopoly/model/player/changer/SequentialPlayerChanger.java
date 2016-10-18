@@ -20,12 +20,37 @@ public class SequentialPlayerChanger implements PlayerChanger {
 
     @Override
     public Player current() {
-        return players.get(0);
+        return players.get(curr);
     }
 
     @Override
     public Player next() {
         this.curr = (this.curr + 1) % players.size();
         return current();
+    }
+
+    @Override
+    public void setName(String name, int ind) {
+        players.get(ind).setName(name);
+    }
+
+    @Override
+    public void increasePlayerMoney(int ind, int sum) {
+        players.get(ind).increaseMoney(sum);
+    }
+
+    @Override
+    public void reducePlayerMoney(int ind, int sum) {
+        players.get(ind).reduceMoney(sum);
+    }
+
+    @Override
+    public int getPlayerMoney(int ind) {
+        return players.get(ind).getMoney();
+    }
+
+    @Override
+    public Player getPlayer(int ind) {
+        return players.get(ind);
     }
 }

@@ -1,29 +1,24 @@
 package monopoly.controller;
 
-import monopoly.model.Model;
-import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
-import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
+import javafx.util.StringConverter;
+import javafx.util.converter.IntegerStringConverter;
+import monopoly.viewmodel.ViewModel;
 
-import java.io.File;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
-    private final Model model;
+    private final ViewModel viewModel;
     private Random rand;
 
     private static Image pieceBlueImage =
@@ -604,23 +599,20 @@ public class Controller implements Initializable {
 
     //endregion
 
-    public Controller() {
-        model = new Model();
-        rand = new Random();
-    }
-
-    public Controller(Model model) {
-        this.model = model;
-        rand = new Random();
+    public Controller(ViewModel viewModel) {
+        this.viewModel = viewModel;
+        rand = new Random(); //TODO: Randomizer?
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        player0MoneyLabel.textProperty().bindBidirectional(model.moneyTextProperty(0));
-        player1MoneyLabel.textProperty().bindBidirectional(model.moneyTextProperty(1));
-        player2MoneyLabel.textProperty().bindBidirectional(model.moneyTextProperty(2));
-        player3MoneyLabel.textProperty().bindBidirectional(model.moneyTextProperty(3));
+        StringConverter<? extends Number> converter = new IntegerStringConverter();
 
+        player0MoneyLabel.textProperty().bindBidirectional(viewModel.getPlayerMoneyProperty(0), (StringConverter<Number>) converter);
+        player1MoneyLabel.textProperty().bindBidirectional(viewModel.getPlayerMoneyProperty(1), (StringConverter<Number>) converter);
+        player2MoneyLabel.textProperty().bindBidirectional(viewModel.getPlayerMoneyProperty(2), (StringConverter<Number>) converter);
+        player3MoneyLabel.textProperty().bindBidirectional(viewModel.getPlayerMoneyProperty(3), (StringConverter<Number>) converter);
+/*
         //Bind player MonopolyProperties
         player0PropertyList.itemsProperty().bindBidirectional(model.getPlayer(0).getMonopolyProperties());
         player1PropertyList.itemsProperty().bindBidirectional(model.getPlayer(1).getMonopolyProperties());
@@ -628,19 +620,19 @@ public class Controller implements Initializable {
         player3PropertyList.itemsProperty().bindBidirectional(model.getPlayer(3).getMonopolyProperties());
 
         //Bind with the logger
-        logPropertyList.itemsProperty().bindBidirectional(model.getMonopolyLogger().getMonopolyLogObservable());
+        //logPropertyList.itemsProperty().bindBidirectional(model.getMonopolyLogger().getMonopolyLogObservable()); TODO
 
         //Bind with the logger
-        chatTextArea.textProperty().bindBidirectional(model.getMonopolyChat().getMonopolyChatObservable());
-
+        //chatTextArea.textProperty().bindBidirectional(model.getMonopolyChat().getMonopolyChatObservable()); TODO
+*/
         buyPropertyButton.setDisable(true);
 
-        player0Tab.textProperty().bindBidirectional(model.nameProperty(0));
-        player1Tab.textProperty().bindBidirectional(model.nameProperty(1));
-        player2Tab.textProperty().bindBidirectional(model.nameProperty(2));
-        player3Tab.textProperty().bindBidirectional(model.nameProperty(3));
+        player0Tab.textProperty().bindBidirectional(viewModel.getPlayerNameProperty(0));
+        player1Tab.textProperty().bindBidirectional(viewModel.getPlayerNameProperty(1));
+        player2Tab.textProperty().bindBidirectional(viewModel.getPlayerNameProperty(2));
+        player3Tab.textProperty().bindBidirectional(viewModel.getPlayerNameProperty(3));
 
-        //region Ugly stepPlayer bindings
+/*        //region Ugly stepPlayer bindings
 
         field0_player0.imageProperty().bind(Bindings.when(model.positionProperty(0).isEqualTo(0)).then(pieceBlueImage).otherwise(emptyImage));
         field1_player0.imageProperty().bind(Bindings.when(model.positionProperty(0).isEqualTo(1)).then(pieceBlueImage).otherwise(emptyImage));
@@ -879,7 +871,7 @@ public class Controller implements Initializable {
             }else{
                 secondDiceImage.setImage(diceImageList.get((Integer)newValue - 1));
             }
-        });
+        });*/
     }
 
 
@@ -890,12 +882,12 @@ public class Controller implements Initializable {
 
     @FXML
     void saveGameMenuItemClicked(ActionEvent event) {
-        FileChooser fileChooser = new FileChooser();
+        /*FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save game");
         File file = fileChooser.showSaveDialog((Stage) ((Node) rollDiceButton).getScene().getWindow());
         if (file != null) {
             model.saveGame(file);
-        }
+        }*/
     }
 
     @FXML
@@ -905,7 +897,7 @@ public class Controller implements Initializable {
 
     @FXML
     void exitMenuItemClicked(ActionEvent event) {
-        Dialog dialog = new Alert(Alert.AlertType.CONFIRMATION, "Save game before exit?", ButtonType.YES, ButtonType.NO);
+        /*Dialog dialog = new Alert(Alert.AlertType.CONFIRMATION, "Save game before exit?", ButtonType.YES, ButtonType.NO);
         dialog.showAndWait();
 
         if (dialog.getResult() == ButtonType.YES) {
@@ -918,7 +910,7 @@ public class Controller implements Initializable {
         }
 
         Stage stage = (Stage) rollDiceButton.getScene().getWindow();
-        stage.close();
+        stage.close();*/
     }
 
     @FXML
@@ -933,7 +925,7 @@ public class Controller implements Initializable {
 
     @FXML
     void rollDiceButtonClicked(ActionEvent event) {
-        int firstDiceValue = rand.nextInt(6) + 1;
+        /*int firstDiceValue = rand.nextInt(6) + 1;
         int secondDiceValue = rand.nextInt(6) + 1;
 
         model.setFirstDiceValue(firstDiceValue);
@@ -989,24 +981,24 @@ public class Controller implements Initializable {
             }
         });
 
-        new Thread(task).start();
+        new Thread(task).start();*/
 
     }
 
     private void nextPlayer() {
-        model.nextPlayer();
+        /*model.nextPlayer();
         if(!model.getCurrentPlayer().getInJail()){
             model.getCurrentPlayer().setDiceRollsLeft(3);
         }else{
             //TODO: handle actions in jail
-        }
+        }*/
     }
 
 
     @FXML
     void buyPropertyButtonClicked(ActionEvent event) {
-        model.buyActProperty();
-        buyPropertyButton.setDisable(true);
+        /*model.buyActProperty();
+        buyPropertyButton.setDisable(true);*/
     }
 
     @FXML
@@ -1026,10 +1018,10 @@ public class Controller implements Initializable {
 
     @FXML
     void sendButtonClicked(ActionEvent event) {
-        model.getMonopolyChat().writeToChat("[" +
+        /*model.getMonopolyChat().writeToChat("[" +
                 model.getPlayer(model.getCurrentPlayerIndex()).getName() +
                 "]: " +
                 sendButtonTextField.getText());
-        sendButtonTextField.setText("");
+        sendButtonTextField.setText("");*/
     }
 }

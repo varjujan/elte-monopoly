@@ -1,6 +1,5 @@
 package monopoly.controller;
 
-import monopoly.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import monopoly.viewmodel.ViewModel;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,7 +19,11 @@ import java.util.ResourceBundle;
 
 public class StartGameController implements Initializable {
 
-    public StartGameController() { }
+    private final ViewModel viewModel;
+
+    public StartGameController(ViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -109,16 +113,17 @@ public class StartGameController implements Initializable {
 
         if(error) return;
 
-        final Model model = new Model(player1NameLabel.getText(), player2NameLabel.getText(), player3NameLabel.getText(), player4NameLabel.getText());
+        viewModel.updateNames(player1NameLabel.getText(), player2NameLabel.getText(),
+                player3NameLabel.getText(), player4NameLabel.getText());
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/monopoly/View/MainFrame.fxml"));
-        loader.setControllerFactory(aClass -> new Controller(model));
+        loader.setLocation(getClass().getResource("/monopoly/view/MainFrame.fxml"));
+        loader.setControllerFactory(aClass -> new Controller(viewModel));
 
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Parent root = loader.load();
 
-        primaryStage.setTitle("Awesome Monopoly");
+        primaryStage.setTitle("Awesome monopoly");
         primaryStage.setMinHeight(768);
         primaryStage.setMinWidth(1366);
         primaryStage.setResizable(true);

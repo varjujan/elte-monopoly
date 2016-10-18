@@ -1,22 +1,45 @@
-package monopoly.View;
+package monopoly.view;
 
-import monopoly.controller.StartGameController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import monopoly.controller.StartGameController;
+import monopoly.model.Model;
+import monopoly.model.board.StandardBoard;
+import monopoly.model.dice.StandardDice;
+import monopoly.model.dice.TwoStandardDices;
+import monopoly.model.player.Player;
+import monopoly.model.player.changer.SequentialPlayerChanger;
+import monopoly.util.logger.InGameLogger;
+import monopoly.util.random.JavaRandom;
+import monopoly.viewmodel.ViewModel;
+
+import java.util.Arrays;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+
+        StandardBoard board = new StandardBoard();
+        TwoStandardDices dices = new TwoStandardDices(new StandardDice(new JavaRandom()),
+                new StandardDice(new JavaRandom()));
+        SequentialPlayerChanger playerChanger = new SequentialPlayerChanger(Arrays.asList(new Player("", 1500),
+                new Player("", 1500), new Player("", 1500), new Player("", 1500)));
+        InGameLogger logger = new InGameLogger();
+
+        Model model = new Model(board, dices, playerChanger, logger);
+
+        ViewModel viewModel = new ViewModel(model);
+
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("StartGameFrame.fxml"));
-        loader.setControllerFactory(aClass -> new StartGameController());
+        loader.setControllerFactory(aClass -> new StartGameController(viewModel));
 
         Parent root = loader.load();
-        primaryStage.setTitle("Start Monopoly");
+        primaryStage.setTitle("Start monopoly");
         primaryStage.setMinHeight(556);
         primaryStage.setMinWidth(800);
 
@@ -24,8 +47,6 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
-
-        //Test comment from zokis
 
     }
 

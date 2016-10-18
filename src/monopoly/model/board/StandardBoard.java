@@ -1,12 +1,11 @@
 package monopoly.model.board;
 
 import monopoly.model.field.Field;
-import monopoly.model.field.StandardField;
 import monopoly.model.field.Property;
+import monopoly.model.field.StandardField;
 import monopoly.model.player.Player;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class StandardBoard implements Board {
@@ -44,7 +43,7 @@ public class StandardBoard implements Board {
     }
 
     public StandardBoard() {
-        this.board = new HashMap<Integer, Field>();
+        this.board = new HashMap<>();
         this.board.put(0, new StandardField("Start"));
         this.board.put(1, new Property("Mediterranean Avenue", 60));
         this.board.put(2, new StandardField("Community Chest"));
