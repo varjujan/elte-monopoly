@@ -12,7 +12,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="768.0" minWidth="1366.0" prefHeight="768.0" prefWidth="1366.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="monopoly.controller.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="768.0" minWidth="1366.0" prefHeight="768.0" prefWidth="1366.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Monopoly.Controller.Controller">
    <children>
       <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="1280.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <menus>
@@ -103,21 +103,16 @@
                                                       <Image url="@../../Images/pieceRed.png" />
                                                    </image>
                                                 </ImageView>
-                                                <Pane layoutX="32.0" layoutY="2.0" prefHeight="71.0" prefWidth="89.0" style="-fx-background-image: url(&quot;/Images/jailImage.png&quot;); -fx-background-size: stretch;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <AnchorPane layoutX="37.0" prefHeight="75.0" prefWidth="75.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <children>
-                                                      <Label layoutX="16.0" layoutY="18.0" text="J a i l">
+                                                      <Label layoutX="16.0" layoutY="19.0" text="J a i l">
                                                          <font>
                                                             <Font name="System Bold" size="24.0" />
                                                          </font>
                                                       </Label>
-                                                      <ImageView fx:id="jailField_player2" fitHeight="25.0" fitWidth="27.0" layoutX="14.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fx:id="jailField_player0" fitHeight="25.0" fitWidth="27.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
-                                                            <Image url="@../../Images/pieceRed.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                      <ImageView fx:id="jailField_player3" fitHeight="25.0" fitWidth="27.0" layoutX="60.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@../../Images/pieceYellow.png" />
+                                                            <Image url="@../../Images/pieceBlue.png" />
                                                          </image>
                                                       </ImageView>
                                                       <ImageView fx:id="jailField_player1" fitHeight="25.0" fitWidth="27.0" layoutX="60.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
@@ -125,12 +120,23 @@
                                                             <Image url="@../../Images/pieceGreen.png" />
                                                          </image>
                                                       </ImageView>
-                                                      <ImageView fx:id="jailField_player0" fitHeight="25.0" fitWidth="27.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fx:id="jailField_player3" fitHeight="25.0" fitWidth="27.0" layoutX="60.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
-                                                            <Image url="@../../Images/pieceBlue.png" />
+                                                            <Image url="@../../Images/pieceYellow.png" />
                                                          </image>
                                                       </ImageView>
-                                                   </children></Pane>
+                                                      <ImageView fx:id="jailField_player2" fitHeight="25.0" fitWidth="27.0" layoutX="10.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../Images/pieceRed.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <ImageView fitHeight="75.0" fitWidth="83.0" layoutX="-1.0" layoutY="3.0" pickOnBounds="true" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <image>
+                                                            <Image url="@../../Images/jailImage.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </children>
+                                                </AnchorPane>
                                              </children>
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.columnIndex="10" GridPane.rowIndex="10">
@@ -164,6 +170,26 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.columnIndex="9" GridPane.rowIndex="10">
                                              <children>
+                                                <Label alignment="CENTER" layoutX="5.0" layoutY="80.0" prefHeight="17.0" prefWidth="55.0" text="\$60">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="7.0" layoutY="42.0" prefHeight="17.0" prefWidth="48.0" text="ranean">
+                                                   <font>
+                                                      <Font name="System Bold" size="11.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="8.0" layoutY="55.0" prefHeight="17.0" prefWidth="48.0" text="Avenue">
+                                                   <font>
+                                                      <Font name="System Bold" size="11.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="30.0" prefHeight="17.0" prefWidth="55.0" text="Mediter-" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="11.0" />
+                                                   </font>
+                                                </Label>
                                                 <ImageView fx:id="field1_player1" fitHeight="25.0" fitWidth="27.0" layoutX="32.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../Images/pieceGreen.png" />
@@ -189,6 +215,21 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.columnIndex="8" GridPane.rowIndex="10">
                                              <children>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="1.0" layoutY="6.0" prefHeight="17.0" prefWidth="59.0" text="COMMUNITY" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="9.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="1.0" layoutY="18.0" prefHeight="17.0" prefWidth="59.0" text="CHEST" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="10.0" />
+                                                   </font>
+                                                </Label>
+                                                <ImageView fitHeight="70.0" fitWidth="52.0" layoutX="6.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../Images/communityChestImage.png" />
+                                                   </image>
+                                                </ImageView>
                                                 <ImageView fx:id="field2_player2" fitHeight="25.0" fitWidth="27.0" layoutX="10.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../Images/pieceRed.png" />
@@ -213,6 +254,21 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.columnIndex="7" GridPane.rowIndex="10">
                                              <children>
+                                                <Label alignment="CENTER" layoutX="4.0" layoutY="80.0" prefHeight="17.0" prefWidth="55.0" text="\$60">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="8.0" layoutY="42.0" prefHeight="17.0" prefWidth="48.0" text="Avenue">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="28.0" prefHeight="17.0" prefWidth="55.0" text="Baltic" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
                                                 <ImageView fx:id="field3_player0" fitHeight="25.0" fitWidth="27.0" layoutX="14.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../Images/pieceBlue.png" />
@@ -238,6 +294,21 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.columnIndex="6" GridPane.rowIndex="10">
                                              <children>
+                                                <Label alignment="CENTER" layoutX="2.0" layoutY="80.0" prefHeight="17.0" prefWidth="55.0" text="Pay $200">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutY="8.0" prefHeight="17.0" prefWidth="59.0" text="INCOME" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutY="25.0" prefHeight="17.0" prefWidth="59.0" text="TAX" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
                                                 <ImageView fx:id="field4_player2" fitHeight="25.0" fitWidth="27.0" layoutX="14.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../Images/pieceRed.png" />
@@ -262,6 +333,26 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.columnIndex="5" GridPane.rowIndex="10">
                                              <children>
+                                                <Label alignment="CENTER" layoutX="3.0" layoutY="80.0" prefHeight="17.0" prefWidth="55.0" text="\$200">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <ImageView fitHeight="71.0" fitWidth="57.0" layoutX="4.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../Images/railRoadImage.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <Label alignment="CENTER" layoutX="3.0" layoutY="20.0" prefHeight="17.0" prefWidth="58.0" text="RAILROAD">
+                                                   <font>
+                                                      <Font name="System Bold" size="11.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="3.0" layoutY="6.0" prefHeight="17.0" prefWidth="55.0" text="READING" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="11.0" />
+                                                   </font>
+                                                </Label>
                                                 <ImageView fx:id="field5_player0" fitHeight="25.0" fitWidth="27.0" layoutX="14.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../Images/pieceBlue.png" />
@@ -286,6 +377,21 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.columnIndex="4" GridPane.rowIndex="10">
                                              <children>
+                                                <Label alignment="CENTER" layoutX="8.0" layoutY="43.0" prefHeight="17.0" prefWidth="48.0" text="Avenue">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="3.0" layoutY="80.0" prefHeight="17.0" prefWidth="55.0" text="\$100">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="3.0" layoutY="30.0" prefHeight="17.0" prefWidth="55.0" text="Oriental" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
                                                 <ImageView fx:id="field6_player2" fitHeight="25.0" fitWidth="27.0" layoutX="14.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../Images/pieceRed.png" />
@@ -311,6 +417,16 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.columnIndex="3" GridPane.rowIndex="10">
                                              <children>
+                                                <ImageView fitHeight="71.0" fitWidth="57.0" layoutX="13.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../Images/chanceImage.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="3.0" layoutY="6.0" prefHeight="17.0" prefWidth="59.0" text="CHANCE" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
                                                 <ImageView fx:id="field7_player0" fitHeight="25.0" fitWidth="27.0" layoutX="14.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../Images/pieceBlue.png" />
@@ -335,6 +451,21 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.columnIndex="2" GridPane.rowIndex="10">
                                              <children>
+                                                <Label alignment="CENTER" layoutX="3.0" layoutY="80.0" prefHeight="17.0" prefWidth="55.0" text="\$100">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="8.0" layoutY="43.0" prefHeight="17.0" prefWidth="48.0" text="Avenue">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="30.0" prefHeight="17.0" prefWidth="55.0" text="Vermont" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
                                                 <ImageView fx:id="field8_player2" fitHeight="25.0" fitWidth="27.0" layoutX="14.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../Images/pieceRed.png" />
@@ -360,6 +491,21 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="10">
                                              <children>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="2.0" layoutY="30.0" prefHeight="17.0" prefWidth="55.0" text="Connecticut" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="9.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="8.0" layoutY="43.0" prefHeight="17.0" prefWidth="48.0" text="Avenue">
+                                                   <font>
+                                                      <Font name="System Bold" size="10.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="2.0" layoutY="80.0" prefHeight="17.0" prefWidth="55.0" text="\$120">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
                                                 <ImageView fx:id="field9_player0" fitHeight="25.0" fitWidth="27.0" layoutX="14.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../Images/pieceBlue.png" />
@@ -385,6 +531,21 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.rowIndex="9">
                                              <children>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="2.0" prefHeight="17.0" prefWidth="55.0" text="St. Charles" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="11.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="25.0" layoutY="14.0" prefHeight="17.0" prefWidth="48.0" text="Place">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="20.0" layoutY="34.0" prefHeight="17.0" prefWidth="55.0" text="\$140">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
                                                 <Pane layoutX="98.0" prefHeight="53.0" prefWidth="22.0" style="-fx-background-color: Pink; -fx-border-color: Black;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                                 <ImageView fx:id="field11_player2" fitHeight="25.0" fitWidth="27.0" layoutX="61.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
@@ -410,6 +571,26 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.rowIndex="8">
                                              <children>
+                                                <Label alignment="CENTER" layoutX="-15.0" layoutY="18.0" prefHeight="17.0" prefWidth="55.0" rotate="90.0" text="\$150">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <ImageView fitHeight="42.0" fitWidth="58.0" layoutX="20.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../Images/electricImage.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <Label alignment="CENTER" layoutX="48.0" layoutY="18.0" prefHeight="17.0" prefWidth="58.0" rotate="90.0" text="COMPANY">
+                                                   <font>
+                                                      <Font name="System Bold" size="9.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="62.0" layoutY="18.0" prefHeight="17.0" prefWidth="55.0" rotate="90.0" text="ELECTRIC" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="10.0" />
+                                                   </font>
+                                                </Label>
                                                 <ImageView fx:id="field12_player0" fitHeight="25.0" fitWidth="27.0" layoutX="14.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../Images/pieceBlue.png" />
@@ -433,6 +614,21 @@
                                              </children></AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.rowIndex="7">
                                              <children>
+                                                <Label alignment="CENTER" layoutX="26.0" layoutY="15.0" prefHeight="17.0" prefWidth="48.0" text="Avenue">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="19.0" layoutY="33.0" prefHeight="17.0" prefWidth="55.0" text="\$140">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="2.0" prefHeight="17.0" prefWidth="55.0" text="States" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="11.0" />
+                                                   </font>
+                                                </Label>
                                                 <Pane layoutX="98.0" prefHeight="53.0" prefWidth="22.0" style="-fx-background-color: Pink; -fx-border-color: Black;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                                 <ImageView fx:id="field13_player2" fitHeight="25.0" fitWidth="27.0" layoutX="61.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
@@ -457,6 +653,21 @@
                                              </children></AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.rowIndex="6">
                                              <children>
+                                                <Label alignment="CENTER" layoutX="28.0" layoutY="15.0" prefHeight="17.0" prefWidth="48.0" text="Avenue">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="20.0" layoutY="33.0" prefHeight="17.0" prefWidth="55.0" text="\$160">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="24.0" layoutY="2.0" prefHeight="17.0" prefWidth="55.0" text="Virginia" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="11.0" />
+                                                   </font>
+                                                </Label>
                                                 <Pane layoutX="98.0" prefHeight="53.0" prefWidth="22.0" style="-fx-background-color: Pink; -fx-border-color: Black;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                                 <ImageView fx:id="field14_player0" fitHeight="25.0" fitWidth="27.0" layoutX="14.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
@@ -482,6 +693,26 @@
                                           </AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.rowIndex="5">
                                              <children>
+                                                <Label alignment="CENTER" layoutX="48.0" layoutY="18.0" prefHeight="17.0" prefWidth="58.0" rotate="90.0" text="RAILROAD">
+                                                   <font>
+                                                      <Font name="System Bold" size="9.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="62.0" layoutY="19.0" prefHeight="17.0" prefWidth="55.0" rotate="90.0" text="PENNS" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="11.0" />
+                                                   </font>
+                                                </Label>
+                                                <ImageView fitHeight="45.0" fitWidth="52.0" layoutX="22.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                                                   <image>
+                                                      <Image url="@../../Images/railRoadImage.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <Label alignment="CENTER" layoutX="-15.0" layoutY="19.0" prefHeight="17.0" prefWidth="55.0" rotate="90.0" text="\$200">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
                                                 <ImageView fx:id="field15_player0" fitHeight="25.0" fitWidth="27.0" layoutX="14.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../Images/pieceBlue.png" />
@@ -505,6 +736,21 @@
                                              </children></AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.rowIndex="4">
                                              <children>
+                                                <Label alignment="CENTER" layoutX="26.0" layoutY="34.0" prefHeight="17.0" prefWidth="55.0" text="\$180">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="27.0" prefHeight="17.0" prefWidth="55.0" text="St. James" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="11.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="29.0" layoutY="12.0" prefHeight="17.0" prefWidth="48.0" text="Place">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
                                                 <Pane layoutX="98.0" prefHeight="53.0" prefWidth="22.0" style="-fx-background-color: SaddleBrown; -fx-border-color: Black;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                                 <ImageView fx:id="field16_player0" fitHeight="25.0" fitWidth="27.0" layoutX="14.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
@@ -529,6 +775,21 @@
                                              </children></AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.rowIndex="3">
                                              <children>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="18.0" prefHeight="17.0" prefWidth="59.0" rotate="90.0" text="CHEST" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="10.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="58.0" layoutY="18.0" prefHeight="17.0" prefWidth="59.0" rotate="90.0" text="COMM" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="10.0" />
+                                                   </font>
+                                                </Label>
+                                                <ImageView fitHeight="50.0" fitWidth="45.0" layoutX="10.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                                                   <image>
+                                                      <Image url="@../../Images/communityChestImage.png" />
+                                                   </image>
+                                                </ImageView>
                                                 <ImageView fx:id="field17_player0" fitHeight="25.0" fitWidth="27.0" layoutX="14.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../Images/pieceBlue.png" />
@@ -552,6 +813,21 @@
                                              </children></AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.rowIndex="2">
                                              <children>
+                                                <Label alignment="CENTER" layoutX="19.0" layoutY="33.0" prefHeight="17.0" prefWidth="55.0" text="\$180">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="22.0" layoutY="15.0" prefHeight="17.0" prefWidth="48.0" text="Avenue">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="19.0" prefHeight="17.0" prefWidth="55.0" text="Tennessee" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="11.0" />
+                                                   </font>
+                                                </Label>
                                                 <Pane layoutX="98.0" prefHeight="53.0" prefWidth="22.0" style="-fx-background-color: SaddleBrown; -fx-border-color: Black;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                                 <ImageView fx:id="field18_player0" fitHeight="25.0" fitWidth="27.0" layoutX="14.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
@@ -597,6 +873,21 @@
                                                       <Image url="@../../Images/pieceRed.png" />
                                                    </image>
                                                 </ImageView>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="19.0" prefHeight="17.0" prefWidth="55.0" text="New York" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="11.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="19.0" layoutY="33.0" prefHeight="17.0" prefWidth="55.0" text="\$200">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="22.0" layoutY="13.0" prefHeight="17.0" prefWidth="48.0" text="Avenue">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
                                              </children></AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;">
                                              <children>
@@ -633,6 +924,21 @@
                                              </children></AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.columnIndex="1">
                                              <children>
+                                                <Label alignment="CENTER" layoutX="8.0" layoutY="23.0" prefHeight="17.0" prefWidth="48.0" text="Avenue">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="5.0" layoutY="63.0" prefHeight="17.0" prefWidth="55.0" text="\$220">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="6.0" prefHeight="17.0" prefWidth="55.0" text="Kentucky" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
                                                 <ImageView fx:id="field21_player0" fitHeight="25.0" fitWidth="27.0" layoutX="14.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../Images/pieceBlue.png" />
@@ -657,6 +963,16 @@
                                              </children></AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.columnIndex="2">
                                              <children>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="1.0" layoutY="4.0" prefHeight="17.0" prefWidth="59.0" text="CHANCE" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <ImageView fitHeight="71.0" fitWidth="57.0" layoutX="12.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../Images/chanceImage.png" />
+                                                   </image>
+                                                </ImageView>
                                                 <ImageView fx:id="field22_player0" fitHeight="25.0" fitWidth="27.0" layoutX="14.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../Images/pieceBlue.png" />
@@ -680,6 +996,21 @@
                                              </children></AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.columnIndex="3">
                                              <children>
+                                                <Label alignment="CENTER" layoutX="8.0" layoutY="23.0" prefHeight="17.0" prefWidth="48.0" text="Avenue">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="4.0" layoutY="63.0" prefHeight="17.0" prefWidth="55.0" text="\$220">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="6.0" prefHeight="17.0" prefWidth="55.0" text="Indiana" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
                                                 <ImageView fx:id="field23_player0" fitHeight="25.0" fitWidth="27.0" layoutX="14.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../Images/pieceBlue.png" />
@@ -704,6 +1035,21 @@
                                              </children></AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.columnIndex="4">
                                              <children>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="6.0" prefHeight="17.0" prefWidth="55.0" text="Illinois" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="4.0" layoutY="63.0" prefHeight="17.0" prefWidth="55.0" text="\$240">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="8.0" layoutY="23.0" prefHeight="17.0" prefWidth="48.0" text="Avenue">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
                                                 <ImageView fx:id="field24_player0" fitHeight="25.0" fitWidth="27.0" layoutX="14.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../Images/pieceBlue.png" />
@@ -728,6 +1074,26 @@
                                              </children></AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.columnIndex="5">
                                              <children>
+                                                <ImageView fitHeight="71.0" fitWidth="57.0" layoutX="3.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../Images/railRoadImage.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="3.0" prefHeight="17.0" prefWidth="55.0" text="B. &amp; O." wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="11.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="6.0" layoutY="80.0" prefHeight="17.0" prefWidth="55.0" text="\$200">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="3.0" layoutY="18.0" prefHeight="17.0" prefWidth="58.0" text="RAILROAD">
+                                                   <font>
+                                                      <Font name="System Bold" size="11.0" />
+                                                   </font>
+                                                </Label>
                                                 <ImageView fx:id="field25_player0" fitHeight="25.0" fitWidth="27.0" layoutX="14.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../Images/pieceBlue.png" />
@@ -751,6 +1117,21 @@
                                              </children></AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.columnIndex="6">
                                              <children>
+                                                <Label alignment="CENTER" layoutX="8.0" layoutY="23.0" prefHeight="17.0" prefWidth="48.0" text="Avenue">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="6.0" prefHeight="17.0" prefWidth="55.0" text="Atlantic" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="4.0" layoutY="63.0" prefHeight="17.0" prefWidth="55.0" text="\$260">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
                                                 <ImageView fx:id="field26_player0" fitHeight="25.0" fitWidth="27.0" layoutX="14.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../Images/pieceBlue.png" />
@@ -775,6 +1156,21 @@
                                              </children></AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.columnIndex="7">
                                              <children>
+                                                <Label alignment="CENTER" layoutX="3.0" layoutY="63.0" prefHeight="17.0" prefWidth="55.0" text="\$260">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="3.0" layoutY="6.0" prefHeight="17.0" prefWidth="55.0" text="Ventnor" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="7.0" layoutY="23.0" prefHeight="17.0" prefWidth="48.0" text="Avenue">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
                                                 <ImageView fx:id="field27_player0" fitHeight="25.0" fitWidth="27.0" layoutX="14.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../Images/pieceBlue.png" />
@@ -799,6 +1195,26 @@
                                              </children></AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.columnIndex="8">
                                              <children>
+                                                <Label alignment="CENTER" layoutX="3.0" layoutY="80.0" prefHeight="17.0" prefWidth="55.0" text="\$150">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <ImageView fitHeight="71.0" fitWidth="57.0" layoutX="3.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../Images/waterWorksImage.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="6.0" prefHeight="17.0" prefWidth="55.0" text="WATER" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="11.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="4.0" layoutY="18.0" prefHeight="17.0" prefWidth="58.0" text="WORKS">
+                                                   <font>
+                                                      <Font name="System Bold" size="11.0" />
+                                                   </font>
+                                                </Label>
                                                 <ImageView fx:id="field28_player2" fitHeight="25.0" fitWidth="27.0" layoutX="14.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../Images/pieceRed.png" />
@@ -822,6 +1238,21 @@
                                              </children></AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.columnIndex="9">
                                              <children>
+                                                <Label alignment="CENTER" layoutX="4.0" layoutY="63.0" prefHeight="17.0" prefWidth="55.0" text="\$280">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="8.0" layoutY="23.0" prefHeight="17.0" prefWidth="48.0" text="Gardens">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="6.0" prefHeight="17.0" prefWidth="55.0" text="Marvin" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
                                                 <ImageView fx:id="field29_player0" fitHeight="25.0" fitWidth="27.0" layoutX="14.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../Images/pieceBlue.png" />
@@ -879,6 +1310,21 @@
                                              </children></AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.columnIndex="10" GridPane.rowIndex="1">
                                              <children>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="44.0" prefHeight="17.0" prefWidth="55.0" text="Pacific" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="11.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="44.0" layoutY="33.0" prefHeight="17.0" prefWidth="55.0" text="\$300">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="48.0" layoutY="13.0" prefHeight="17.0" prefWidth="48.0" text="Avenue">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
                                                 <Pane prefHeight="53.0" prefWidth="22.0" style="-fx-background-color: Green; -fx-border-color: Black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                                 <ImageView fx:id="field31_player0" fitHeight="25.0" fitWidth="27.0" layoutX="15.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
@@ -903,6 +1349,21 @@
                                              </children></AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.columnIndex="10" GridPane.rowIndex="2">
                                              <children>
+                                                <Label alignment="CENTER" layoutX="41.0" layoutY="33.0" prefHeight="17.0" prefWidth="55.0" text="\$300">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="45.0" layoutY="13.0" prefHeight="17.0" prefWidth="48.0" text="Avenue">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="24.0" prefHeight="17.0" prefWidth="89.0" text="North Carolina" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="11.0" />
+                                                   </font>
+                                                </Label>
                                                 <Pane prefHeight="53.0" prefWidth="22.0" style="-fx-background-color: Green; -fx-border-color: Black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                                 <ImageView fx:id="field32_player0" fitHeight="25.0" fitWidth="27.0" layoutX="12.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
@@ -927,6 +1388,21 @@
                                              </children></AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.columnIndex="10" GridPane.rowIndex="3">
                                              <children>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="3.0" layoutY="18.0" prefHeight="17.0" prefWidth="59.0" rotate="-90.0" text="COMM" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="10.0" />
+                                                   </font>
+                                                </Label>
+                                                <ImageView fitHeight="50.0" fitWidth="45.0" layoutX="67.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
+                                                   <image>
+                                                      <Image url="@../../Images/communityChestImage.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="18.0" prefHeight="17.0" prefWidth="59.0" rotate="-90.0" text="CHEST" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="10.0" />
+                                                   </font>
+                                                </Label>
                                                 <ImageView fx:id="field33_player0" fitHeight="25.0" fitWidth="27.0" layoutX="10.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../Images/pieceBlue.png" />
@@ -950,6 +1426,21 @@
                                              </children></AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.columnIndex="10" GridPane.rowIndex="4">
                                              <children>
+                                                <Label alignment="CENTER" layoutX="26.0" prefHeight="17.0" prefWidth="83.0" text="Pennsylvania">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="40.0" layoutY="33.0" prefHeight="17.0" prefWidth="55.0" text="\$320">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="13.0" prefHeight="17.0" prefWidth="55.0" text="Avenue" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="11.0" />
+                                                   </font>
+                                                </Label>
                                                 <Pane prefHeight="53.0" prefWidth="22.0" style="-fx-background-color: Green; -fx-border-color: Black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                                 <ImageView fx:id="field34_player0" fitHeight="25.0" fitWidth="27.0" layoutX="11.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
@@ -974,6 +1465,26 @@
                                              </children></AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.columnIndex="10" GridPane.rowIndex="5">
                                              <children>
+                                                <Label alignment="CENTER" layoutX="80.0" layoutY="20.0" prefHeight="17.0" prefWidth="39.0" rotate="-90.0" text="\$200">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-14.0" layoutY="18.0" prefHeight="17.0" prefWidth="55.0" rotate="-90.0" text="SHORT" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="11.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="-4.0" layoutY="18.0" prefHeight="17.0" prefWidth="58.0" rotate="-90.0" text="LINE">
+                                                   <font>
+                                                      <Font name="System Bold" size="11.0" />
+                                                   </font>
+                                                </Label>
+                                                <ImageView fitHeight="45.0" fitWidth="52.0" layoutX="35.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
+                                                   <image>
+                                                      <Image url="@../../Images/railRoadImage.png" />
+                                                   </image>
+                                                </ImageView>
                                                 <ImageView fx:id="field35_player0" fitHeight="25.0" fitWidth="27.0" layoutX="13.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../Images/pieceBlue.png" />
@@ -997,6 +1508,16 @@
                                              </children></AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.columnIndex="10" GridPane.rowIndex="6">
                                              <children>
+                                                <ImageView fitHeight="57.0" fitWidth="71.0" layoutX="52.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
+                                                   <image>
+                                                      <Image url="@../../Images/chanceImage.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-15.0" layoutY="18.0" prefHeight="17.0" prefWidth="59.0" rotate="-90.0" text="CHANCE" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
                                                 <ImageView fx:id="field36_player0" fitHeight="25.0" fitWidth="27.0" layoutX="16.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../Images/pieceBlue.png" />
@@ -1020,6 +1541,21 @@
                                              </children></AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.columnIndex="10" GridPane.rowIndex="7">
                                              <children>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" prefHeight="17.0" prefWidth="55.0" text="Park" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="11.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="44.0" layoutY="13.0" prefHeight="17.0" prefWidth="48.0" text="Place">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="40.0" layoutY="33.0" prefHeight="17.0" prefWidth="55.0" text="\$350">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
                                                 <Pane prefHeight="53.0" prefWidth="22.0" style="-fx-background-color: Blue; -fx-border-color: Black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                                 <ImageView fx:id="field37_player0" fitHeight="25.0" fitWidth="27.0" layoutX="16.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
@@ -1044,6 +1580,26 @@
                                              </children></AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.columnIndex="10" GridPane.rowIndex="8">
                                              <children>
+                                                <Label alignment="CENTER" layoutX="64.0" layoutY="18.0" prefHeight="17.0" prefWidth="55.0" rotate="-90.0" text="PAY $100">
+                                                   <font>
+                                                      <Font name="System Bold" size="10.0" />
+                                                   </font>
+                                                </Label>
+                                                <ImageView fitHeight="42.0" fitWidth="58.0" layoutX="42.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../Images/luxuryTaskImage.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-13.0" layoutY="18.0" prefHeight="17.0" prefWidth="55.0" rotate="-90.0" text="LUXURY" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="10.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="1.0" layoutY="18.0" prefHeight="17.0" prefWidth="58.0" rotate="-90.0" text="TAX">
+                                                   <font>
+                                                      <Font name="System Bold" size="9.0" />
+                                                   </font>
+                                                </Label>
                                                 <ImageView fx:id="field38_player0" fitHeight="25.0" fitWidth="27.0" layoutX="12.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../Images/pieceBlue.png" />
@@ -1067,6 +1623,16 @@
                                              </children></AnchorPane>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-image-width: 1; -fx-border-color: black;" GridPane.columnIndex="10" GridPane.rowIndex="9">
                                              <children>
+                                                <Label alignment="CENTER" layoutX="43.0" layoutY="31.0" prefHeight="17.0" prefWidth="55.0" text="\$400">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutX="29.0" prefHeight="17.0" prefWidth="83.0" text="Boardwalk">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
                                                 <Pane prefHeight="53.0" prefWidth="22.0" style="-fx-background-color: Blue; -fx-border-color: Black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                                 <ImageView fx:id="field39_player0" fitHeight="25.0" fitWidth="27.0" layoutX="14.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
@@ -1160,9 +1726,20 @@
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="454.0" prefWidth="253.0">
                            <children>
                               <ListView fx:id="player0PropertyList" layoutX="15.0" layoutY="67.0" prefHeight="425.0" prefWidth="224.0" AnchorPane.bottomAnchor="14.0" AnchorPane.topAnchor="67.0" />
-                              <Label layoutX="14.0" layoutY="14.0" text="Money:" />
+                              <Label layoutX="14.0" layoutY="12.0" text="Money:">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font></Label>
                               <Label layoutX="14.0" layoutY="50.0" text="Properties:" AnchorPane.topAnchor="50.0" />
-                              <Label fx:id="player0MoneyLabel" layoutX="57.0" layoutY="14.0" text="Label" />
+                              <Label fx:id="player0MoneyLabel" layoutX="86.0" layoutY="16.0" text="Label">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                              <Label layoutX="77.0" layoutY="16.0" text="\$">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                   </content>
@@ -1172,9 +1749,20 @@
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="438.0" prefWidth="253.0">
                            <children>
                               <ListView fx:id="player1PropertyList" layoutX="15.0" layoutY="67.0" prefHeight="334.0" prefWidth="224.0" AnchorPane.bottomAnchor="14.0" AnchorPane.topAnchor="67.0" />
-                              <Label layoutX="14.0" layoutY="14.0" text="Money:" />
+                              <Label layoutX="14.0" layoutY="12.0" text="Money:">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font></Label>
                               <Label layoutX="14.0" layoutY="50.0" text="Properties:" AnchorPane.topAnchor="50.0" />
-                              <Label fx:id="player1MoneyLabel" layoutX="57.0" layoutY="14.0" text="Label" />
+                              <Label fx:id="player1MoneyLabel" layoutX="86.0" layoutY="16.0" text="Label">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                              <Label layoutX="77.0" layoutY="16.0" text="\$">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                      </content>
@@ -1184,9 +1772,20 @@
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="438.0" prefWidth="253.0">
                            <children>
                               <ListView fx:id="player2PropertyList" layoutX="15.0" layoutY="67.0" prefHeight="334.0" prefWidth="224.0" AnchorPane.bottomAnchor="14.0" AnchorPane.topAnchor="67.0" />
-                              <Label layoutX="14.0" layoutY="14.0" text="Money:" />
+                              <Label layoutX="14.0" layoutY="12.0" text="Money:">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font></Label>
                               <Label layoutX="14.0" layoutY="50.0" text="Properties:" AnchorPane.topAnchor="50.0" />
-                              <Label fx:id="player2MoneyLabel" layoutX="57.0" layoutY="14.0" text="Label" />
+                              <Label fx:id="player2MoneyLabel" layoutX="86.0" layoutY="16.0" text="Label">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                              <Label layoutX="77.0" layoutY="16.0" text="\$">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                      </content>
@@ -1196,9 +1795,20 @@
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="438.0" prefWidth="253.0">
                            <children>
                               <ListView fx:id="player3PropertyList" layoutX="15.0" layoutY="67.0" prefHeight="413.0" prefWidth="224.0" AnchorPane.bottomAnchor="14.0" AnchorPane.topAnchor="67.0" />
-                              <Label layoutX="14.0" layoutY="14.0" text="Money:" />
+                              <Label layoutX="14.0" layoutY="12.0" text="Money:">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font></Label>
                               <Label layoutX="14.0" layoutY="50.0" text="Properties:" AnchorPane.topAnchor="50.0" />
-                              <Label fx:id="player3MoneyLabel" layoutX="57.0" layoutY="14.0" text="Label" />
+                              <Label fx:id="player3MoneyLabel" layoutX="86.0" layoutY="16.0" text="Label">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                              <Label layoutX="77.0" layoutY="16.0" text="\$">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                      </content>
