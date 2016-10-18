@@ -1,17 +1,14 @@
 package monopoly.model.board;
 
 import monopoly.model.field.Field;
-import monopoly.model.field.StandardField;
 import monopoly.model.field.Property;
-import monopoly.model.player.Player;
+import monopoly.model.field.StandardField;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class StandardBoard implements Board {
 
-    private Map<Player, Integer> players;
     private Map<Integer, Field> board;
 
     @Override
@@ -23,28 +20,8 @@ public class StandardBoard implements Board {
         return board.get(pos);
     }
 
-    @Override
-    public Field getPlayerPos(Player player) {
-        if (!players.containsKey(player)) {
-            throw new IllegalArgumentException("There is no such a player.");
-        }
-
-        Integer pos = players.get(player);
-        return getFieldAt(pos);
-    }
-
-    @Override
-    public void stepPlayer(Player player, int steps) {
-        if (!players.containsKey(player)) {
-            throw new IllegalArgumentException("There is no such a player.");
-        }
-
-        Integer pos = players.get(player);
-        players.put(player, (pos + steps) % board.size());
-    }
-
     public StandardBoard() {
-        this.board = new HashMap<Integer, Field>();
+        this.board = new HashMap<>();
         this.board.put(0, new StandardField("Start"));
         this.board.put(1, new Property("Mediterranean Avenue", 60));
         this.board.put(2, new StandardField("Community Chest"));

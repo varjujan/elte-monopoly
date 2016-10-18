@@ -1,4 +1,4 @@
-# Monopoly
+# monopoly
 
 Rules:
 http://www.monopolybajnoksag.hu/monopoly/jatszab.pdf
