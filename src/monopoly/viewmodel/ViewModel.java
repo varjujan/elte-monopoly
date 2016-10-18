@@ -1,6 +1,8 @@
 package monopoly.viewmodel;
 
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import monopoly.model.Model;
 
@@ -11,38 +13,60 @@ public class ViewModel {
 
     private final Model model;
 
-    private List<PlayerViewModel> players;
+    private List<StringProperty> playerNames;
+    private List<IntegerProperty> playerMoney;
+    private List<IntegerProperty> playerPositions;
+
+    private IntegerProperty firstDiceValue;
+    private IntegerProperty secondDiceValue;
 
     public ViewModel(Model model) {
         this.model = model;
-        this.players = Arrays.asList(new PlayerViewModel(model.getPlayer(0)), new PlayerViewModel(model.getPlayer(0)),
-                new PlayerViewModel(model.getPlayer(0)), new PlayerViewModel(model.getPlayer(0)));
+
+        playerNames = Arrays.asList(new SimpleStringProperty(model.getPlayer(0).getName()),
+                new SimpleStringProperty(model.getPlayer(1).getName()),
+                new SimpleStringProperty(model.getPlayer(2).getName()),
+                new SimpleStringProperty(model.getPlayer(3).getName()));
+
+        playerMoney = Arrays.asList(new SimpleIntegerProperty(model.getPlayer(0).getMoney()),
+                new SimpleIntegerProperty(model.getPlayer(1).getMoney()),
+                new SimpleIntegerProperty(model.getPlayer(2).getMoney()),
+                new SimpleIntegerProperty(model.getPlayer(3).getMoney()));
+
+        playerPositions = Arrays.asList(new SimpleIntegerProperty(model.getPlayerPosition(0)),
+                new SimpleIntegerProperty(model.getPlayerPosition(1)),
+                new SimpleIntegerProperty(model.getPlayerPosition(2)),
+                new SimpleIntegerProperty(model.getPlayerPosition(3)));
     }
 
     public int getPlayerMoney(int ind) {
-        return players.get(ind).getMoney();
+        return playerMoney.get(ind).get();
     }
 
     public void increasePlayerMoney(int ind, int sum) {
-        players.get(ind).increaseMoney(sum);
+        model.increasePlayerMoney(ind, sum);
+        playerMoney.get(ind).set(model.getPlayerMoney(ind));
     }
 
     public void reducePlayerMoney(int ind, int sum) {
-        players.get(ind).reduceMoney(sum);
+        model.reducePlayerMoney(ind, sum);
+        playerMoney.get(ind).set(model.getPlayerMoney(ind));
     }
 
-    public void updateNames(String player0Name, String player1Name, String player2Name, String player3Name) {
-        players.get(0).setName(player0Name);
-        players.get(1).setName(player1Name);
-        players.get(2).setName(player2Name);
-        players.get(3).setName(player3Name);
+    public void setPlayerName(int ind, String name) {
+        model.setPlayerName(ind, name);
+        playerNames.get(ind).set(name);
     }
 
     public IntegerProperty getPlayerMoneyProperty(int ind) {
-        return players.get(ind).moneyProperty();
+        return playerMoney.get(ind);
     }
 
     public StringProperty getPlayerNameProperty(int ind) {
-        return players.get(ind).nameProperty();
+        return playerNames.get(ind);
+    }
+
+    public IntegerProperty getPlayerPositionProperty(int ind) {
+        return playerPositions.get(ind);
     }
 }

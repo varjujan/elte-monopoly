@@ -3,14 +3,12 @@ package monopoly.model.board;
 import monopoly.model.field.Field;
 import monopoly.model.field.Property;
 import monopoly.model.field.StandardField;
-import monopoly.model.player.Player;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class StandardBoard implements Board {
 
-    private Map<Player, Integer> players;
     private Map<Integer, Field> board;
 
     @Override
@@ -20,26 +18,6 @@ public class StandardBoard implements Board {
         }
 
         return board.get(pos);
-    }
-
-    @Override
-    public Field getPlayerPos(Player player) {
-        if (!players.containsKey(player)) {
-            throw new IllegalArgumentException("There is no such a player.");
-        }
-
-        Integer pos = players.get(player);
-        return getFieldAt(pos);
-    }
-
-    @Override
-    public void stepPlayer(Player player, int steps) {
-        if (!players.containsKey(player)) {
-            throw new IllegalArgumentException("There is no such a player.");
-        }
-
-        Integer pos = players.get(player);
-        players.put(player, (pos + steps) % board.size());
     }
 
     public StandardBoard() {

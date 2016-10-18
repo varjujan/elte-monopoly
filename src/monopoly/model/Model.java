@@ -27,7 +27,7 @@ public class Model {
     }
 
     public void movePlayer(Player player, int steps) {
-        board.stepPlayer(player, steps);
+        player.step(steps);
         logger.info(String.format("%s player moved %d field(s).", player.getName(), steps));
     }
 
@@ -58,7 +58,7 @@ public class Model {
 
     public void buyProperty() {
         Player player = this.getCurrentPlayer();
-        Field field = board.getPlayerPos(player);
+        Field field = board.getFieldAt(player.getPosition());
 
         if (!(field instanceof Property)) {
             throw new RuntimeException("Cannot bought a not ownable field.");
@@ -72,13 +72,27 @@ public class Model {
         return playerChanger.current();
     }
 
-    //public int getPlayerMoney(int ind) { return playerChanger.getPlayerMoney(ind); }
+    public int getPlayerMoney(int ind) {
+        return playerChanger.getPlayerMoney(ind);
+    }
 
-    //public void increasePlayerMoney(int ind, int sum) { playerChanger.increasePlayerMoney(ind, sum); }
+    public void increasePlayerMoney(int ind, int sum) {
+        playerChanger.increasePlayerMoney(ind, sum);
+    }
 
-    //public void reducePlayerMoney(int ind, int sum) { playerChanger.reducePlayerMoney(ind, sum); }
+    public void reducePlayerMoney(int ind, int sum) {
+        playerChanger.reducePlayerMoney(ind, sum);
+    }
+
+    public void setPlayerName(int ind, String name) {
+        playerChanger.setName(name, ind);
+    }
 
     public Player getPlayer(int ind) {
         return playerChanger.getPlayer(ind);
+    }
+
+    public int getPlayerPosition(int ind) {
+        return playerChanger.getPlayer(ind).getPosition();
     }
 }

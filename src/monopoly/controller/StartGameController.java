@@ -113,8 +113,10 @@ public class StartGameController implements Initializable {
 
         if(error) return;
 
-        viewModel.updateNames(player1NameLabel.getText(), player2NameLabel.getText(),
-                player3NameLabel.getText(), player4NameLabel.getText());
+        viewModel.setPlayerName(0, player1NameLabel.getText());
+        viewModel.setPlayerName(1, player2NameLabel.getText());
+        viewModel.setPlayerName(2, player3NameLabel.getText());
+        viewModel.setPlayerName(3, player4NameLabel.getText());
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/monopoly/view/MainFrame.fxml"));

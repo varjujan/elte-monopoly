@@ -6,11 +6,13 @@ public class Player implements Owner {
 
     private String name;
     private int money;
+    private int position;
     private State state;
 
     public Player(String name, int money) {
         this.name = name;
         this.money = money;
+        this.position = 0;
         this.state = State.InGame;
     }
 
@@ -43,6 +45,27 @@ public class Player implements Owner {
     public int getMoney() {
         return money;
     }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        if (position < -1 || position > 39) {
+            throw new IllegalArgumentException("Position should be in range [-1, 39].");
+        }
+
+        this.position = position;
+    }
+
+    public void step(int steps) {
+        if (steps < 0) {
+            throw new IllegalArgumentException("Steps should be positive.");
+        }
+
+        position = (position + steps) % 40;
+    }
+
 
     public State getState() {
         return state;
