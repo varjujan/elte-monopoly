@@ -19,14 +19,14 @@ public class SequentialPlayerChanger implements PlayerChanger {
     }
 
     @Override
-    public Player current() {
+    public Player currentPlayer() {
         return players.get(curr);
     }
 
     @Override
-    public Player next() {
+    public Player nextPlayer() {
         this.curr = (this.curr + 1) % players.size();
-        return current();
+        return currentPlayer();
     }
 
     @Override

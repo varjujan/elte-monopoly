@@ -1,6 +1,10 @@
 package monopoly.model.player;
 
 import monopoly.model.Owner;
+import monopoly.model.field.Property;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Player implements Owner {
 
@@ -8,12 +12,14 @@ public class Player implements Owner {
     private int money;
     private int position;
     private State state;
+    private List<Property> properties;
 
     public Player(String name, int money) {
         this.name = name;
         this.money = money;
         this.position = 0;
         this.state = State.InGame;
+        this.properties = new ArrayList<>();
     }
 
     @Override
@@ -42,12 +48,22 @@ public class Player implements Owner {
         }
     }
 
-    public int getMoney() {
-        return money;
+    @Override
+    public void addProperty(Property property) {
+        if (property.hasOwner()) {
+            throw new IllegalArgumentException("Property is already owned by a player.");
+        }
+
+        this.properties.add(property);
+        property.setOwner(this);
     }
 
-    public int getPosition() {
-        return position;
+    public void removeProperty(Property property) {
+        if (!this.properties.contains(property)) {
+            throw new IllegalArgumentException("Only properties owned by the player should be removed!");
+        }
+
+        this.properties.remove(property);
     }
 
     public void setPosition(int position) {
@@ -66,6 +82,13 @@ public class Player implements Owner {
         position = (position + steps) % 40;
     }
 
+    public int getMoney() {
+        return money;
+    }
+
+    public int getPosition() {
+        return position;
+    }
 
     public State getState() {
         return state;
@@ -81,5 +104,9 @@ public class Player implements Owner {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Property> getProperties() {
+        return properties;
     }
 }

@@ -31,13 +31,13 @@ public class Model {
         logger.info(String.format("%s player moved %d field(s).", player.getName(), steps));
     }
 
-    public void movePlayer(int value) {
+    public void moveCurrentPlayer(int value) {
         Player player = this.getCurrentPlayer();
         movePlayer(player, value);
     }
 
     public void endTurn() {
-        Player nextPlayer = playerChanger.next();
+        Player nextPlayer = playerChanger.nextPlayer();
         logger.info(String.format("%s's turn.", nextPlayer));
     }
 
@@ -53,7 +53,7 @@ public class Model {
             oldOwner.increaseMoney(price);
         }
         owner.reduceMoney(price);
-        property.setOwner(owner);
+        owner.addProperty(property);
     }
 
     public void buyProperty() {
@@ -69,7 +69,11 @@ public class Model {
     }
 
     public Player getCurrentPlayer() {
-        return playerChanger.current();
+        return playerChanger.currentPlayer();
+    }
+
+    public Field getCurrentPlayersField() {
+        return board.getFieldAt(getCurrentPlayer());
     }
 
     public int getPlayerMoney(int ind) {

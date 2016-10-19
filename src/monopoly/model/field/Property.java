@@ -8,9 +8,10 @@ public class Property extends Field implements Ownable {
     private Owner owner;
     private int defaultPrice;
 
-    public Property(String name, int price) {
+    public Property(/*Owner owner, */String name, int price) {
         super(name);
         this.defaultPrice = price;
+        //this.owner = owner; (Bank)
     }
 
     public int getDefaultPrice() {

@@ -15,6 +15,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
+import monopoly.model.field.Property;
 import monopoly.viewmodel.ViewModel;
 
 import java.io.File;
@@ -617,20 +618,20 @@ public class Controller implements Initializable {
         player1MoneyLabel.textProperty().bindBidirectional(viewModel.getPlayerMoneyProperty(1), (StringConverter<Number>) converter);
         player2MoneyLabel.textProperty().bindBidirectional(viewModel.getPlayerMoneyProperty(2), (StringConverter<Number>) converter);
         player3MoneyLabel.textProperty().bindBidirectional(viewModel.getPlayerMoneyProperty(3), (StringConverter<Number>) converter);
-/*
-        //Bind player MonopolyProperties
-        player0PropertyList.itemsProperty().bindBidirectional(model.getPlayer(0).getMonopolyProperties());
-        player1PropertyList.itemsProperty().bindBidirectional(model.getPlayer(1).getMonopolyProperties());
-        player2PropertyList.itemsProperty().bindBidirectional(model.getPlayer(2).getMonopolyProperties());
-        player3PropertyList.itemsProperty().bindBidirectional(model.getPlayer(3).getMonopolyProperties());
 
-        //Bind with the logger
+        //Bind player MonopolyProperties
+        player0PropertyList.itemsProperty().bindBidirectional(viewModel.getPlayerPropertiesProperty(0));
+        player1PropertyList.itemsProperty().bindBidirectional(viewModel.getPlayerPropertiesProperty(1));
+        player2PropertyList.itemsProperty().bindBidirectional(viewModel.getPlayerPropertiesProperty(2));
+        player3PropertyList.itemsProperty().bindBidirectional(viewModel.getPlayerPropertiesProperty(3));
+
+/*        //Bind with the logger
         //logPropertyList.itemsProperty().bindBidirectional(model.getMonopolyLogger().getMonopolyLogObservable()); TODO
 
         //Bind with the logger
         //chatTextArea.textProperty().bindBidirectional(model.getMonopolyChat().getMonopolyChatObservable()); TODO
 */
-        buyPropertyButton.setDisable(true);
+        buyPropertyButton.disableProperty().bindBidirectional(viewModel.getCurrentPlayersFieldNotBuyableProperty());
 
         player0Tab.textProperty().bindBidirectional(viewModel.getPlayerNameProperty(0));
         player1Tab.textProperty().bindBidirectional(viewModel.getPlayerNameProperty(1));
@@ -931,6 +932,9 @@ public class Controller implements Initializable {
 
     @FXML
     void rollDiceButtonClicked(ActionEvent event) {
+
+        viewModel.moveCurrentPlayer(3);
+
         /*int firstDiceValue = rand.nextInt(6) + 1;
         int secondDiceValue = rand.nextInt(6) + 1;
 
@@ -1003,8 +1007,19 @@ public class Controller implements Initializable {
 
     @FXML
     void buyPropertyButtonClicked(ActionEvent event) {
-        /*model.buyActProperty();
-        buyPropertyButton.setDisable(true);*/
+        if (!(viewModel.getCurrentPlayersField() instanceof Property)) {
+            throw new RuntimeException("Current players field is not a property");
+        }
+
+        if (viewModel.getCurrentPlayer().hasEnoughMoneyFor(((Property) viewModel.getCurrentPlayersField()).getDefaultPrice())) {
+            viewModel.buyProperty();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "You don't have enough money to buy this property!");
+            alert.setHeaderText(null);
+            alert.show();
+        }
+
+
     }
 
     @FXML
