@@ -3,6 +3,8 @@ package monopoly.controller;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
+import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,6 +17,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
+import monopoly.model.dice.MultipleDiceResult;
 import monopoly.model.field.Property;
 import monopoly.viewmodel.ViewModel;
 
@@ -631,7 +634,7 @@ public class Controller implements Initializable {
         //Bind with the logger
         //chatTextArea.textProperty().bindBidirectional(model.getMonopolyChat().getMonopolyChatObservable()); TODO
 */
-        buyPropertyButton.disableProperty().bindBidirectional(viewModel.getCurrentPlayersFieldNotBuyableProperty());
+        //buyPropertyButton.disableProperty().bindBidirectional(viewModel.getCurrentPlayersFieldNotBuyableProperty());
 
         player0Tab.textProperty().bindBidirectional(viewModel.getPlayerNameProperty(0));
         player1Tab.textProperty().bindBidirectional(viewModel.getPlayerNameProperty(1));
@@ -861,9 +864,9 @@ public class Controller implements Initializable {
             }
         });
 
-        //endregion
+        //endregion*/
 
-        model.getFirstDiceProperty().addListener((obs, oldValue, newValue) -> {
+        viewModel.getFirstDiceValueProperty().addListener((obs, oldValue, newValue) -> {
             if((Integer)newValue == 0){
                 firstDiceImage.setImage(emptyImage);
             }else{
@@ -871,13 +874,13 @@ public class Controller implements Initializable {
             }
         });
 
-        model.getSecondDiceProperty().addListener((obs, oldValue, newValue) -> {
+        viewModel.getSecondDiceValueProperty().addListener((obs, oldValue, newValue) -> {
             if((Integer)newValue == 0){
                 secondDiceImage.setImage(emptyImage);
             }else{
                 secondDiceImage.setImage(diceImageList.get((Integer)newValue - 1));
             }
-        });*/
+        });
     }
 
 
@@ -933,17 +936,17 @@ public class Controller implements Initializable {
     @FXML
     void rollDiceButtonClicked(ActionEvent event) {
 
-        viewModel.moveCurrentPlayer(3);
+        MultipleDiceResult result = (MultipleDiceResult) viewModel.roll();
 
-        /*int firstDiceValue = rand.nextInt(6) + 1;
-        int secondDiceValue = rand.nextInt(6) + 1;
+        int firstDiceValue = result.getResult().get(0).getResult();
+        int secondDiceValue = result.getResult().get(1).getResult();
 
-        model.setFirstDiceValue(firstDiceValue);
-        model.setSecondDiceValue(secondDiceValue);
+        viewModel.setFirstDiceValue(firstDiceValue);
+        viewModel.setSecondDiceValue(secondDiceValue);
 
-        model.getMonopolyLogger().writeToLogger(model.getName(model.getCurrentPlayerIndex()) + " rolled " + firstDiceValue + " + " + secondDiceValue);
+        //model.getMonopolyLogger().writeToLogger(model.getName(model.getCurrentPlayerIndex()) + " rolled " + firstDiceValue + " + " + secondDiceValue);
 
-        if(firstDiceValue == secondDiceValue){
+        /*if(firstDiceValue == secondDiceValue){
             model.getPlayer(model.getCurrentPlayerIndex()).decreaseDiceRollsLeft();
             if(model.getPlayer(model.getCurrentPlayerIndex()).getDiceRollsLeft() == 0){
                 model.setPosition(model.getCurrentPlayerIndex(), -1); //send that cheater bi*** to jail
@@ -960,7 +963,7 @@ public class Controller implements Initializable {
         }
 
         int tmpDiceRollsLeft = model.getCurrentPlayer().getDiceRollsLeft();
-        model.getCurrentPlayer().setDiceRollsLeft(0);
+        model.getCurrentPlayer().setDiceRollsLeft(0);*/
 
         int stepValue = firstDiceValue + secondDiceValue;
 
@@ -976,22 +979,22 @@ public class Controller implements Initializable {
             }
         };
 
-        task.messageProperty().addListener((obs, oldMessage, newMessage) -> model.step(model.getCurrentPlayerIndex(), 1));
+        task.messageProperty().addListener((obs, oldMessage, newMessage) -> viewModel.moveCurrentPlayer(1));
         task.stateProperty().addListener((observableValue, oldState, newState) -> {
             if (newState == Worker.State.SUCCEEDED) {
                 //TODO: handle step result
                 //Set Buy Property field - check if it is property or it has an owner or player has enough money
-                if (model.isActFieldProperty() && !model.checkPropertyHasOwner() && model.checkPlayerHasEnoughMoney()) {
+                /*if (model.isActFieldProperty() && !model.checkPropertyHasOwner() && model.checkPlayerHasEnoughMoney()) {
                     buyPropertyButton.setDisable(false);
                 } else {
                     buyPropertyButton.setDisable(true);
-                }
+                }*/
 
-                model.getCurrentPlayer().setDiceRollsLeft(tmpDiceRollsLeft); //enable dRB if player rolled double
+                //model.getCurrentPlayer().setDiceRollsLeft(tmpDiceRollsLeft); //enable dRB if player rolled double
             }
         });
 
-        new Thread(task).start();*/
+        new Thread(task).start();
 
     }
 

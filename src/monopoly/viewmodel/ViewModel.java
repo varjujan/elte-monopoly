@@ -3,6 +3,8 @@ package monopoly.viewmodel;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import monopoly.model.Model;
+import monopoly.model.dice.DiceResult;
+import monopoly.model.dice.MultipleDiceResult;
 import monopoly.model.field.Field;
 import monopoly.model.player.Player;
 
@@ -54,6 +56,9 @@ public class ViewModel {
         }};
 
         currentPlayersFieldNotBuyable = new SimpleBooleanProperty(true);
+
+        firstDiceValue = new SimpleIntegerProperty(0);
+        secondDiceValue = new SimpleIntegerProperty(0);
     }
 
     public int getPlayerMoney(int ind) {
@@ -99,6 +104,13 @@ public class ViewModel {
         }
     }
 
+    public DiceResult roll() {
+        MultipleDiceResult result = (MultipleDiceResult) model.roll();
+        firstDiceValue.set(result.getResult().get(0).getResult());
+        secondDiceValue.set(result.getResult().get(1).getResult());
+        return result;
+    }
+
     public Player getCurrentPlayer() {
         return model.getCurrentPlayer();
     }
@@ -125,5 +137,21 @@ public class ViewModel {
 
     public BooleanProperty getCurrentPlayersFieldNotBuyableProperty() {
         return currentPlayersFieldNotBuyable;
+    }
+
+    public void setFirstDiceValue(int value) {
+        firstDiceValue.set(value);
+    }
+
+    public void setSecondDiceValue(int value) {
+        secondDiceValue.set(value);
+    }
+
+    public IntegerProperty getFirstDiceValueProperty() {
+        return firstDiceValue;
+    }
+
+    public IntegerProperty getSecondDiceValueProperty() {
+        return secondDiceValue;
     }
 }

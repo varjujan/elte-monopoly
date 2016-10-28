@@ -2,6 +2,7 @@ package monopoly.model;
 
 import monopoly.model.board.Board;
 import monopoly.model.dice.Dice;
+import monopoly.model.dice.DiceResult;
 import monopoly.model.field.Field;
 import monopoly.model.field.Property;
 import monopoly.model.player.Player;
@@ -39,6 +40,10 @@ public class Model {
     public void endTurn() {
         Player nextPlayer = playerChanger.nextPlayer();
         logger.info(String.format("%s's turn.", nextPlayer));
+    }
+
+    public DiceResult roll() {
+        return dice.roll();
     }
 
     public void buyProperty(Owner owner, Property property, int price) {

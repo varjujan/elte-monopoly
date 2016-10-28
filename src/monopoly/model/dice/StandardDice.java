@@ -11,7 +11,7 @@ public class StandardDice implements Dice {
     }
 
     @Override
-    public int roll() {
-        return randomizer.random(1, 6);
+    public SingleDiceResult roll() {
+        return new SingleDiceResult(randomizer.random(1, 6));
     }
 }
