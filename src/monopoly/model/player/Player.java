@@ -13,6 +13,7 @@ public class Player implements Owner {
     private int position;
     private State state;
     private List<Property> properties;
+    private int diceRollsLeft;
 
     public Player(String name, int money) {
         this.name = name;
@@ -20,6 +21,7 @@ public class Player implements Owner {
         this.position = 0;
         this.state = State.InGame;
         this.properties = new ArrayList<>();
+        this.diceRollsLeft = 3;
     }
 
     @Override
@@ -98,6 +100,10 @@ public class Player implements Owner {
         this.state = state;
     }
 
+    public boolean isInJail() {
+        return state == State.InJail;
+    }
+
     public String getName() {
         return name;
     }
@@ -108,5 +114,21 @@ public class Player implements Owner {
 
     public List<Property> getProperties() {
         return properties;
+    }
+
+    public int getDiceRollsLeft() {
+        return diceRollsLeft;
+    }
+
+    public void setDiceRollsLeft(int diceRollsLeft) {
+        this.diceRollsLeft = diceRollsLeft;
+    }
+
+    public void decreaseDiceRollsLeft() {
+        if (this.diceRollsLeft == 0) {
+            throw new RuntimeException("Number of dice rolls left must be positive.");
+        }
+
+        this.diceRollsLeft -= 1;
     }
 }

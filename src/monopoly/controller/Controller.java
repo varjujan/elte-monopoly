@@ -3,6 +3,8 @@ package monopoly.controller;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
+import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,6 +17,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
+import monopoly.model.dice.MultipleDiceResult;
 import monopoly.model.field.Property;
 import monopoly.viewmodel.ViewModel;
 
@@ -625,13 +628,11 @@ public class Controller implements Initializable {
         player2PropertyList.itemsProperty().bindBidirectional(viewModel.getPlayerPropertiesProperty(2));
         player3PropertyList.itemsProperty().bindBidirectional(viewModel.getPlayerPropertiesProperty(3));
 
-/*        //Bind with the logger
+        //Bind with the logger
         //logPropertyList.itemsProperty().bindBidirectional(model.getMonopolyLogger().getMonopolyLogObservable()); TODO
 
         //Bind with the logger
         //chatTextArea.textProperty().bindBidirectional(model.getMonopolyChat().getMonopolyChatObservable()); TODO
-*/
-        buyPropertyButton.disableProperty().bindBidirectional(viewModel.getCurrentPlayersFieldNotBuyableProperty());
 
         player0Tab.textProperty().bindBidirectional(viewModel.getPlayerNameProperty(0));
         player1Tab.textProperty().bindBidirectional(viewModel.getPlayerNameProperty(1));
@@ -813,17 +814,17 @@ public class Controller implements Initializable {
 
         //region Ugly rollDiceButton listeners
 
-/*        model.currentPlayerIndexProperty().addListener((obs, oldValue, newValue) -> {
-            if(model.getCurrentPlayer().getDiceRollsLeft() == 0){
+        viewModel.currentPlayerIndexProperty().addListener((obs, oldValue, newValue) -> {
+            if (viewModel.getCurrentPlayer().getDiceRollsLeft() == 0) {
                 rollDiceButton.disableProperty().set(true);
             }else{
                 rollDiceButton.disableProperty().set(false);
             }
         });
 
-        model.getPlayer(0).diceRollsLeftProperty().addListener((obs, oldValue, newValue) -> {
-            if(model.getCurrentPlayerIndex() == 0){
-                if(model.getPlayer(0).getDiceRollsLeft() == 0){
+        viewModel.playerDiceRollsLeftProperty(0).addListener((obs, oldValue, newValue) -> {
+            if (viewModel.getCurrentPlayerIndex() == 0) {
+                if (viewModel.getPlayer(0).getDiceRollsLeft() == 0) {
                     rollDiceButton.disableProperty().set(true);
                 }else{
                     rollDiceButton.disableProperty().set(false);
@@ -831,9 +832,9 @@ public class Controller implements Initializable {
             }
         });
 
-        model.getPlayer(1).diceRollsLeftProperty().addListener((obs, oldValue, newValue) -> {
-            if(model.getCurrentPlayerIndex() == 1){
-                if(model.getPlayer(1).getDiceRollsLeft() == 0){
+        viewModel.playerDiceRollsLeftProperty(1).addListener((obs, oldValue, newValue) -> {
+            if (viewModel.getCurrentPlayerIndex() == 1) {
+                if (viewModel.getPlayer(1).getDiceRollsLeft() == 0) {
                     rollDiceButton.disableProperty().set(true);
                 }else{
                     rollDiceButton.disableProperty().set(false);
@@ -841,9 +842,9 @@ public class Controller implements Initializable {
             }
         });
 
-        model.getPlayer(2).diceRollsLeftProperty().addListener((obs, oldValue, newValue) -> {
-            if(model.getCurrentPlayerIndex() == 2){
-                if(model.getPlayer(2).getDiceRollsLeft() == 0){
+        viewModel.playerDiceRollsLeftProperty(2).addListener((obs, oldValue, newValue) -> {
+            if (viewModel.getCurrentPlayerIndex() == 2) {
+                if (viewModel.getPlayer(2).getDiceRollsLeft() == 0) {
                     rollDiceButton.disableProperty().set(true);
                 }else{
                     rollDiceButton.disableProperty().set(false);
@@ -851,9 +852,9 @@ public class Controller implements Initializable {
             }
         });
 
-        model.getPlayer(3).diceRollsLeftProperty().addListener((obs, oldValue, newValue) -> {
-            if(model.getCurrentPlayerIndex() == 3){
-                if(model.getPlayer(3).getDiceRollsLeft() == 0){
+        viewModel.playerDiceRollsLeftProperty(3).addListener((obs, oldValue, newValue) -> {
+            if (viewModel.getCurrentPlayerIndex() == 3) {
+                if (viewModel.getPlayer(3).getDiceRollsLeft() == 0) {
                     rollDiceButton.disableProperty().set(true);
                 }else{
                     rollDiceButton.disableProperty().set(false);
@@ -863,7 +864,7 @@ public class Controller implements Initializable {
 
         //endregion
 
-        model.getFirstDiceProperty().addListener((obs, oldValue, newValue) -> {
+        viewModel.getFirstDiceValueProperty().addListener((obs, oldValue, newValue) -> {
             if((Integer)newValue == 0){
                 firstDiceImage.setImage(emptyImage);
             }else{
@@ -871,13 +872,13 @@ public class Controller implements Initializable {
             }
         });
 
-        model.getSecondDiceProperty().addListener((obs, oldValue, newValue) -> {
+        viewModel.getSecondDiceValueProperty().addListener((obs, oldValue, newValue) -> {
             if((Integer)newValue == 0){
                 secondDiceImage.setImage(emptyImage);
             }else{
                 secondDiceImage.setImage(diceImageList.get((Integer)newValue - 1));
             }
-        });*/
+        });
     }
 
 
@@ -933,38 +934,17 @@ public class Controller implements Initializable {
     @FXML
     void rollDiceButtonClicked(ActionEvent event) {
 
-        viewModel.moveCurrentPlayer(3);
+        MultipleDiceResult result = (MultipleDiceResult) viewModel.roll();
 
-        /*int firstDiceValue = rand.nextInt(6) + 1;
-        int secondDiceValue = rand.nextInt(6) + 1;
+        int tmpDiceRollsLeft = viewModel.getCurrentPlayer().getDiceRollsLeft();
+        viewModel.getCurrentPlayer().setDiceRollsLeft(0);
 
-        model.setFirstDiceValue(firstDiceValue);
-        model.setSecondDiceValue(secondDiceValue);
-
-        model.getMonopolyLogger().writeToLogger(model.getName(model.getCurrentPlayerIndex()) + " rolled " + firstDiceValue + " + " + secondDiceValue);
-
-        if(firstDiceValue == secondDiceValue){
-            model.getPlayer(model.getCurrentPlayerIndex()).decreaseDiceRollsLeft();
-            if(model.getPlayer(model.getCurrentPlayerIndex()).getDiceRollsLeft() == 0){
-                model.setPosition(model.getCurrentPlayerIndex(), -1); //send that cheater bi*** to jail
-                model.getCurrentPlayer().setInJail(true);
-
-                model.getMonopolyLogger().writeToLogger(model.getName(model.getCurrentPlayerIndex()) + " has to go to jail");
-                nextPlayer();
-                return;
-            }else{
-                model.getMonopolyLogger().writeToLogger(model.getName(model.getCurrentPlayerIndex()) + " can roll again");
-            }
-        }else{
-            model.getCurrentPlayer().setDiceRollsLeft(0);
-        }
-
-        int tmpDiceRollsLeft = model.getCurrentPlayer().getDiceRollsLeft();
-        model.getCurrentPlayer().setDiceRollsLeft(0);
+        int firstDiceValue = result.getResult().get(0).getResult();
+        int secondDiceValue = result.getResult().get(1).getResult();
 
         int stepValue = firstDiceValue + secondDiceValue;
 
-        //javafx ain't easy...
+        //Task for step animation
         Task<Void> task = new Task<Void>() {
             @Override
             public Void call() throws Exception {
@@ -976,34 +956,25 @@ public class Controller implements Initializable {
             }
         };
 
-        task.messageProperty().addListener((obs, oldMessage, newMessage) -> model.step(model.getCurrentPlayerIndex(), 1));
+        task.messageProperty().addListener((obs, oldMessage, newMessage) -> viewModel.moveCurrentPlayer(1));
         task.stateProperty().addListener((observableValue, oldState, newState) -> {
             if (newState == Worker.State.SUCCEEDED) {
                 //TODO: handle step result
-                //Set Buy Property field - check if it is property or it has an owner or player has enough money
-                if (model.isActFieldProperty() && !model.checkPropertyHasOwner() && model.checkPlayerHasEnoughMoney()) {
+
+                if (viewModel.isCurrentPlayersFieldBuyable()) {
                     buyPropertyButton.setDisable(false);
                 } else {
                     buyPropertyButton.setDisable(true);
                 }
 
-                model.getCurrentPlayer().setDiceRollsLeft(tmpDiceRollsLeft); //enable dRB if player rolled double
+                viewModel.getCurrentPlayer().setDiceRollsLeft(tmpDiceRollsLeft); //enable dRB if player rolled double
             }
         });
 
-        new Thread(task).start();*/
+        buyPropertyButton.setDisable(true);
+        new Thread(task).start();
 
     }
-
-    private void nextPlayer() {
-        /*model.nextPlayer();
-        if(!model.getCurrentPlayer().getInJail()){
-            model.getCurrentPlayer().setDiceRollsLeft(3);
-        }else{
-            //TODO: handle actions in jail
-        }*/
-    }
-
 
     @FXML
     void buyPropertyButtonClicked(ActionEvent event) {
@@ -1013,13 +984,12 @@ public class Controller implements Initializable {
 
         if (viewModel.getCurrentPlayer().hasEnoughMoneyFor(((Property) viewModel.getCurrentPlayersField()).getDefaultPrice())) {
             viewModel.buyProperty();
+            buyPropertyButton.setDisable(true);
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "You don't have enough money to buy this property!");
             alert.setHeaderText(null);
             alert.show();
         }
-
-
     }
 
     @FXML
@@ -1034,7 +1004,8 @@ public class Controller implements Initializable {
 
     @FXML
     void endTurnButtonClicked(ActionEvent event) {
-        nextPlayer();
+        viewModel.endTurn();
+        //TODO: handle actions in jail
     }
 
     @FXML

@@ -2,6 +2,8 @@ package monopoly.model;
 
 import monopoly.model.board.Board;
 import monopoly.model.dice.Dice;
+import monopoly.model.dice.DiceResult;
+import monopoly.model.dice.MultipleDiceResult;
 import monopoly.model.field.Field;
 import monopoly.model.field.Property;
 import monopoly.model.player.Player;
@@ -11,7 +13,7 @@ import monopoly.util.logger.Logger;
 public class Model {
 
     private Board board;
-    private Dice dice; //TODO: Where should I implement the dice rolling?
+    private Dice dice;
     private PlayerChanger playerChanger;
     private Logger logger;
 
@@ -27,7 +29,9 @@ public class Model {
     }
 
     public void movePlayer(Player player, int steps) {
+        if (player.isInJail()) return;
         player.step(steps);
+
         logger.info(String.format("%s player moved %d field(s).", player.getName(), steps));
     }
 
@@ -36,9 +40,27 @@ public class Model {
         movePlayer(player, value);
     }
 
-    public void endTurn() {
+    public Player endTurn() {
         Player nextPlayer = playerChanger.nextPlayer();
         logger.info(String.format("%s's turn.", nextPlayer));
+        return nextPlayer;
+    }
+
+    public DiceResult roll() {
+
+        MultipleDiceResult result = (MultipleDiceResult) dice.roll();
+
+        boolean success = playerChanger.handleRoll(result);
+
+        if (success) {
+            logger.info(String.format("%s rolled %d + %d.", playerChanger.getName(playerChanger.currentPlayerIndex()), result.getResult().get(0).getResult(), result.getResult().get(1).getResult()));
+            return result;
+        } else {
+            logger.info(String.format("%s got jailed.", playerChanger.getName(playerChanger.currentPlayerIndex())));
+            //playerChanger.nextPlayer();
+            return result;
+        }
+
     }
 
     public void buyProperty(Owner owner, Property property, int price) {
@@ -72,6 +94,10 @@ public class Model {
         return playerChanger.currentPlayer();
     }
 
+    public int getCurrentPlayerIndex() {
+        return playerChanger.currentPlayerIndex();
+    }
+
     public Field getCurrentPlayersField() {
         return board.getFieldAt(getCurrentPlayer());
     }
@@ -90,6 +116,10 @@ public class Model {
 
     public void setPlayerName(int ind, String name) {
         playerChanger.setName(name, ind);
+    }
+
+    public String getPlayerName(int ind) {
+        return playerChanger.getName(ind);
     }
 
     public Player getPlayer(int ind) {

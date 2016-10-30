@@ -3,6 +3,8 @@ package monopoly.viewmodel;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import monopoly.model.Model;
+import monopoly.model.dice.DiceResult;
+import monopoly.model.dice.MultipleDiceResult;
 import monopoly.model.field.Field;
 import monopoly.model.player.Player;
 
@@ -16,27 +18,29 @@ public class ViewModel {
     private Map<Player, StringProperty> playerNames;
     private Map<Player, IntegerProperty> playerMoney;
     private Map<Player, IntegerProperty> playerPositions;
+    private Map<Player, IntegerProperty> playerDiceRollsLeft;
     private Map<Player, ListProperty<monopoly.model.field.Property>> playerProperties;
-    private BooleanProperty currentPlayersFieldNotBuyable;
 
     private IntegerProperty firstDiceValue;
     private IntegerProperty secondDiceValue;
+
+    private IntegerProperty currentPlayerIndex;
 
     public ViewModel(Model model) {
         this.model = model;
 
         playerNames = new HashMap<Player, StringProperty>() {{
-            put(model.getPlayer(0), new SimpleStringProperty(model.getPlayer(0).getName()));
-            put(model.getPlayer(1), new SimpleStringProperty(model.getPlayer(1).getName()));
-            put(model.getPlayer(2), new SimpleStringProperty(model.getPlayer(2).getName()));
-            put(model.getPlayer(3), new SimpleStringProperty(model.getPlayer(3).getName()));
+            put(model.getPlayer(0), new SimpleStringProperty(model.getPlayerName(0)));
+            put(model.getPlayer(1), new SimpleStringProperty(model.getPlayerName(1)));
+            put(model.getPlayer(2), new SimpleStringProperty(model.getPlayerName(2)));
+            put(model.getPlayer(3), new SimpleStringProperty(model.getPlayerName(3)));
         }};
 
         playerMoney = new HashMap<Player, IntegerProperty>() {{
-            put(model.getPlayer(0), new SimpleIntegerProperty(model.getPlayer(0).getMoney()));
-            put(model.getPlayer(1), new SimpleIntegerProperty(model.getPlayer(1).getMoney()));
-            put(model.getPlayer(2), new SimpleIntegerProperty(model.getPlayer(2).getMoney()));
-            put(model.getPlayer(3), new SimpleIntegerProperty(model.getPlayer(3).getMoney()));
+            put(model.getPlayer(0), new SimpleIntegerProperty(model.getPlayerMoney(0)));
+            put(model.getPlayer(1), new SimpleIntegerProperty(model.getPlayerMoney(1)));
+            put(model.getPlayer(2), new SimpleIntegerProperty(model.getPlayerMoney(2)));
+            put(model.getPlayer(3), new SimpleIntegerProperty(model.getPlayerMoney(3)));
         }};
 
         playerPositions = new HashMap<Player, IntegerProperty>() {{
@@ -53,7 +57,17 @@ public class ViewModel {
             put(model.getPlayer(3), new SimpleListProperty<>());
         }};
 
-        currentPlayersFieldNotBuyable = new SimpleBooleanProperty(true);
+        playerDiceRollsLeft = new HashMap<Player, IntegerProperty>() {{
+            put(model.getPlayer(0), new SimpleIntegerProperty(model.getPlayer(0).getDiceRollsLeft()));
+            put(model.getPlayer(1), new SimpleIntegerProperty(model.getPlayer(1).getDiceRollsLeft()));
+            put(model.getPlayer(2), new SimpleIntegerProperty(model.getPlayer(2).getDiceRollsLeft()));
+            put(model.getPlayer(3), new SimpleIntegerProperty(model.getPlayer(3).getDiceRollsLeft()));
+        }};
+
+        firstDiceValue = new SimpleIntegerProperty(0);
+        secondDiceValue = new SimpleIntegerProperty(0);
+
+        currentPlayerIndex = new SimpleIntegerProperty(0);
     }
 
     public int getPlayerMoney(int ind) {
@@ -62,49 +76,81 @@ public class ViewModel {
 
     public void increasePlayerMoney(int ind, int sum) {
         model.increasePlayerMoney(ind, sum);
+
+        //Update properties
         playerMoney.get(model.getPlayer(ind)).set(model.getPlayerMoney(ind));
     }
 
     public void reducePlayerMoney(int ind, int sum) {
         model.reducePlayerMoney(ind, sum);
+
+        //Update properties
         playerMoney.get(model.getPlayer(ind)).set(model.getPlayerMoney(ind));
     }
 
     public void setPlayerName(int ind, String name) {
         model.setPlayerName(ind, name);
+
+        //Update properties
         playerNames.get(model.getPlayer(ind)).set(name);
     }
 
     public void moveCurrentPlayer(int value) {
         model.moveCurrentPlayer(value);
 
+        //Update properties
         playerPositions.get(model.getCurrentPlayer()).set(model.getCurrentPlayer().getPosition());
-
-        if (model.getCurrentPlayersField() instanceof monopoly.model.field.Property) {
-            currentPlayersFieldNotBuyable.setValue(((monopoly.model.field.Property) model.getCurrentPlayersField()).hasOwner());
-        } else {
-            currentPlayersFieldNotBuyable.setValue(true);
-        }
     }
 
     public void buyProperty() {
         model.buyProperty();
 
+        //Update properties
         playerProperties.get(model.getCurrentPlayer()).set(FXCollections.observableArrayList(model.getCurrentPlayer().getProperties()));
         playerMoney.get(model.getCurrentPlayer()).set(model.getCurrentPlayer().getMoney());
-        if (model.getCurrentPlayersField() instanceof monopoly.model.field.Property) {
-            currentPlayersFieldNotBuyable.setValue(((monopoly.model.field.Property) model.getCurrentPlayersField()).hasOwner());
-        } else {
-            currentPlayersFieldNotBuyable.setValue(true);
-        }
+    }
+
+    public DiceResult roll() {
+        MultipleDiceResult result = (MultipleDiceResult) model.roll();
+
+        //Update properties
+        firstDiceValue.set(result.getResult().get(0).getResult());
+        secondDiceValue.set(result.getResult().get(1).getResult());
+        playerDiceRollsLeft.get(model.getCurrentPlayer()).set(model.getCurrentPlayer().getDiceRollsLeft());
+        playerPositions.get(model.getCurrentPlayer()).set(model.getCurrentPlayer().getPosition());
+        setCurrentPlayerIndex(model.getCurrentPlayerIndex());
+
+        return result;
     }
 
     public Player getCurrentPlayer() {
         return model.getCurrentPlayer();
     }
 
+    public Player getPlayer(int index) {
+        return model.getPlayer(index);
+    }
+
+    public Player endTurn() {
+        Player player = model.endTurn();
+
+        //Update properties
+        setCurrentPlayerIndex(model.getCurrentPlayerIndex());
+        playerDiceRollsLeft.get(player).set(player.getDiceRollsLeft());
+
+        return player;
+    }
+
     public Field getCurrentPlayersField() {
         return model.getCurrentPlayersField();
+    }
+
+    public boolean isCurrentPlayersFieldBuyable() {
+        if (model.getCurrentPlayersField() instanceof monopoly.model.field.Property) {
+            return !((monopoly.model.field.Property) model.getCurrentPlayersField()).hasOwner();
+        } else {
+            return false;
+        }
     }
 
     public IntegerProperty getPlayerMoneyProperty(int ind) {
@@ -123,7 +169,35 @@ public class ViewModel {
         return playerProperties.get(model.getPlayer(ind));
     }
 
-    public BooleanProperty getCurrentPlayersFieldNotBuyableProperty() {
-        return currentPlayersFieldNotBuyable;
+    public void setFirstDiceValue(int value) {
+        firstDiceValue.set(value);
+    }
+
+    public void setSecondDiceValue(int value) {
+        secondDiceValue.set(value);
+    }
+
+    public IntegerProperty getFirstDiceValueProperty() {
+        return firstDiceValue;
+    }
+
+    public IntegerProperty getSecondDiceValueProperty() {
+        return secondDiceValue;
+    }
+
+    public int getCurrentPlayerIndex() {
+        return currentPlayerIndex.get();
+    }
+
+    public void setCurrentPlayerIndex(int value) {
+        currentPlayerIndex.set(value);
+    }
+
+    public IntegerProperty currentPlayerIndexProperty() {
+        return currentPlayerIndex;
+    }
+
+    public IntegerProperty playerDiceRollsLeftProperty(int index) {
+        return playerDiceRollsLeft.get(model.getPlayer(index));
     }
 }

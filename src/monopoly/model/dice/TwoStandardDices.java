@@ -1,7 +1,5 @@
 package monopoly.model.dice;
 
-import monopoly.util.random.Randomizer;
-
 public class TwoStandardDices implements Dice {
 
     private StandardDice dice1;
@@ -13,9 +11,8 @@ public class TwoStandardDices implements Dice {
     }
 
     @Override
-    public int roll() {
-        return dice1.roll() + dice2.roll();
+    public MultipleDiceResult roll() {
+        return new MultipleDiceResult(dice1.roll(), dice2.roll());
     }
 
-    //TODO: Getter for rolled numbers per dice.
 }
