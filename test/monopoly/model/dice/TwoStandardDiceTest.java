@@ -11,32 +11,42 @@ public class TwoStandardDiceTest {
     public void addFirstDiceValue() {
         StandardDice stdDice1 = mock(StandardDice.class);
         StandardDice stdDice2 = mock(StandardDice.class);
+        SingleDiceResult sdRes1 = mock(SingleDiceResult.class);
+        SingleDiceResult sdRes2 = mock(SingleDiceResult.class);
 
-        when(stdDice1.roll()).thenReturn(1);
-        when(stdDice2.roll()).thenReturn(0);
+        when(sdRes1.getResult()).thenReturn(1);
+        when(sdRes2.getResult()).thenReturn(0);
+        when(stdDice1.roll()).thenReturn(sdRes1);
+        when(stdDice2.roll()).thenReturn(sdRes2);
 
         Dice twoStdDice = new TwoStandardDices(stdDice1, stdDice2);
-        int result = twoStdDice.roll();
+        DiceResult result = twoStdDice.roll();
 
         verify(stdDice1).roll();
         verify(stdDice2).roll();
-        assertEquals(1, result);
+        assertEquals(1, ((MultipleDiceResult) result).getResult().get(0).getResult());
+        assertEquals(0, ((MultipleDiceResult) result).getResult().get(1).getResult());
     }
 
     @Test
     public void addSecondDiceValue() {
         StandardDice stdDice1 = mock(StandardDice.class);
         StandardDice stdDice2 = mock(StandardDice.class);
+        SingleDiceResult sdRes1 = mock(SingleDiceResult.class);
+        SingleDiceResult sdRes2 = mock(SingleDiceResult.class);
 
-        when(stdDice1.roll()).thenReturn(0);
-        when(stdDice2.roll()).thenReturn(1);
+        when(sdRes1.getResult()).thenReturn(0);
+        when(sdRes2.getResult()).thenReturn(1);
+        when(stdDice1.roll()).thenReturn(sdRes1);
+        when(stdDice2.roll()).thenReturn(sdRes2);
 
         Dice twoStdDice = new TwoStandardDices(stdDice1, stdDice2);
-        int result = twoStdDice.roll();
+        DiceResult result = twoStdDice.roll();
 
         verify(stdDice1).roll();
         verify(stdDice2).roll();
-        assertEquals(1, result);
+        assertEquals(0, ((MultipleDiceResult) result).getResult().get(0).getResult());
+        assertEquals(1, ((MultipleDiceResult) result).getResult().get(1).getResult());
     }
 
 }

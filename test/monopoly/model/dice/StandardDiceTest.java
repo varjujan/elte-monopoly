@@ -1,10 +1,10 @@
 package monopoly.model.dice;
 
+import monopoly.util.random.Randomizer;
 import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
-
-import monopoly.util.random.Randomizer;
 
 public class StandardDiceTest {
 
@@ -15,10 +15,10 @@ public class StandardDiceTest {
 
         when(randomizer.random(anyInt(), anyInt())).thenReturn(1);
 
-        int result = dice.roll();
+        DiceResult result = dice.roll();
 
         verify(randomizer).random(1, 6);
-        assertEquals(1, result);
+        assertEquals(1, ((SingleDiceResult) result).getResult());
     }
 
 }

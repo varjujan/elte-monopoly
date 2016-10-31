@@ -889,12 +889,12 @@ public class Controller implements Initializable {
 
     @FXML
     void saveGameMenuItemClicked(ActionEvent event) {
-        /*FileChooser fileChooser = new FileChooser();
+        FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save game");
         File file = fileChooser.showSaveDialog((Stage) ((Node) rollDiceButton).getScene().getWindow());
         if (file != null) {
-            model.saveGame(file);
-        }*/
+            //viewModel.saveGame(file);
+        }
     }
 
     @FXML
