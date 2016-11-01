@@ -3,7 +3,6 @@ package monopoly.model;
 import monopoly.model.board.Board;
 import monopoly.model.dice.Dice;
 import monopoly.model.dice.DiceResult;
-import monopoly.model.dice.MultipleDiceResult;
 import monopoly.model.field.Field;
 import monopoly.model.field.Property;
 import monopoly.model.player.Player;
@@ -48,12 +47,12 @@ public class Model {
 
     public DiceResult roll() {
 
-        MultipleDiceResult result = (MultipleDiceResult) dice.roll();
+        DiceResult result = dice.roll();
 
         boolean success = playerChanger.handleRoll(result);
 
         if (success) {
-            logger.info(String.format("%s rolled %d + %d.", playerChanger.getName(playerChanger.currentPlayerIndex()), result.getResult().get(0).getResult(), result.getResult().get(1).getResult()));
+            logger.info(String.format("%s rolled %d + %d.", playerChanger.getName(playerChanger.currentPlayerIndex()), result.getResult().get(0), result.getResult().get(1)));
             return result;
         } else {
             logger.info(String.format("%s got jailed.", playerChanger.getName(playerChanger.currentPlayerIndex())));

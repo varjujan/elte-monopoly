@@ -1,10 +1,12 @@
 package monopoly.model.player.changer;
 
-import monopoly.model.dice.MultipleDiceResult;
+import monopoly.model.dice.DiceResult;
 import monopoly.model.player.Player;
 import monopoly.model.player.State;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class SequentialPlayerChanger implements PlayerChanger {
 
@@ -72,11 +74,10 @@ public class SequentialPlayerChanger implements PlayerChanger {
     }
 
     @Override
-    public boolean handleRoll(MultipleDiceResult result) {
-        int firstDiceValue = result.getResult().get(0).getResult();
-        int secondDiceValue = result.getResult().get(1).getResult();
+    public boolean handleRoll(DiceResult result) {
+        Set<Integer> uniqueValues = new HashSet<>(result.getResult());
 
-        if (firstDiceValue == secondDiceValue) {
+        if (uniqueValues.size() == 1) {
             currentPlayer().decreaseDiceRollsLeft();
             if (currentPlayer().getDiceRollsLeft() == 0) {
                 currentPlayer().setPosition(-1);

@@ -18,7 +18,8 @@ public class StandardDiceTest {
         DiceResult result = dice.roll();
 
         verify(randomizer).random(1, 6);
-        assertEquals(1, ((SingleDiceResult) result).getResult());
+        assertEquals(1, result.getResult().size());
+        assertEquals(1, result.getResult().get(0).intValue());
     }
 
 }

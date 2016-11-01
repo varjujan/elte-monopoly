@@ -1,8 +1,9 @@
 package monopoly.model.dice;
 
-/**
- * Created by Janos on 2016. 10. 28..
- */
-public interface DiceResult {
+import java.util.List;
 
+public interface DiceResult {
+    List<Integer> getResult();
+
+    int getRollValue();
 }

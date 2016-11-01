@@ -1,6 +1,6 @@
 package monopoly.model.player.changer;
 
-import monopoly.model.dice.MultipleDiceResult;
+import monopoly.model.dice.DiceResult;
 import monopoly.model.player.Player;
 
 public interface PlayerChanger {
@@ -22,5 +22,5 @@ public interface PlayerChanger {
 
     Player getPlayer(int ind);
 
-    boolean handleRoll(MultipleDiceResult result);
+    boolean handleRoll(DiceResult result);
 }

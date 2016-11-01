@@ -114,8 +114,8 @@ public class ViewModel {
         MultipleDiceResult result = (MultipleDiceResult) model.roll();
 
         //Update properties
-        firstDiceValue.set(result.getResult().get(0).getResult());
-        secondDiceValue.set(result.getResult().get(1).getResult());
+        firstDiceValue.set(result.getResult().get(0));
+        secondDiceValue.set(result.getResult().get(1));
         playerDiceRollsLeft.get(model.getCurrentPlayer()).set(model.getCurrentPlayer().getDiceRollsLeft());
         playerPositions.get(model.getCurrentPlayer()).set(model.getCurrentPlayer().getPosition());
         setCurrentPlayerIndex(model.getCurrentPlayerIndex());
