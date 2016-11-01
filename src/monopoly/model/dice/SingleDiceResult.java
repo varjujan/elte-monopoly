@@ -1,8 +1,8 @@
 package monopoly.model.dice;
 
-/**
- * Created by Janos on 2016. 10. 28..
- */
+import java.util.Arrays;
+import java.util.List;
+
 public class SingleDiceResult implements DiceResult {
 
     private int value;
@@ -11,7 +11,13 @@ public class SingleDiceResult implements DiceResult {
         this.value = value;
     }
 
-    public int getResult() {
+    @Override
+    public List<Integer> getResult() {
+        return Arrays.asList(value);
+    }
+
+    @Override
+    public int getRollValue() {
         return value;
     }
 

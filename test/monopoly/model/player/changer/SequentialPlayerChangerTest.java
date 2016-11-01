@@ -1,12 +1,12 @@
 package monopoly.model.player.changer;
 
 import monopoly.model.dice.MultipleDiceResult;
-import monopoly.model.dice.SingleDiceResult;
 import monopoly.model.player.Player;
 import monopoly.model.player.State;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -78,19 +78,16 @@ public class SequentialPlayerChangerTest {
     public void handleRollWithDifferentDices() {
         Player player = mock(Player.class);
         List<Player> players = mock(List.class);
-        List<SingleDiceResult> sdResList = mock(List.class);
 
-        SingleDiceResult sdRes1 = mock(SingleDiceResult.class);
-        SingleDiceResult sdRes2 = mock(SingleDiceResult.class);
         MultipleDiceResult mdRes = mock(MultipleDiceResult.class);
+        List<Integer> integerList = mock(List.class);
+        Iterator<Integer> intListIterator = mock(Iterator.class);
 
-        when(sdResList.get(0)).thenReturn(sdRes1);
-        when(sdResList.get(1)).thenReturn(sdRes2);
+        when(integerList.iterator()).thenReturn(intListIterator);
+        when(intListIterator.hasNext()).thenReturn(true).thenReturn(true).thenReturn(false);
+        when(intListIterator.next()).thenReturn(1).thenReturn(2);
 
-        when(sdRes1.getResult()).thenReturn(1);
-        when(sdRes2.getResult()).thenReturn(2);
-
-        when(mdRes.getResult()).thenReturn(sdResList);
+        when(mdRes.getResult()).thenReturn(integerList);
 
         when(players.get(0)).thenReturn(player);
         when(players.size()).thenReturn(1);
@@ -99,6 +96,7 @@ public class SequentialPlayerChangerTest {
 
         assertEquals(true, spChanger.handleRoll(mdRes));
 
+        verify(player, times(1)).setDiceRollsLeft(0);
         verify(player, times(0)).decreaseDiceRollsLeft();
         verify(player, times(0)).setPosition(anyInt());
     }
@@ -107,19 +105,16 @@ public class SequentialPlayerChangerTest {
     public void handleRollWithEqualDices() {
         Player player = mock(Player.class);
         List<Player> players = mock(List.class);
-        List<SingleDiceResult> sdResList = mock(List.class);
 
-        SingleDiceResult sdRes1 = mock(SingleDiceResult.class);
-        SingleDiceResult sdRes2 = mock(SingleDiceResult.class);
         MultipleDiceResult mdRes = mock(MultipleDiceResult.class);
+        List<Integer> integerList = mock(List.class);
+        Iterator<Integer> intListIterator = mock(Iterator.class);
 
-        when(sdResList.get(0)).thenReturn(sdRes1);
-        when(sdResList.get(1)).thenReturn(sdRes2);
+        when(integerList.iterator()).thenReturn(intListIterator);
+        when(intListIterator.hasNext()).thenReturn(true).thenReturn(true).thenReturn(false).thenReturn(true).thenReturn(true).thenReturn(false).thenReturn(true).thenReturn(true).thenReturn(false);
+        when(intListIterator.next()).thenReturn(1).thenReturn(1).thenReturn(1).thenReturn(1).thenReturn(1).thenReturn(1);
 
-        when(sdRes1.getResult()).thenReturn(1);
-        when(sdRes2.getResult()).thenReturn(1);
-
-        when(mdRes.getResult()).thenReturn(sdResList);
+        when(mdRes.getResult()).thenReturn(integerList);
 
         when(players.get(0)).thenReturn(player);
         when(players.size()).thenReturn(1);

@@ -421,6 +421,9 @@ public class Controller implements Initializable {
     private Button sellPropertyButton;
 
     @FXML
+    private Button endTurnButton;
+
+    @FXML
     private ImageView field14_player3;
 
     @FXML
@@ -939,10 +942,7 @@ public class Controller implements Initializable {
         int tmpDiceRollsLeft = viewModel.getCurrentPlayer().getDiceRollsLeft();
         viewModel.getCurrentPlayer().setDiceRollsLeft(0);
 
-        int firstDiceValue = result.getResult().get(0).getResult();
-        int secondDiceValue = result.getResult().get(1).getResult();
-
-        int stepValue = firstDiceValue + secondDiceValue;
+        int stepValue = result.getRollValue();
 
         //Task for step animation
         Task<Void> task = new Task<Void>() {
@@ -961,19 +961,25 @@ public class Controller implements Initializable {
             if (newState == Worker.State.SUCCEEDED) {
                 //TODO: handle step result
 
-                if (viewModel.isCurrentPlayersFieldBuyable()) {
-                    buyPropertyButton.setDisable(false);
-                } else {
-                    buyPropertyButton.setDisable(true);
-                }
+                updateBuyPropertyButton();
+                endTurnButton.setDisable(false);
 
                 viewModel.getCurrentPlayer().setDiceRollsLeft(tmpDiceRollsLeft); //enable dRB if player rolled double
             }
         });
 
         buyPropertyButton.setDisable(true);
+        endTurnButton.setDisable(true);
         new Thread(task).start();
 
+    }
+
+    void updateBuyPropertyButton() {
+        if (viewModel.isCurrentPlayersFieldBuyable()) {
+            buyPropertyButton.setDisable(false);
+        } else {
+            buyPropertyButton.setDisable(true);
+        }
     }
 
     @FXML
@@ -1005,6 +1011,7 @@ public class Controller implements Initializable {
     @FXML
     void endTurnButtonClicked(ActionEvent event) {
         viewModel.endTurn();
+        updateBuyPropertyButton();
         //TODO: handle actions in jail
     }
 
