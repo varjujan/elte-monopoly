@@ -961,6 +961,22 @@ public class Controller implements Initializable {
             if (newState == Worker.State.SUCCEEDED) {
                 //TODO: handle step result
 
+                if(viewModel.isCurrentPlayersFieldChanceCard()) {
+
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Chance Card");
+                    alert.setHeaderText(null);
+                    alert.setContentText(viewModel.drawChanceCard());
+                    alert.showAndWait();
+
+                } else if (viewModel.isCurrentPlayersFieldCommunityChest()) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Community Chest");
+                    alert.setHeaderText(null);
+                    alert.setContentText(viewModel.drawCommunityCard());
+                    alert.showAndWait();
+                }
+
                 updateBuyPropertyButton();
                 endTurnButton.setDisable(false);
 

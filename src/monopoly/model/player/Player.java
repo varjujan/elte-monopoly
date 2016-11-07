@@ -1,6 +1,7 @@
 package monopoly.model.player;
 
 import monopoly.model.Owner;
+import monopoly.model.deck.card.Card;
 import monopoly.model.field.Property;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ public class Player implements Owner {
     private int position;
     private State state;
     private List<Property> properties;
+    private List<Card> freeFromJailCards;
     private int diceRollsLeft;
 
     public Player(String name, int money) {
@@ -21,6 +23,7 @@ public class Player implements Owner {
         this.position = 0;
         this.state = State.InGame;
         this.properties = new ArrayList<>();
+        this.freeFromJailCards = new ArrayList<>();
         this.diceRollsLeft = 3;
     }
 
@@ -131,4 +134,19 @@ public class Player implements Owner {
 
         this.diceRollsLeft -= 1;
     }
+
+    public Integer useFreeFromJailCard (){
+        Integer tmp = freeFromJailCards.get(0).getId();
+        freeFromJailCards.remove(0);
+        return tmp;
+    }
+
+    public void addFreeFromJailCard(Card card) {
+        freeFromJailCards.add(card);
+    }
+
+    public int getFreeFormJailCardCount(){
+        return freeFromJailCards.size();
+    }
+
 }

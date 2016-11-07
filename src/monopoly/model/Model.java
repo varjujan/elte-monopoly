@@ -1,6 +1,8 @@
 package monopoly.model;
 
 import monopoly.model.board.Board;
+import monopoly.model.deck.Deck;
+import monopoly.model.deck.card.Card;
 import monopoly.model.dice.Dice;
 import monopoly.model.dice.DiceResult;
 import monopoly.model.field.Field;
@@ -15,16 +17,22 @@ public class Model {
     private Dice dice;
     private PlayerChanger playerChanger;
     private Logger logger;
+    private Deck chanceCardDeck;
+    private Deck communityCardDeck;
 
     public Model(
             Board board,
             Dice dice,
             PlayerChanger playerChanger,
-            Logger logger) {
+            Logger logger,
+            Deck chanceCardDeck,
+            Deck communityCardDeck) {
         this.board = board;
         this.dice = dice;
         this.playerChanger = playerChanger;
         this.logger = logger;
+        this.chanceCardDeck = chanceCardDeck;
+        this.communityCardDeck = communityCardDeck;
     }
 
     public void movePlayer(Player player, int steps) {
@@ -127,5 +135,17 @@ public class Model {
 
     public int getPlayerPosition(int ind) {
         return playerChanger.getPlayer(ind).getPosition();
+    }
+
+    public String drawChanceCard()  {
+        Card card = chanceCardDeck.draw();
+        card.Effect();
+        return card.getText();
+    }
+
+    public String drawCommunityCard()  {
+        Card card = communityCardDeck.draw();
+        card.Effect();
+        return card.getText();
     }
 }

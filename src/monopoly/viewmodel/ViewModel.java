@@ -153,6 +153,22 @@ public class ViewModel {
         }
     }
 
+    public boolean isCurrentPlayersFieldChanceCard() {
+        if (model.getCurrentPlayersField().getName() == "Chance") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isCurrentPlayersFieldCommunityChest() {
+        if (model.getCurrentPlayersField().getName() == "Community Chest") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public IntegerProperty getPlayerMoneyProperty(int ind) {
         return playerMoney.get(model.getPlayer(ind));
     }
@@ -199,5 +215,29 @@ public class ViewModel {
 
     public IntegerProperty playerDiceRollsLeftProperty(int index) {
         return playerDiceRollsLeft.get(model.getPlayer(index));
+    }
+
+    public String drawChanceCard() {
+        String str = model.drawChanceCard();
+
+        //Update properties
+        for (int i=0; i<4; i++) {
+            playerPositions.get(model.getPlayer(i)).set(model.getPlayer(i).getPosition());
+            playerMoney.get(model.getPlayer(i)).set(model.getPlayer(i).getMoney());
+        }
+
+        return str;
+    }
+
+    public String drawCommunityCard() {
+        String str = model.drawCommunityCard();
+
+        //Update properties
+        for (int i=0; i<4; i++) {
+            playerPositions.get(model.getPlayer(i)).set(model.getPlayer(i).getPosition());
+            playerMoney.get(model.getPlayer(i)).set(model.getPlayer(i).getMoney());
+        }
+
+        return str;
     }
 }

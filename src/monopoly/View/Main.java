@@ -8,6 +8,9 @@ import javafx.stage.Stage;
 import monopoly.controller.StartGameController;
 import monopoly.model.Model;
 import monopoly.model.board.StandardBoard;
+import monopoly.model.deck.CommunityCardDeck;
+import monopoly.model.deck.ChanceCardDeck;
+import monopoly.model.deck.card.*;
 import monopoly.model.dice.StandardDice;
 import monopoly.model.dice.TwoStandardDices;
 import monopoly.model.player.Player;
@@ -16,7 +19,9 @@ import monopoly.util.logger.InGameLogger;
 import monopoly.util.random.JavaRandom;
 import monopoly.viewmodel.ViewModel;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Main extends Application {
 
@@ -30,7 +35,18 @@ public class Main extends Application {
                 new Player("", 1500), new Player("", 1500), new Player("", 1500)));
         InGameLogger logger = new InGameLogger();
 
-        Model model = new Model(board, dices, playerChanger, logger);
+        List<Card> communityCards = new ArrayList<>();
+        List<Card> chanceCards = new ArrayList<>();
+        for (int i=1; i<=17; i++) {
+            chanceCards.add(new ChanceCard(i, playerChanger, board));
+            if (i<17) {
+                communityCards.add(new CommunityCard(i, playerChanger, board));
+            }
+        }
+        ChanceCardDeck chanceCardDeck = new ChanceCardDeck(chanceCards);
+        CommunityCardDeck communityCardDeck = new CommunityCardDeck(communityCards);
+
+        Model model = new Model(board, dices, playerChanger, logger, chanceCardDeck, communityCardDeck);
 
         ViewModel viewModel = new ViewModel(model);
 
