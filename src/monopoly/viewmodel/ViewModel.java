@@ -240,4 +240,22 @@ public class ViewModel {
 
         return str;
     }
+
+    public void freeCurrentPlayerFromJail(int type) {
+        DiceResult result = model.freeCurrentPlayerFromJail(type);
+
+        //Update properties
+        for (int i = 0; i < 4; i++) {
+            playerPositions.get(model.getPlayer(i)).set(model.getPlayer(i).getPosition());
+            playerMoney.get(model.getPlayer(i)).set(model.getPlayer(i).getMoney());
+        }
+
+        if (result != null) {
+            firstDiceValue.set(result.getResult().get(0));
+            secondDiceValue.set(result.getResult().get(1));
+        }
+
+        playerDiceRollsLeft.get(getCurrentPlayer()).set(getCurrentPlayer().getDiceRollsLeft());
+
+    }
 }

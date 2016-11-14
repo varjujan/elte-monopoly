@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import monopoly.model.dice.MultipleDiceResult;
@@ -23,6 +24,7 @@ import monopoly.viewmodel.ViewModel;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Optional;
 import java.util.Random;
 import java.util.ResourceBundle;
 
@@ -959,7 +961,7 @@ public class Controller implements Initializable {
         task.messageProperty().addListener((obs, oldMessage, newMessage) -> viewModel.moveCurrentPlayer(1));
         task.stateProperty().addListener((observableValue, oldState, newState) -> {
             if (newState == Worker.State.SUCCEEDED) {
-                //TODO: handle step result
+
 
                 if(viewModel.isCurrentPlayersFieldChanceCard()) {
 
@@ -1027,8 +1029,50 @@ public class Controller implements Initializable {
     @FXML
     void endTurnButtonClicked(ActionEvent event) {
         viewModel.endTurn();
+
+        showJailOptions();
+
         updateBuyPropertyButton();
-        //TODO: handle actions in jail
+    }
+
+    void showJailOptions() {
+        if (viewModel.getCurrentPlayer().isInJail()) {
+            if (viewModel.getCurrentPlayer().getTurnsLeftInJail() > 0) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Your options");
+                alert.setHeaderText("Choose one:");
+                alert.setContentText("Choose your option.");
+                alert.initStyle(StageStyle.UNDECORATED);
+
+                ButtonType buttonTypeOne = new ButtonType("Use a card");
+                ButtonType buttonTypeTwo = new ButtonType("Pay $50 fine");
+                ButtonType buttonTypeThree = new ButtonType("Roll the dice");
+
+                alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeThree);
+
+                alert.getDialogPane().lookupButton(buttonTypeOne).setDisable(viewModel.getCurrentPlayer().getFreeFormJailCardCount() > 0);
+                alert.getDialogPane().lookupButton(buttonTypeOne).setDisable(viewModel.getCurrentPlayer().getMoney() >= 50);
+
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == buttonTypeOne) {
+                    //Use a card
+                    viewModel.freeCurrentPlayerFromJail(1);
+                    return;
+                } else if (result.get() == buttonTypeTwo) {
+                    //Pay the fine
+                    viewModel.freeCurrentPlayerFromJail(2);
+                    return;
+                } else if (result.get() == buttonTypeThree) {
+                    //Roll the dice
+                    viewModel.freeCurrentPlayerFromJail(3);
+                } else {
+                    //Pay the fine
+                    viewModel.freeCurrentPlayerFromJail(2);
+                }
+            } else {
+                viewModel.freeCurrentPlayerFromJail(2);
+            }
+        }
     }
 
     @FXML

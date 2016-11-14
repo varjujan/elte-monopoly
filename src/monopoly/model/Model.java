@@ -8,8 +8,12 @@ import monopoly.model.dice.DiceResult;
 import monopoly.model.field.Field;
 import monopoly.model.field.Property;
 import monopoly.model.player.Player;
+import monopoly.model.player.State;
 import monopoly.model.player.changer.PlayerChanger;
 import monopoly.util.logger.Logger;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class Model {
 
@@ -147,5 +151,33 @@ public class Model {
         Card card = communityCardDeck.draw();
         card.Effect();
         return card.getText();
+    }
+
+    public DiceResult freeCurrentPlayerFromJail(int type) {
+
+        boolean success = false;
+        DiceResult result = null;
+        switch (type) {
+            case 1:
+                getCurrentPlayer().useFreeFromJailCard();
+                break;
+            case 2:
+                getCurrentPlayer().reduceMoney(50);
+                break;
+            case 3:
+                result = dice.roll();
+                Set<Integer> uniqueValues = new HashSet<>(result.getResult());
+                success = (uniqueValues.size() == 1);
+                break;
+        }
+
+        if ((type != 3 || success) && (getCurrentPlayer().getState() != State.InBankruptcy)) {
+            getCurrentPlayer().setPosition(10);
+            getCurrentPlayer().setState(State.InGame);
+            getCurrentPlayer().setDiceRollsLeft(3);
+            getCurrentPlayer().setTurnsLeftInJail(0);
+        }
+
+        return result;
     }
 }

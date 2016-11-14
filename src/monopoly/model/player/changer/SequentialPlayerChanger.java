@@ -82,6 +82,7 @@ public class SequentialPlayerChanger implements PlayerChanger {
             if (currentPlayer().getDiceRollsLeft() == 0) {
                 currentPlayer().setPosition(-1);
                 currentPlayer().setState(State.InJail);
+                currentPlayer().setTurnsLeftInJail(3);
                 return false;
             }
         } else {

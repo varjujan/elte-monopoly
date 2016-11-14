@@ -16,6 +16,7 @@ public class Player implements Owner {
     private List<Property> properties;
     private List<Card> freeFromJailCards;
     private int diceRollsLeft;
+    private int turnsLeftInJail;
 
     public Player(String name, int money) {
         this.name = name;
@@ -25,6 +26,7 @@ public class Player implements Owner {
         this.properties = new ArrayList<>();
         this.freeFromJailCards = new ArrayList<>();
         this.diceRollsLeft = 3;
+        this.turnsLeftInJail = 0;
     }
 
     @Override
@@ -147,6 +149,14 @@ public class Player implements Owner {
 
     public int getFreeFormJailCardCount(){
         return freeFromJailCards.size();
+    }
+
+    public int getTurnsLeftInJail() {
+        return turnsLeftInJail;
+    }
+
+    public void setTurnsLeftInJail(int value) {
+        turnsLeftInJail = value;
     }
 
 }
