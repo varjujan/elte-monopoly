@@ -137,10 +137,8 @@ public class Player implements Owner {
         this.diceRollsLeft -= 1;
     }
 
-    public Integer useFreeFromJailCard (){
-        Integer tmp = freeFromJailCards.get(0).getId();
-        freeFromJailCards.remove(0);
-        return tmp;
+    public Card useFreeFromJailCard (){
+        return freeFromJailCards.remove(0);
     }
 
     public void addFreeFromJailCard(Card card) {

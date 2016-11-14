@@ -12,22 +12,23 @@ public class CommunityCardDeck implements Deck {
 
     public CommunityCardDeck(List<Card> activeCommunityCards) {
         fill(activeCommunityCards);
-        shuffle();
+        shuffle(new Random());
     }
 
     public void fill (List<Card> activeCommunityCards) {
         this.activeCommunityCards = new ArrayList<>();
-        this.activeCommunityCards.addAll(activeCommunityCards);
+
+        for (int i=0; i<activeCommunityCards.size(); i++) {
+            this.activeCommunityCards.add(activeCommunityCards.get(i));
+        }
     }
 
-    public void shuffle() {
+    public void shuffle(Random rand) {
         List<Card> cardsToShuffle = new ArrayList<>();
         cardsToShuffle.addAll(usedCommunityCards);
         cardsToShuffle.addAll(activeCommunityCards);
         usedCommunityCards.clear();
         activeCommunityCards.clear();
-
-        Random rand = new Random();
 
         while(cardsToShuffle.size()>0) {
             int randomInt = rand.nextInt(cardsToShuffle.size());
@@ -38,7 +39,7 @@ public class CommunityCardDeck implements Deck {
 
     public Card draw() {
         if (activeCommunityCards.size() == 0) {
-            shuffle();
+            shuffle(new Random());
         }
         Card card = activeCommunityCards.remove(0);
 
@@ -46,5 +47,23 @@ public class CommunityCardDeck implements Deck {
             usedCommunityCards.add(card);
         }
         return card;
+    }
+
+    public void putCardBack (Card c) {
+        usedCommunityCards.add(c);
+    }
+
+    public Integer getActiveOrUsedCommunityCardsNumber (Cards cs) {
+        if (cs == Cards.active)
+            return this.activeCommunityCards.size();
+        else
+            return usedCommunityCards.size();
+    }
+
+    public Integer getActiveOrUsedCommunityCardIdAt(Cards cs, int i) {
+        if (cs == Cards.active)
+            return this.activeCommunityCards.get(i).getId();
+        else
+            return usedCommunityCards.get(i).getId();
     }
 }

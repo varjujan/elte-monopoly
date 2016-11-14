@@ -12,22 +12,23 @@ public class ChanceCardDeck implements Deck{
 
     public ChanceCardDeck(List<Card> activeChanceCards) {
         fill(activeChanceCards);
-        shuffle();
+        shuffle(new Random());
     }
 
     public void fill (List<Card> activeChanceCards) {
         this.activeChanceCards = new ArrayList<>();
-        this.activeChanceCards.addAll(activeChanceCards);
+
+        for (int i=0; i<activeChanceCards.size(); i++) {
+            this.activeChanceCards.add(activeChanceCards.get(i));
+        }
     }
 
-    public void shuffle() {
+    public void shuffle(Random rand) {
         List<Card> cardsToShuffle = new ArrayList<>();
         cardsToShuffle.addAll(usedChanceCards);
         cardsToShuffle.addAll(activeChanceCards);
         usedChanceCards.clear();
         activeChanceCards.clear();
-
-        Random rand = new Random();
 
         while(cardsToShuffle.size()>0) {
             int randomInt = rand.nextInt(cardsToShuffle.size());
@@ -38,7 +39,7 @@ public class ChanceCardDeck implements Deck{
 
     public Card draw() {
         if (activeChanceCards.size() == 0) {
-            shuffle();
+            shuffle(new Random());
         }
         Card card = activeChanceCards.remove(0);
 
@@ -46,5 +47,23 @@ public class ChanceCardDeck implements Deck{
             usedChanceCards.add(card);
         }
         return card;
+    }
+
+    public void putCardBack (Card c) {
+        usedChanceCards.add(c);
+    }
+
+    public Integer getActiveOrUsedChanceCardsNumber (Cards cs) {
+        if (cs == Cards.active)
+            return this.activeChanceCards.size();
+        else
+            return usedChanceCards.size();
+    }
+
+    public Integer getActiveOrUsedChanceCardIdAt(Cards cs, int i) {
+        if (cs == Cards.active)
+            return this.activeChanceCards.get(i).getId();
+        else
+            return usedChanceCards.get(i).getId();
     }
 }

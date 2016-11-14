@@ -159,7 +159,12 @@ public class Model {
         DiceResult result = null;
         switch (type) {
             case 1:
-                getCurrentPlayer().useFreeFromJailCard();
+                Card card = getCurrentPlayer().useFreeFromJailCard();
+                if (card.getId() == 5) {
+                    communityCardDeck.putCardBack(card);
+                } else if (card.getId() == 7) {
+                    chanceCardDeck.putCardBack(card);
+                }
                 break;
             case 2:
                 getCurrentPlayer().reduceMoney(50);
