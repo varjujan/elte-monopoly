@@ -22,6 +22,7 @@ import monopoly.viewmodel.ViewModel;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class Main extends Application {
 
@@ -38,7 +39,7 @@ public class Main extends Application {
         List<Card> communityCards = new ArrayList<>();
         List<Card> chanceCards = new ArrayList<>();
         for (int i=1; i<=17; i++) {
-            chanceCards.add(new ChanceCard(i, playerChanger, board));
+            chanceCards.add(new ChanceCard(i, playerChanger, board, new Random()));
             if (i<17) {
                 communityCards.add(new CommunityCard(i, playerChanger, board));
             }
