@@ -13,11 +13,13 @@ public class ChanceCard implements Card{
     private String text;
     private PlayerChanger plChanger;
     private Board board;
+    private Random random;
 
-    public ChanceCard(int id, PlayerChanger plChanger, Board board) {
+    public ChanceCard(int id, PlayerChanger plChanger, Board board, Random random) {
         this.id = id;
         this.plChanger = plChanger;
         this.board = board;
+        this.random = random;
     }
 
     public Integer getId() {
@@ -47,7 +49,6 @@ public class ChanceCard implements Card{
                 break;
             case 3:
                 text = "Advance token to nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total ten times the amount thrown.";
-                Random random = new Random();
                 Owner utilityOwner;
                 if (playerPosition > 28) {
                     utilityOwner = ((Property) board.getFieldAt(12)).getOwner();
