@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.stage.Screen;
 import monopoly.viewmodel.ViewModel;
 
 import java.io.IOException;
@@ -130,9 +132,17 @@ public class StartGameController implements Initializable {
         primaryStage.setMinWidth(1366);
         primaryStage.setResizable(true);
 
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        primaryStage.setX((primScreenBounds.getWidth() - 1366) / 2);
+        primaryStage.setY((primScreenBounds.getHeight() - 768) / 2);
+
         Scene scene = new Scene(root, 1366, 768);
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        primaryStage.setMinHeight(768);
+        primaryStage.setMinWidth(1366);
+
     }
 
     @FXML

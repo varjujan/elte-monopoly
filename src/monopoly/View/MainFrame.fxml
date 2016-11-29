@@ -1664,6 +1664,20 @@
                                                 <Font name="System Bold" size="16.0" />
                                              </font>
                                           </Label>
+                                          <Pane prefHeight="96.0" prefWidth="189.0" GridPane.columnIndex="4" GridPane.columnSpan="3" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label layoutX="45.0" layoutY="4.0" text="Current player:">
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="currentPlayerLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="-8.0" layoutY="24.0" prefHeight="20.0" prefWidth="204.0" text="Label">
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </Pane>
                                        </children>
                                        <padding>
                                           <Insets bottom="30.0" left="5.0" right="5.0" top="30.0" />
@@ -1712,7 +1726,7 @@
             <Button fx:id="rollDiceButton" layoutX="11.0" layoutY="505.0" mnemonicParsing="false" onAction="#rollDiceButtonClicked" prefHeight="35.0" prefWidth="263.0" text="Roll dice" AnchorPane.bottomAnchor="198.0" />
             <Button fx:id="buyPropertyButton" disable="true" layoutX="11.0" layoutY="546.0" mnemonicParsing="false" onAction="#buyPropertyButtonClicked" prefHeight="35.0" prefWidth="263.0" text="Buy property" AnchorPane.bottomAnchor="157.0" />
             <Button fx:id="sellPropertyButton" layoutX="11.0" layoutY="587.0" mnemonicParsing="false" onAction="#sellPropertyButtonClicked" prefHeight="35.0" prefWidth="263.0" text="Sell Property" AnchorPane.bottomAnchor="116.0" />
-            <TabPane layoutX="14.0" layoutY="14.0" prefHeight="486.0" prefWidth="253.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="238.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+            <TabPane fx:id="playersTabPane" layoutX="14.0" layoutY="14.0" prefHeight="486.0" prefWidth="253.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="238.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
               <tabs>
                 <Tab fx:id="player0Tab" text="Player1">
                   <content>

@@ -21,6 +21,8 @@ public class ViewModel {
     private Map<Player, IntegerProperty> playerDiceRollsLeft;
     private Map<Player, ListProperty<monopoly.model.field.Property>> playerProperties;
 
+    private StringProperty currentPlayerNameProperty;
+
     private IntegerProperty firstDiceValue;
     private IntegerProperty secondDiceValue;
 
@@ -68,6 +70,8 @@ public class ViewModel {
         secondDiceValue = new SimpleIntegerProperty(0);
 
         currentPlayerIndex = new SimpleIntegerProperty(0);
+
+        currentPlayerNameProperty = new SimpleStringProperty(model.getPlayer(0).getName());
     }
 
     public int getPlayerMoney(int ind) {
@@ -86,6 +90,7 @@ public class ViewModel {
 
         //Update properties
         playerMoney.get(model.getPlayer(ind)).set(model.getPlayerMoney(ind));
+        currentPlayerNameProperty.set(model.getCurrentPlayer().getName());
     }
 
     public void setPlayerName(int ind, String name) {
@@ -100,6 +105,7 @@ public class ViewModel {
 
         //Update properties
         playerPositions.get(model.getCurrentPlayer()).set(model.getCurrentPlayer().getPosition());
+        currentPlayerNameProperty.set(model.getCurrentPlayer().getName());
     }
 
     public void buyProperty() {
@@ -119,6 +125,7 @@ public class ViewModel {
         playerDiceRollsLeft.get(model.getCurrentPlayer()).set(model.getCurrentPlayer().getDiceRollsLeft());
         playerPositions.get(model.getCurrentPlayer()).set(model.getCurrentPlayer().getPosition());
         setCurrentPlayerIndex(model.getCurrentPlayerIndex());
+        currentPlayerNameProperty.set(model.getCurrentPlayer().getName());
 
         return result;
     }
@@ -137,6 +144,7 @@ public class ViewModel {
         //Update properties
         setCurrentPlayerIndex(model.getCurrentPlayerIndex());
         playerDiceRollsLeft.get(player).set(player.getDiceRollsLeft());
+        currentPlayerNameProperty.set(model.getCurrentPlayer().getName());
 
         return player;
     }
@@ -226,6 +234,8 @@ public class ViewModel {
             playerMoney.get(model.getPlayer(i)).set(model.getPlayer(i).getMoney());
         }
 
+        currentPlayerNameProperty.set(model.getCurrentPlayer().getName());
+
         return str;
     }
 
@@ -237,6 +247,8 @@ public class ViewModel {
             playerPositions.get(model.getPlayer(i)).set(model.getPlayer(i).getPosition());
             playerMoney.get(model.getPlayer(i)).set(model.getPlayer(i).getMoney());
         }
+
+        currentPlayerNameProperty.set(model.getCurrentPlayer().getName());
 
         return str;
     }
@@ -256,6 +268,11 @@ public class ViewModel {
         }
 
         playerDiceRollsLeft.get(getCurrentPlayer()).set(getCurrentPlayer().getDiceRollsLeft());
+        currentPlayerNameProperty.set(model.getCurrentPlayer().getName());
 
+    }
+
+    public StringProperty getCurrentPlayerNameProperty() {
+        return currentPlayerNameProperty;
     }
 }

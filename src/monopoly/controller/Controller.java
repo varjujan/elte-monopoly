@@ -611,6 +611,12 @@ public class Controller implements Initializable {
     @FXML
     private ImageView jailField_player3;
 
+    @FXML
+    private TabPane playersTabPane;
+
+    @FXML
+    private Label currentPlayerLabel;
+
     //endregion
 
     public Controller(ViewModel viewModel) {
@@ -816,6 +822,8 @@ public class Controller implements Initializable {
         jailField_player3.imageProperty().bind(Bindings.when(viewModel.getPlayerPositionProperty(3).isEqualTo(-1)).then(pieceYellowImage).otherwise(emptyImage));
 
         //endregion
+
+        currentPlayerLabel.textProperty().bind(viewModel.getCurrentPlayerNameProperty());
 
         //region Ugly rollDiceButton listeners
 
@@ -1029,6 +1037,7 @@ public class Controller implements Initializable {
     @FXML
     void endTurnButtonClicked(ActionEvent event) {
         viewModel.endTurn();
+        playersTabPane.getSelectionModel().select(viewModel.getCurrentPlayerIndex());
 
         showJailOptions();
 
