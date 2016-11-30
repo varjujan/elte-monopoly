@@ -1036,12 +1036,22 @@ public class Controller implements Initializable {
 
     @FXML
     void endTurnButtonClicked(ActionEvent event) {
-        viewModel.endTurn();
-        playersTabPane.getSelectionModel().select(viewModel.getCurrentPlayerIndex());
+        String currentPlayerName = viewModel.getCurrentPlayer().getName();
+        if (viewModel.endTurn() == null)
+        {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("End of Game");
+            alert.setHeaderText(null);
+            alert.setContentText("Congratulation! "+ currentPlayerName + " won the game!" );
+            alert.showAndWait();
+            System.exit(0);
+        } else {
+            playersTabPane.getSelectionModel().select(viewModel.getCurrentPlayerIndex());
 
-        showJailOptions();
+            showJailOptions();
 
-        updateBuyPropertyButton();
+            updateBuyPropertyButton();
+        }
     }
 
     void showJailOptions() {

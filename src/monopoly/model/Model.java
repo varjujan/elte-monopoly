@@ -52,8 +52,14 @@ public class Model {
     }
 
     public Player endTurn() {
+        Player currentPlayer = playerChanger.currentPlayer();
         Player nextPlayer = playerChanger.nextPlayer();
         logger.info(String.format("%s's turn.", nextPlayer));
+        if (currentPlayer == nextPlayer) {
+            logger.info(String.format("%s won the Game!", nextPlayer));
+            return null;
+        }
+
         return nextPlayer;
     }
 

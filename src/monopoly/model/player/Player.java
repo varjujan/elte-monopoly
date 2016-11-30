@@ -51,6 +51,7 @@ public class Player implements Owner {
 
         this.money -= value;
         if (this.money < 0) {
+            this.state = State.InBankruptcy;
             this.money = 0;
         }
     }

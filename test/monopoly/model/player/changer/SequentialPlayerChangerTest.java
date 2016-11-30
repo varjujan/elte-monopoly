@@ -36,7 +36,7 @@ public class SequentialPlayerChangerTest {
             assertEquals(player, spChanger.currentPlayer());
         }
 
-        verify(players, times(20)).get(0);
+        verify(players, times(25)).get(0);
         verify(player, times(5)).setDiceRollsLeft(anyInt());
     }
 
@@ -68,7 +68,7 @@ public class SequentialPlayerChangerTest {
         assertEquals(player1, spChanger.nextPlayer());
         assertEquals(player1, spChanger.currentPlayer());
 
-        verify(players, times(13)).get(anyInt());
+        verify(players, times(17)).get(anyInt());
         verify(player0, times(0)).setDiceRollsLeft(anyInt());
         verify(player1, times(0)).setDiceRollsLeft(anyInt());
         verify(player2, times(0)).setDiceRollsLeft(anyInt());
@@ -133,6 +133,34 @@ public class SequentialPlayerChangerTest {
         verify(player, times(3)).decreaseDiceRollsLeft();
         verify(player, times(1)).setPosition(anyInt());
         verify(player, times(1)).setState(anyObject());
+    }
+
+    @Test
+    public void nextPlayerWithOnlyOneInGamePlayer() {
+        Player player0 = mock(Player.class);
+        Player player1 = mock(Player.class);
+        Player player2 = mock(Player.class);
+        List<Player> players = mock(List.class);
+
+        when(players.get(0)).thenReturn(player0);
+        when(players.get(1)).thenReturn(player1);
+        when(players.get(2)).thenReturn(player2);
+        when(players.size()).thenReturn(3);
+
+        when(player0.getState()).thenReturn(State.InGame);
+        when(player1.getState()).thenReturn(State.InBankruptcy);
+        when(player2.getState()).thenReturn(State.InBankruptcy);
+
+        SequentialPlayerChanger spChanger = new SequentialPlayerChanger(players);
+
+        assertEquals(player0, spChanger.currentPlayer());
+        assertEquals(player0, spChanger.nextPlayer());
+        assertEquals(player0, spChanger.currentPlayer());
+
+        verify(players, times(8)).get(anyInt());
+        verify(player0, times(1)).setDiceRollsLeft(anyInt());
+        verify(player1, times(0)).setDiceRollsLeft(anyInt());
+        verify(player2, times(0)).setDiceRollsLeft(anyInt());
     }
 
 }

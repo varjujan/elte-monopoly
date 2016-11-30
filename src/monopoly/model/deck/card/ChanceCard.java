@@ -153,8 +153,8 @@ public class ChanceCard implements Card{
                 break;
             case 14:
                 text = "You have been elected Chairman of the Board – Pay each player $50";
-                for (int i = 0; i < 4 && plChanger.currentPlayer().getState() == State.InGame; i++) {
-                    if (i != plChanger.currentPlayerIndex() && plChanger.getPlayer(i).getState() == State.InGame) {
+                for (int i = 0; i < 4 && plChanger.currentPlayer().getState() != State.InBankruptcy; i++) {
+                    if (i != plChanger.currentPlayerIndex() && plChanger.getPlayer(i).getState() != State.InBankruptcy) {
                         plChanger.increasePlayerMoney(i, Math.min(plChanger.currentPlayer().getMoney(), 50));
                         plChanger.currentPlayer().reduceMoney(50);
                     }

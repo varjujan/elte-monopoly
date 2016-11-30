@@ -141,6 +141,10 @@ public class ViewModel {
     public Player endTurn() {
         Player player = model.endTurn();
 
+        if (player == null){
+            return null;
+        }
+
         //Update properties
         setCurrentPlayerIndex(model.getCurrentPlayerIndex());
         playerDiceRollsLeft.get(player).set(player.getDiceRollsLeft());

@@ -59,7 +59,7 @@ public class CommunityCard implements Card{
             case 7:
                 text = "Grand Opera Night – Collect $50 from every player for opening night seats";
                 for (int i=0; i<4; i++) {
-                    if (i != plChanger.currentPlayerIndex() && plChanger.getPlayer(i).getState() == State.InGame ) {
+                    if (i != plChanger.currentPlayerIndex() && plChanger.getPlayer(i).getState() != State.InBankruptcy ) {
                         plChanger.currentPlayer().increaseMoney(Math.min(plChanger.getPlayer(i).getMoney(),50));
                         plChanger.reducePlayerMoney(i,50);
                     }
@@ -76,7 +76,7 @@ public class CommunityCard implements Card{
             case 10:
                 text = "It is your birthday - Collect $10 from each player";
                 for (int i=0; i<4; i++) {
-                    if (i != plChanger.currentPlayerIndex() && plChanger.getPlayer(i).getState() == State.InGame ) {
+                    if (i != plChanger.currentPlayerIndex() && plChanger.getPlayer(i).getState() != State.InBankruptcy ) {
                         plChanger.currentPlayer().increaseMoney(Math.min(plChanger.getPlayer(i).getMoney(),10));
                         plChanger.reducePlayerMoney(i,10);
                     }

@@ -34,7 +34,12 @@ public class SequentialPlayerChanger implements PlayerChanger {
 
     @Override
     public Player nextPlayer() {
-        this.curr = (this.curr + 1) % players.size();
+
+        int i = (this.curr + 1) % players.size();
+        while ( players.get(i).getState() == State.InBankruptcy && i != curr) {
+            i = (i + 1) % players.size();
+        }
+        this.curr = i;
 
         if (currentPlayer().getState() != State.InJail) {
             currentPlayer().setDiceRollsLeft(3);
