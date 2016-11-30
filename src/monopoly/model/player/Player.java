@@ -58,9 +58,9 @@ public class Player implements Owner {
 
     @Override
     public void addProperty(Property property) {
-        if (property.hasOwner()) {
+        /*if (property.hasOwner()) {
             throw new IllegalArgumentException("Property is already owned by a player.");
-        }
+        }*/
 
         this.properties.add(property);
         property.setOwner(this);

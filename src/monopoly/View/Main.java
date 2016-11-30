@@ -7,10 +7,14 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import monopoly.controller.StartGameController;
 import monopoly.model.Model;
+import monopoly.model.bank.Bank;
+import monopoly.model.bank.StandardBank;
 import monopoly.model.board.StandardBoard;
-import monopoly.model.deck.CommunityCardDeck;
 import monopoly.model.deck.ChanceCardDeck;
-import monopoly.model.deck.card.*;
+import monopoly.model.deck.CommunityCardDeck;
+import monopoly.model.deck.card.Card;
+import monopoly.model.deck.card.ChanceCard;
+import monopoly.model.deck.card.CommunityCard;
 import monopoly.model.dice.StandardDice;
 import monopoly.model.dice.TwoStandardDices;
 import monopoly.model.player.Player;
@@ -29,7 +33,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        StandardBoard board = new StandardBoard();
+        Bank bank = new StandardBank();
+        StandardBoard board = new StandardBoard(bank);
         TwoStandardDices dices = new TwoStandardDices(new StandardDice(new JavaRandom()),
                 new StandardDice(new JavaRandom()));
         SequentialPlayerChanger playerChanger = new SequentialPlayerChanger(Arrays.asList(new Player("", 1500),
@@ -47,7 +52,7 @@ public class Main extends Application {
         ChanceCardDeck chanceCardDeck = new ChanceCardDeck(chanceCards);
         CommunityCardDeck communityCardDeck = new CommunityCardDeck(communityCards);
 
-        Model model = new Model(board, dices, playerChanger, logger, chanceCardDeck, communityCardDeck);
+        Model model = new Model(board, dices, playerChanger, logger, chanceCardDeck, communityCardDeck, bank);
 
         ViewModel viewModel = new ViewModel(model);
 

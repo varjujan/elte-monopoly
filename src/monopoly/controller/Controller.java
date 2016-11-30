@@ -617,6 +617,16 @@ public class Controller implements Initializable {
     @FXML
     private Label currentPlayerLabel;
 
+    @FXML
+    private Label bankMoneyLabel;
+
+    @FXML
+    private Label bankHousesLabel;
+
+    @FXML
+    private Label bankHotelsLabel;
+
+
     //endregion
 
     public Controller(ViewModel viewModel) {
@@ -644,6 +654,11 @@ public class Controller implements Initializable {
 
         //Bind with the logger
         //chatTextArea.textProperty().bindBidirectional(model.getMonopolyChat().getMonopolyChatObservable()); TODO
+
+        bankMoneyLabel.textProperty().bindBidirectional(viewModel.getBankMoneyProperty(), (StringConverter<Number>) converter);
+        bankHousesLabel.textProperty().bindBidirectional(viewModel.getBankHouseCountProperty(), (StringConverter<Number>) converter);
+        bankHotelsLabel.textProperty().bindBidirectional(viewModel.getBankHotelCountProperty(), (StringConverter<Number>) converter);
+
 
         player0Tab.textProperty().bindBidirectional(viewModel.getPlayerNameProperty(0));
         player1Tab.textProperty().bindBidirectional(viewModel.getPlayerNameProperty(1));
@@ -1014,7 +1029,7 @@ public class Controller implements Initializable {
             throw new RuntimeException("Current players field is not a property");
         }
 
-        if (viewModel.getCurrentPlayer().hasEnoughMoneyFor(((Property) viewModel.getCurrentPlayersField()).getDefaultPrice())) {
+        if (viewModel.getCurrentPlayer().hasEnoughMoneyFor(((Property) viewModel.getCurrentPlayersField()).getPrice())) {
             viewModel.buyProperty();
             buyPropertyButton.setDisable(true);
         } else {

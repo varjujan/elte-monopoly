@@ -1,5 +1,6 @@
 package monopoly.model;
 
+import monopoly.model.bank.Bank;
 import monopoly.model.board.Board;
 import monopoly.model.deck.Deck;
 import monopoly.model.deck.card.Card;
@@ -23,6 +24,7 @@ public class Model {
     private Logger logger;
     private Deck chanceCardDeck;
     private Deck communityCardDeck;
+    private Bank bank;
 
     public Model(
             Board board,
@@ -30,13 +32,15 @@ public class Model {
             PlayerChanger playerChanger,
             Logger logger,
             Deck chanceCardDeck,
-            Deck communityCardDeck) {
+            Deck communityCardDeck,
+            Bank bank) {
         this.board = board;
         this.dice = dice;
         this.playerChanger = playerChanger;
         this.logger = logger;
         this.chanceCardDeck = chanceCardDeck;
         this.communityCardDeck = communityCardDeck;
+        this.bank = bank;
     }
 
     public void movePlayer(Player player, int steps) {
@@ -104,7 +108,7 @@ public class Model {
         }
 
         Property property = (Property) field;
-        buyProperty(player, property, property.getDefaultPrice());
+        buyProperty(player, property, property.getPrice());
     }
 
     public Player getCurrentPlayer() {
@@ -190,5 +194,21 @@ public class Model {
         }
 
         return result;
+    }
+
+    public int getBankMoney() {
+        return bank.getMoney();
+    }
+
+    public int getBankHouseCount() {
+        return bank.getHouseCount();
+    }
+
+    public int getBankHotelCount() {
+        return bank.getHotelCount();
+    }
+
+    public Bank getBank() {
+        return bank;
     }
 }

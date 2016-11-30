@@ -1666,16 +1666,85 @@
                                           </Label>
                                           <Pane prefHeight="96.0" prefWidth="189.0" GridPane.columnIndex="4" GridPane.columnSpan="3" GridPane.rowIndex="1">
                                              <children>
-                                                <Label layoutX="45.0" layoutY="4.0" text="Current player:">
+                                                <Label layoutX="45.0" layoutY="29.0" text="Current player:">
                                                    <font>
                                                       <Font name="System Bold" size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <Label fx:id="currentPlayerLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="-8.0" layoutY="24.0" prefHeight="20.0" prefWidth="204.0" text="Label">
+                                             </children>
+                                          </Pane>
+                                          <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4"
+                                                GridPane.columnSpan="3" GridPane.rowIndex="2">
+                                             <children>
+                                                <Label fx:id="currentPlayerLabel" alignment="CENTER"
+                                                       contentDisplay="CENTER" layoutX="-7.0" layoutY="1.0"
+                                                       prefHeight="20.0" prefWidth="204.0" text="Label" textFill="RED">
                                                    <font>
-                                                      <Font name="System Bold" size="14.0" />
+                                                      <Font name="System Bold" size="18.0"/>
                                                    </font>
                                                 </Label>
+                                             </children>
+                                          </Pane>
+                                          <Pane GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                             <children>
+                                                <Pane layoutY="106.0" prefHeight="200.0" prefWidth="200.0"
+                                                      GridPane.columnIndex="1" GridPane.columnSpan="3"
+                                                      GridPane.rowIndex="4">
+                                                   <children>
+                                                      <Label layoutX="43.0" layoutY="5.0" text="Hotels:">
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0"/>
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="bankHotelsLabel" layoutX="95.0" layoutY="5.0"
+                                                             prefHeight="19.0" prefWidth="98.0" text="bankHotels">
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0"/>
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                                <Pane layoutY="53.0" prefHeight="200.0" prefWidth="200.0"
+                                                      GridPane.columnIndex="1" GridPane.columnSpan="3"
+                                                      GridPane.rowIndex="3">
+                                                   <children>
+                                                      <Label layoutX="40.0" layoutY="5.0" prefHeight="19.0"
+                                                             prefWidth="51.0" text="Money: ">
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0"/>
+                                                         </font>
+                                                      </Label>
+                                                      <Label layoutX="38.0" layoutY="30.0" text="Houses: ">
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0"/>
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="bankMoneyLabel" layoutX="95.0" layoutY="5.0"
+                                                             prefHeight="19.0" prefWidth="98.0" text="bankMoney">
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0"/>
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="bankHousesLabel" layoutX="95.0" layoutY="30.0"
+                                                             prefHeight="19.0" prefWidth="98.0" text="bankHouses">
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0"/>
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                                <Pane layoutX="19.0" prefHeight="157.0" prefWidth="174.0"
+                                                      style="-fx-border-width: 2; -fx-border-color: black;"
+                                                      GridPane.columnIndex="1" GridPane.columnSpan="3"
+                                                      GridPane.rowIndex="2">
+                                                   <children>
+                                                      <Label layoutX="61.0" layoutY="23.0" text="Bank">
+                                                         <font>
+                                                            <Font name="System Bold" size="22.0"/>
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
                                              </children>
                                           </Pane>
                                        </children>

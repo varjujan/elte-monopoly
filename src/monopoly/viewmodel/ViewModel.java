@@ -28,6 +28,10 @@ public class ViewModel {
 
     private IntegerProperty currentPlayerIndex;
 
+    private IntegerProperty bankMoney;
+    private IntegerProperty bankHouseCount;
+    private IntegerProperty bankHotelCount;
+
     public ViewModel(Model model) {
         this.model = model;
 
@@ -72,6 +76,10 @@ public class ViewModel {
         currentPlayerIndex = new SimpleIntegerProperty(0);
 
         currentPlayerNameProperty = new SimpleStringProperty(model.getPlayer(0).getName());
+
+        bankMoney = new SimpleIntegerProperty(model.getBankMoney());
+        bankHouseCount = new SimpleIntegerProperty(model.getBankHouseCount());
+        bankHotelCount = new SimpleIntegerProperty(model.getBankHotelCount());
     }
 
     public int getPlayerMoney(int ind) {
@@ -114,6 +122,9 @@ public class ViewModel {
         //Update properties
         playerProperties.get(model.getCurrentPlayer()).set(FXCollections.observableArrayList(model.getCurrentPlayer().getProperties()));
         playerMoney.get(model.getCurrentPlayer()).set(model.getCurrentPlayer().getMoney());
+        bankMoney.set(model.getBankMoney());
+        bankHouseCount.set(model.getBankHouseCount());
+        bankHotelCount.set(model.getBankHotelCount());
     }
 
     public DiceResult roll() {
@@ -126,6 +137,9 @@ public class ViewModel {
         playerPositions.get(model.getCurrentPlayer()).set(model.getCurrentPlayer().getPosition());
         setCurrentPlayerIndex(model.getCurrentPlayerIndex());
         currentPlayerNameProperty.set(model.getCurrentPlayer().getName());
+        bankMoney.set(model.getBankMoney());
+        bankHouseCount.set(model.getBankHouseCount());
+        bankHotelCount.set(model.getBankHotelCount());
 
         return result;
     }
@@ -159,7 +173,7 @@ public class ViewModel {
 
     public boolean isCurrentPlayersFieldBuyable() {
         if (model.getCurrentPlayersField() instanceof monopoly.model.field.Property) {
-            return !((monopoly.model.field.Property) model.getCurrentPlayersField()).hasOwner();
+            return (((monopoly.model.field.Property) model.getCurrentPlayersField()).getOwner() == model.getBank());
         } else {
             return false;
         }
@@ -239,6 +253,9 @@ public class ViewModel {
         }
 
         currentPlayerNameProperty.set(model.getCurrentPlayer().getName());
+        bankMoney.set(model.getBankMoney());
+        bankHouseCount.set(model.getBankHouseCount());
+        bankHotelCount.set(model.getBankHotelCount());
 
         return str;
     }
@@ -253,6 +270,9 @@ public class ViewModel {
         }
 
         currentPlayerNameProperty.set(model.getCurrentPlayer().getName());
+        bankMoney.set(model.getBankMoney());
+        bankHouseCount.set(model.getBankHouseCount());
+        bankHotelCount.set(model.getBankHotelCount());
 
         return str;
     }
@@ -278,5 +298,17 @@ public class ViewModel {
 
     public StringProperty getCurrentPlayerNameProperty() {
         return currentPlayerNameProperty;
+    }
+
+    public IntegerProperty getBankMoneyProperty() {
+        return bankMoney;
+    }
+
+    public IntegerProperty getBankHouseCountProperty() {
+        return bankHouseCount;
+    }
+
+    public IntegerProperty getBankHotelCountProperty() {
+        return bankHotelCount;
     }
 }
