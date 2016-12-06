@@ -6,6 +6,7 @@ import monopoly.model.Model;
 import monopoly.model.dice.DiceResult;
 import monopoly.model.dice.MultipleDiceResult;
 import monopoly.model.field.Field;
+import monopoly.model.field.UpgradeableField;
 import monopoly.model.player.Player;
 
 import java.util.HashMap;
@@ -170,6 +171,8 @@ public class ViewModel {
     public Field getCurrentPlayersField() {
         return model.getCurrentPlayersField();
     }
+
+    public UpgradeableField getFieldByName(String name) {return model.getFieldByName(name); }
 
     public boolean isCurrentPlayersFieldBuyable() {
         if (model.getCurrentPlayersField() instanceof monopoly.model.field.Property) {

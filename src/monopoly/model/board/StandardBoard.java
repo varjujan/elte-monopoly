@@ -4,6 +4,7 @@ import monopoly.model.bank.Bank;
 import monopoly.model.field.Field;
 import monopoly.model.field.Property;
 import monopoly.model.field.StandardField;
+import monopoly.model.field.UpgradeableField;
 import monopoly.model.player.Player;
 import monopoly.model.player.State;
 
@@ -30,6 +31,11 @@ public class StandardBoard implements Board {
         }
 
         return board.get(player.getPosition());
+    }
+
+    @Override
+    public UpgradeableField getFieldByName(String name) {
+        return (UpgradeableField)board.entrySet().stream().filter(e -> e.getValue().getName().equals(name)).findFirst().get().getValue();
     }
 
     public StandardBoard(Bank bank) {

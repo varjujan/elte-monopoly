@@ -8,6 +8,7 @@ import monopoly.model.dice.Dice;
 import monopoly.model.dice.DiceResult;
 import monopoly.model.field.Field;
 import monopoly.model.field.Property;
+import monopoly.model.field.UpgradeableField;
 import monopoly.model.player.Player;
 import monopoly.model.player.State;
 import monopoly.model.player.changer.PlayerChanger;
@@ -122,6 +123,8 @@ public class Model {
     public Field getCurrentPlayersField() {
         return board.getFieldAt(getCurrentPlayer());
     }
+
+    public UpgradeableField getFieldByName(String name) {return board.getFieldByName(name); }
 
     public int getPlayerMoney(int ind) {
         return playerChanger.getPlayerMoney(ind);

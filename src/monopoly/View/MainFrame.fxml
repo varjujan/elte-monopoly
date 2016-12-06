@@ -1795,13 +1795,13 @@
             <Button fx:id="rollDiceButton" layoutX="11.0" layoutY="505.0" mnemonicParsing="false" onAction="#rollDiceButtonClicked" prefHeight="35.0" prefWidth="263.0" text="Roll dice" AnchorPane.bottomAnchor="198.0" />
             <Button fx:id="buyPropertyButton" disable="true" layoutX="11.0" layoutY="546.0" mnemonicParsing="false" onAction="#buyPropertyButtonClicked" prefHeight="35.0" prefWidth="263.0" text="Buy property" AnchorPane.bottomAnchor="157.0" />
             <Button fx:id="sellPropertyButton" layoutX="11.0" layoutY="587.0" mnemonicParsing="false" onAction="#sellPropertyButtonClicked" prefHeight="35.0" prefWidth="263.0" text="Sell Property" AnchorPane.bottomAnchor="116.0" />
-            <TabPane fx:id="playersTabPane" layoutX="14.0" layoutY="14.0" prefHeight="486.0" prefWidth="253.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="238.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+            <TabPane fx:id="playersTabPane" layoutX="14.0" layoutY="14.0" prefHeight="263.0" prefWidth="253.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="461.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
               <tabs>
                 <Tab fx:id="player0Tab" text="Player1">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="454.0" prefWidth="253.0">
                            <children>
-                              <ListView fx:id="player0PropertyList" layoutX="15.0" layoutY="67.0" prefHeight="425.0" prefWidth="224.0" AnchorPane.bottomAnchor="14.0" AnchorPane.topAnchor="67.0" />
+                              <ListView fx:id="player0PropertyList" layoutX="15.0" layoutY="67.0" prefHeight="157.0" prefWidth="224.0" AnchorPane.bottomAnchor="10.0" AnchorPane.topAnchor="67.0" />
                               <Label layoutX="14.0" layoutY="12.0" text="Money:">
                                  <font>
                                     <Font name="System Bold" size="16.0" />
@@ -1891,13 +1891,42 @@
                   </Tab>
               </tabs>
             </TabPane>
-            <Button fx:id="mortgageButton" layoutX="11.0" layoutY="628.0" mnemonicParsing="false" onAction="#mortgageButtonClicked" prefHeight="35.0" prefWidth="263.0" text="Mortgage" AnchorPane.bottomAnchor="75.0" />
+            <Button fx:id="buyHouseButton" layoutX="11.0" layoutY="628.0" mnemonicParsing="false" onAction="#buyHouseButtonClicked" prefHeight="35.0" prefWidth="130.0" text="Buy House" AnchorPane.bottomAnchor="75.0" />
             <Button fx:id="endTurnButton" layoutX="11.0" layoutY="670.0" mnemonicParsing="false" onAction="#endTurnButtonClicked" prefHeight="53.0" prefWidth="263.0" text="End turn" AnchorPane.bottomAnchor="15.0">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font>
             </Button>
+            <AnchorPane layoutX="12.0" layoutY="291.0" prefHeight="200.0" prefWidth="253.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="242.0">
+               <children>
+                  <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="4.0" prefHeight="17.0" prefWidth="90.0" text="Name: " />
+                  <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="22.0" prefHeight="17.0" prefWidth="90.0" text="Price: " />
+                  <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="40.0" prefHeight="17.0" prefWidth="90.0" text="Houses:" />
+                  <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="58.0" prefHeight="17.0" prefWidth="90.0" text="Hotels:" />
+                  <Label alignment="CENTER_RIGHT" layoutX="13.0" layoutY="76.0" prefHeight="17.0" prefWidth="90.0" text="House cost: " />
+                  <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="94.0" prefHeight="17.0" prefWidth="90.0" text="Rent: " />
+                  <Label alignment="CENTER_RIGHT" layoutX="13.0" layoutY="112.0" prefHeight="17.0" prefWidth="90.0" text="With 1 House: " />
+                  <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="130.0" prefHeight="17.0" prefWidth="90.0" text="With 2 House: " />
+                  <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="149.0" prefHeight="17.0" prefWidth="90.0" text="With 3 House: " />
+                  <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="166.0" prefHeight="17.0" prefWidth="90.0" text="With 4 House: " />
+                  <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="184.0" prefHeight="17.0" prefWidth="90.0" text="With Hotel: " />
+                  <Label fx:id="propertyNameLabel" layoutX="111.0" layoutY="4.0" prefHeight="17.0" prefWidth="138.0" />
+                  <Label fx:id="propertyPriceLabel" layoutX="111.0" layoutY="22.0" prefHeight="17.0" prefWidth="138.0" />
+                  <Label fx:id="propertyHousesLabel" layoutX="111.0" layoutY="40.0" prefHeight="17.0" prefWidth="138.0" />
+                  <Label fx:id="propertyHotelsLabel" layoutX="111.0" layoutY="58.0" prefHeight="17.0" prefWidth="138.0" />
+                  <Label fx:id="propertyHouseCostLabel" layoutX="111.0" layoutY="76.0" prefHeight="17.0" prefWidth="138.0" />
+                  <Label fx:id="propertyRentLabel" layoutX="111.0" layoutY="94.0" prefHeight="17.0" prefWidth="138.0" />
+                  <Label fx:id="propertyW1Label" layoutX="111.0" layoutY="112.0" prefHeight="17.0" prefWidth="138.0" />
+                  <Label fx:id="propertyW2Label" layoutX="111.0" layoutY="130.0" prefHeight="17.0" prefWidth="138.0" />
+                  <Label fx:id="propertyW3Label" layoutX="111.0" layoutY="149.0" prefHeight="17.0" prefWidth="138.0" />
+                  <Label fx:id="propertyW4Label" layoutX="111.0" layoutY="166.0" prefHeight="17.0" prefWidth="138.0" />
+                  <Label fx:id="propertyWHLabel" layoutX="111.0" layoutY="184.0" prefHeight="17.0" prefWidth="138.0" />
+               </children>
+            </AnchorPane>
+            <Label layoutX="14.0" layoutY="277.0" text="Property info:" AnchorPane.bottomAnchor="444.0" AnchorPane.leftAnchor="14.0" />
+            <Button fx:id="sellHouseButton" layoutX="144.0" layoutY="628.0" mnemonicParsing="false" onAction="#sellHouseButtonClicked" prefHeight="35.0" prefWidth="130.0" text="Sell House" AnchorPane.bottomAnchor="75.0" />
          </children>
-      </AnchorPane>
+    </AnchorPane>
    </children>
 </AnchorPane>
+

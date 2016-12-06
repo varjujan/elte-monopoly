@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -13,13 +14,16 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
+import javafx.scene.input.MouseEvent;
 import monopoly.model.dice.MultipleDiceResult;
 import monopoly.model.field.Property;
+import monopoly.model.field.UpgradeableField;
 import monopoly.viewmodel.ViewModel;
 
 import java.io.File;
@@ -626,6 +630,46 @@ public class Controller implements Initializable {
     @FXML
     private Label bankHotelsLabel;
 
+    @FXML
+    private Button buyHouseButton;
+
+    @FXML
+    private Button sellHouseButton;
+
+    @FXML
+    private Label propertyNameLabel;
+
+    @FXML
+    private Label propertyHotelsLabel;
+
+    @FXML
+    private Label propertyPriceLabel;
+
+    @FXML
+    private Label propertyW2Label;
+
+    @FXML
+    private Label propertyWHLabel;
+
+    @FXML
+    private Label propertyHousesLabel;
+
+    @FXML
+    private Label propertyW4Label;
+
+    @FXML
+    private Label propertyW3Label;
+
+    @FXML
+    private Label propertyHouseCostLabel;
+
+    @FXML
+    private Label propertyRentLabel;
+
+    @FXML
+    private Label propertyW1Label;
+
+
 
     //endregion
 
@@ -907,8 +951,77 @@ public class Controller implements Initializable {
                 secondDiceImage.setImage(diceImageList.get((Integer)newValue - 1));
             }
         });
+
+        player0PropertyList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                Object selectedItem = player0PropertyList.getSelectionModel().getSelectedItem();
+
+                if(selectedItem == null) return;
+
+                UpgradeableField prop = viewModel.getFieldByName(selectedItem.toString());
+
+                if(prop != null) updatePropertyDescription(prop);
+            }
+        });
+
+        player1PropertyList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                Object selectedItem = player1PropertyList.getSelectionModel().getSelectedItem();
+
+                if(selectedItem == null) return;
+
+                UpgradeableField prop = viewModel.getFieldByName(selectedItem.toString());
+
+                if(prop != null) updatePropertyDescription(prop);
+            }
+        });
+
+        player2PropertyList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                Object selectedItem = player2PropertyList.getSelectionModel().getSelectedItem();
+
+                if(selectedItem == null) return;
+
+                UpgradeableField prop = viewModel.getFieldByName(selectedItem.toString());
+
+                if(prop != null) updatePropertyDescription(prop);
+            }
+        });
+
+        player3PropertyList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                Object selectedItem = player3PropertyList.getSelectionModel().getSelectedItem();
+
+                if(selectedItem == null) return;
+
+                UpgradeableField prop = viewModel.getFieldByName(selectedItem.toString());
+
+                if(prop != null) updatePropertyDescription(prop);
+            }
+        });
     }
 
+    private void updatePropertyDescription(UpgradeableField field){
+        propertyNameLabel.setText(field.getName());
+        propertyPriceLabel.setText(Integer.toString(field.getPrice()));
+        propertyHousesLabel.setText(Integer.toString(field.getHouseCount()));
+        propertyHotelsLabel.setText(Integer.toString(field.getHotelCount()));
+        propertyHouseCostLabel.setText(Integer.toString(field.getUpgradePrice()));
+        propertyRentLabel.setText(Integer.toString(field.getRentLevel0()));
+        propertyW1Label.setText(Integer.toString(field.getRentLevel1()));
+        propertyW2Label.setText(Integer.toString(field.getRentLevel2()));
+        propertyW3Label.setText(Integer.toString(field.getRentLevel3()));
+        propertyW4Label.setText(Integer.toString(field.getRentLevel4()));
+        propertyWHLabel.setText(Integer.toString(field.getRentLevel5()));
+    }
 
     @FXML
     void newGameMenuItemClicked(ActionEvent event) {
@@ -1045,9 +1158,15 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    void mortgageButtonClicked(ActionEvent event) {
+    void buyHouseButtonClicked(ActionEvent event) {
 
     }
+
+    @FXML
+    void sellHouseButtonClicked(ActionEvent event) {
+
+    }
+
 
     @FXML
     void endTurnButtonClicked(ActionEvent event) {

@@ -3,7 +3,7 @@ package monopoly.model.field;
 import monopoly.model.Ownable;
 import monopoly.model.Owner;
 
-public class Property extends Field implements Ownable {
+public class Property extends Field implements Ownable, UpgradeableField {
 
     private Owner owner;
     private int price;
@@ -169,4 +169,15 @@ public class Property extends Field implements Ownable {
     public void setRentLevel5(int rentLevel5) {
         this.rentLevel5 = rentLevel5;
     }
+
+    public int getHouseCount(){
+        if(level < 5) return level;
+        else return 0;
+    }
+
+    public int getHotelCount(){
+        if(level < 5) return 0;
+        else return 1;
+    }
+
 }
