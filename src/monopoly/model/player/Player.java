@@ -79,6 +79,10 @@ public class Player implements Owner {
             throw new IllegalArgumentException("Position should be in range [-1, 39].");
         }
 
+        if ( position != -1 && this.position > position ) {
+            increaseMoney(200);
+        }
+        
         this.position = position;
     }
 
@@ -87,7 +91,7 @@ public class Player implements Owner {
             throw new IllegalArgumentException("Steps should be positive.");
         }
 
-        position = (position + steps) % 40;
+        setPosition ((position + steps) % 40);
     }
 
     public int getMoney() {
