@@ -1154,7 +1154,90 @@ public class Controller implements Initializable {
 
     @FXML
     void sellPropertyButtonClicked(ActionEvent event) {
+        boolean hasSelected = false;
+        if (viewModel.getCurrentPlayerIndex() == 0) {
+            hasSelected = player0PropertyList.getSelectionModel().getSelectedItem() != null;
+        } else if (viewModel.getCurrentPlayerIndex() == 1) {
+            hasSelected = player1PropertyList.getSelectionModel().getSelectedItem() != null;
+        } else if (viewModel.getCurrentPlayerIndex() == 2) {
+            hasSelected = player2PropertyList.getSelectionModel().getSelectedItem() != null;
+        } else if (viewModel.getCurrentPlayerIndex() == 3) {
+            hasSelected = player3PropertyList.getSelectionModel().getSelectedItem() != null;
+        }
 
+        if (!hasSelected) {
+            showErrorDialog("There is no selected property for the active player!");
+        } else {
+
+            TextInputDialog dialog = new TextInputDialog("100");
+            dialog.setTitle("Sell the property");
+            dialog.setHeaderText("How much money do you want for this property?");
+            dialog.setContentText("Enter the property price:");
+            Optional<String> result = dialog.showAndWait();
+
+            if (result.isPresent() && hasSelected) {
+                int resMoney = Integer.parseInt(result.get());
+
+                //Get active players selected property
+                String propertyName = null;
+                if (viewModel.getCurrentPlayerIndex() == 0) {
+                    propertyName = player0PropertyList.getSelectionModel().getSelectedItem().toString();
+                } else if (viewModel.getCurrentPlayerIndex() == 1) {
+                    propertyName = player1PropertyList.getSelectionModel().getSelectedItem().toString();
+                } else if (viewModel.getCurrentPlayerIndex() == 2) {
+                    propertyName = player2PropertyList.getSelectionModel().getSelectedItem().toString();
+                } else if (viewModel.getCurrentPlayerIndex() == 3) {
+                    propertyName = player3PropertyList.getSelectionModel().getSelectedItem().toString();
+                }
+
+                //tempdata
+                java.util.List<String> playerNames = new java.util.ArrayList<String>();
+                playerNames.add("1");
+                playerNames.add("2");
+                playerNames.add("3");
+                playerNames.add("4");
+
+                //TODO: viewModel.getAllPlayerNamesExceptActive()
+                ChoiceDialog<String> cDialog = new ChoiceDialog<>(playerNames.get(0), playerNames);
+                cDialog.setTitle("Sell " + propertyName);
+                cDialog.setHeaderText("To which player do you want to sell the " + propertyName + " for " + resMoney + "$ ?");
+                cDialog.setContentText("Sell the property to:");
+
+                Optional<String> resultChoice = cDialog.showAndWait();
+
+                if (resultChoice.isPresent()) {
+                    String buyerName = resultChoice.get();
+                    boolean hasEnoughMoney = true;
+                    //TODO:viewModel.checkBuyerHasEnoughMoney(resMoney, buyerName);
+                    if (hasEnoughMoney) {
+
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("Confirmation");
+                        alert.setHeaderText("Check " + buyerName + " confirmation");
+                        alert.setContentText(buyerName + " do you want to buy " + propertyName + " for " + resMoney + "$ ?");
+
+                        Button okButton = (Button) alert.getDialogPane().lookupButton( ButtonType.OK );
+                        okButton.setText("Yes");
+
+                        Button cancelButton = (Button) alert.getDialogPane().lookupButton( ButtonType.CANCEL );
+                        cancelButton.setText("No");
+
+                        Optional<ButtonType> resultConf = alert.showAndWait();
+                        if (resultConf.get() == ButtonType.OK) {
+                            //TODO: viewModel.sellTheProperty(propertyName, buyerName, resMoney);
+                        } else {
+                            showErrorDialog(buyerName + " does not want to buy this property for " + resMoney + "$");
+                        }
+
+
+                    } else {
+                        showErrorDialog(buyerName + " does not have enough money!");
+                    }
+
+                }
+
+            }
+        }
     }
 
     @FXML
@@ -1235,5 +1318,13 @@ public class Controller implements Initializable {
                 "]: " +
                 sendButtonTextField.getText());
         sendButtonTextField.setText("");*/
+    }
+
+    private void showErrorDialog(String errorMsg) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error!");
+        alert.setHeaderText("Error happened!");
+        alert.setContentText(errorMsg);
+        alert.showAndWait();
     }
 }
