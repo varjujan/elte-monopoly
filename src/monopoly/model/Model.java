@@ -214,4 +214,8 @@ public class Model {
     public Bank getBank() {
         return bank;
     }
+
+    public void lockPlayerToJail(int ind) {
+        playerChanger.lockPlayerToJail(ind);
+    }
 }

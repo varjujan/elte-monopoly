@@ -85,8 +85,7 @@ public class SequentialPlayerChanger implements PlayerChanger {
         if (uniqueValues.size() == 1) {
             currentPlayer().decreaseDiceRollsLeft();
             if (currentPlayer().getDiceRollsLeft() == 0) {
-                currentPlayer().setPosition(-1);
-                currentPlayer().setState(State.InJail);
+                lockPlayerToJail(currentPlayerIndex());
                 currentPlayer().setTurnsLeftInJail(3);
                 return false;
             }
@@ -95,5 +94,11 @@ public class SequentialPlayerChanger implements PlayerChanger {
         }
 
         return true;
+    }
+
+    @Override
+    public void lockPlayerToJail(int ind) {
+        players.get(ind).setPosition(-1);
+        players.get(ind).setState(State.InJail);
     }
 }

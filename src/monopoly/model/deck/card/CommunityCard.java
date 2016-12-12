@@ -30,9 +30,6 @@ public class CommunityCard implements Card{
         switch (id) {
             case 1:
                 text = "Advance to Start!";
-                if (playerPosition > 0) {
-                    plChanger.currentPlayer().increaseMoney(200);
-                }
                 plChanger.currentPlayer().setPosition(0);
                 break;
             case 2:
@@ -53,8 +50,7 @@ public class CommunityCard implements Card{
                 break;
             case 6:
                 text = "Go directly to Jail – Do not pass Go, do not collect $200";
-                plChanger.currentPlayer().setPosition(-1);
-                plChanger.currentPlayer().setState(State.InJail);
+                plChanger.lockPlayerToJail(plChanger.currentPlayerIndex());
                 break;
             case 7:
                 text = "Grand Opera Night – Collect $50 from every player for opening night seats";

@@ -82,7 +82,7 @@ public class Player implements Owner {
         if ( position != -1 && this.position > position ) {
             increaseMoney(200);
         }
-        
+
         this.position = position;
     }
 

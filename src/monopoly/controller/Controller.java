@@ -1127,6 +1127,27 @@ public class Controller implements Initializable {
                     alert.setHeaderText(null);
                     alert.setContentText(viewModel.drawCommunityCard());
                     alert.showAndWait();
+                } else if (viewModel.isCurrentPlayersFieldGoToJail()) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Go To Jail");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Go To Jail!");
+                    alert.showAndWait();
+                    viewModel.lockPlayerToJail(viewModel.getCurrentPlayerIndex());
+                } else if (viewModel.isCurrentPlayersFieldIncomeTax()) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Income Tax");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Pay 200$!");
+                    alert.showAndWait();
+                    viewModel.reducePlayerMoney(viewModel.getCurrentPlayerIndex(),200);
+                } else if (viewModel.isCurrentPlayersFieldLuxuryTax()) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Luxury Tax");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Pay 100$!");
+                    alert.showAndWait();
+                    viewModel.reducePlayerMoney(viewModel.getCurrentPlayerIndex(),100);
                 }
 
                 updateBuyPropertyButton();

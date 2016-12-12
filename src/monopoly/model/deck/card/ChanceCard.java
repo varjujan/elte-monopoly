@@ -35,16 +35,10 @@ public class ChanceCard implements Card{
         switch (id) {
             case 1:
                 text = "Advance to Start!";
-                if (playerPosition > 0) {
-                    plChanger.currentPlayer().increaseMoney(200);
-                }
                 plChanger.currentPlayer().setPosition(0);
                 break;
             case 2:
                 text = "Advance to Illinois Ave.";
-                if (playerPosition > 24) {
-                    plChanger.currentPlayer().increaseMoney(200);
-                }
                 plChanger.currentPlayer().setPosition(24);
                 break;
             case 3:
@@ -122,8 +116,7 @@ public class ChanceCard implements Card{
                 break;
             case 9:
                 text = "Go directly to Jail – Do not pass Go, do not collect $200";
-                plChanger.currentPlayer().setPosition(-1);
-                plChanger.currentPlayer().setState(State.InJail);
+                plChanger.lockPlayerToJail(plChanger.currentPlayerIndex());
                 break;
             case 10:
                 text = "Make general repairs on all your property – For each house pay $25 – For each hotel $100";
@@ -140,16 +133,10 @@ public class ChanceCard implements Card{
             case 12:
                 text = "Take a trip to Reading Railroad";
                 plChanger.currentPlayer().setPosition(5);
-                if (playerPosition > 5) {
-                    plChanger.currentPlayer().increaseMoney(200);
-                }
                 break;
             case 13:
                 text = "Take a walk on the Boardwalk";
                 plChanger.currentPlayer().setPosition(39);
-                if (playerPosition > 39) {
-                    plChanger.currentPlayer().increaseMoney(200);
-                }
                 break;
             case 14:
                 text = "You have been elected Chairman of the Board – Pay each player $50";

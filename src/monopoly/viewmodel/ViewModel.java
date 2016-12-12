@@ -198,6 +198,32 @@ public class ViewModel {
         }
     }
 
+    public boolean isCurrentPlayersFieldGoToJail() {
+        if (model.getCurrentPlayersField().getName() == "Go To Jail") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isCurrentPlayersFieldIncomeTax() {
+        if (model.getCurrentPlayersField().getName() == "Income Tax") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isCurrentPlayersFieldLuxuryTax() {
+        if (model.getCurrentPlayersField().getName() == "Luxury Tax") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
     public IntegerProperty getPlayerMoneyProperty(int ind) {
         return playerMoney.get(model.getPlayer(ind));
     }
@@ -313,5 +339,9 @@ public class ViewModel {
 
     public IntegerProperty getBankHotelCountProperty() {
         return bankHotelCount;
+    }
+
+    public void lockPlayerToJail(int ind) {
+        model.lockPlayerToJail(ind);
     }
 }

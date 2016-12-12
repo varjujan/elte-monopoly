@@ -23,4 +23,6 @@ public interface PlayerChanger {
     Player getPlayer(int ind);
 
     boolean handleRoll(DiceResult result);
+
+    public void lockPlayerToJail(int ind);
 }
