@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="913.0" prefWidth="600.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+  <tabs>
+    <Tab text="Object">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Text layoutX="14.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The object of the game is to become the wealthiest player through buying, renting, and trading Property with the intention of bankrupting all opponents. " wrappingWidth="544.328125" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="12.671875" AnchorPane.topAnchor="1.0" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="Equipment &amp; Preparation">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Text layoutX="12.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The Banks equipment consists of a32 Houses and 12 Hotels  16 Chance and 20Community Chest cards, 28 Propertyand $20,580 money.&#10;&#10;Each player is given $1500 at the start." wrappingWidth="548.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="14.05078125" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab text="The Play">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Text layoutX="14.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Place your token on the corner marked &quot;GO&quot;, then throw the dice and move your token (in the direction of the arrow) the number of spaces indicated by the dice.After you have completed your turn, play passes to the left. The tokens remain on the spaces occupied and proceed from that point on the player's next turn. Two or more tokens may rest on the same space at the same time.Depending on the space your token reaches, you may be entitled to buy real estate or other properties, or be obliged to pay rent, pay taxes, draw a Chance or Community Chest card, Go To Jail, etc.&#10;&#10;If you throw doubles, move your token as usual and be subject to any privileges or penalties pertaining to the space on which you land; Then, retaining the dice, throw again and move your token as before. If you throw doubles three times in succession, move your token immediately to the area marked &quot;In Jail&quot;. " wrappingWidth="544.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="10.05078125" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="GO">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Each time a player's token lands on or passes over GO, whether by throwing the dice or drawing a card, the Banker pays that player a $200 salary. The $200 is paid only once each time around the board; However, if a player passing GO on the throw of the dice lands 2 spaces beyond it on Community Chest or 7 spaces beyond it on Chance, and draws the &quot;Advance to GO&quot; card, they collect $200 for passing GO the first time, and another $200 for Advancing to it the second time by the instructions on the card." wrappingWidth="544.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="14.05078125" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Properties">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Text layoutX="13.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Whenever you land on an unowned property you may buy that property from the Bank at its printed price.&#10;&#10;When you land on a property that is owned by another player, the owner collects rent from you in accordance with the list on its Title Deed card. It is an advantage to hold all the Title Deed cards in a color-group (i.e., Boardwalk and Park Place, or Connecticut, Vermont and Oriental Avenues) because the owner may then charge double rent for unimproved properties in that color-group.&#10;It is even more advantageous to have houses or hotels on properties because rents are much higher than for unimproved properties." wrappingWidth="545.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="14.05078125" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Chance and Community Chest">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Text layoutX="11.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="When you land on either of these spaces, take the top card from the deck indicated, follow the instructions and return the card face down to the bottom of the deck. The &quot;Get Out of Jail Free&quot; card is held until used and then returned to the bottom of the deck." wrappingWidth="550.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="14.05078125" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Jail">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You land in Jail when...   &#10;&#9;1. Your token lands on the space marked &quot;Go to Jail&quot;,  &#10;&#9;2. You draw a card marked &quot;Go to Jail&quot;   &#10;&#9;3. You throw doubles three times in succession. &#10;&#10;When you are sent to Jail you cannot collect your $200 salary in that move since, regardless of where your token is on the board, you must move directly into Jail. Your turn ends when you are sent to Jail.If you are not &quot;sent to jail&quot; but in the ordinary course of play lands on that space, you are &quot;Just Visiting&quot;, you incur no penalty, and you move ahead in the usual manner on your next turn.You still are able to collect rent on your properties because you are &quot;Just Visiting&quot;.&#10;&#10;You can get out of Jail by...    &#10;&#9;1. Throwing doubles on any of your next three turns,    if you succeed in doing this you immediately move forward the number of spaces shown by your doubles throw. Even though you had thrown doubles, you do not take another turn. &#10;&#9;2.Using the &quot;Get Out of Jail Free Card&quot; .&#10;&#9;3. Paying a fine of $50 before you roll the dice on either of your next two turns. If you do not throw doubles by your third turn, you must pay the $50 fine. You then get out of Jail and immediately move forward the number of spaces shown by your throw. Even though you are in Jail, you may buy and sell property, buy and sell houses and hotels and collect rents. " wrappingWidth="544.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="14.05078125" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Bankruptcy">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You are declared bankrupt if you owe more than you can pay either to another player or to the Bank. A bankrupt player must immediately retire from the game. The last player left in the game after all others become bankrupt wins the game. " wrappingWidth="545.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="14.0" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Selling Properties">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Unimproved properties, railroads and utilities (but not buildings) may be sold to any player as a private transaction for any amount the owner can get. However, no property can be sold to another player if buildings are standing on any properties of that color-group." wrappingWidth="544.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="14.05078125" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Hotels &amp; Houses">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Text layoutX="12.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="When a player has four houses on each property of a complete color-group, they may buy a hotel from the Bank and erect it on any property of the color-group. They return the four houses from that property to the Bank and pay the price for the hotel as shown on the Title Deed card. Only one hotel may be erected on each property.Unimproved properties, railroads and utilities (but not buildings) may be sold to any player as a private transaction for any amount the owner can get. However, no property can be sold to another player if buildings are standing on any properties of that color-group&#10;&#10;When a player owns all the properties in a color-group they may buy houses from the Bank and erect them on those properties. ." wrappingWidth="547.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="14.05078125" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+  </tabs>
+</TabPane>
