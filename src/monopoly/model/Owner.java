@@ -8,6 +8,7 @@ public interface Owner {
     void increaseMoney(int value);
     void reduceMoney(int value);
 
+    String getName();
     void addProperty(Property property);
 
 }

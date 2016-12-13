@@ -14,14 +14,14 @@ public class PropertyTest {
         final int price = 10;
         Owner owner = mock(Owner.class);
 
-        Property property = new Property(name, 1, 1, 10, 1, 1, 1, 1, 1, 1);
+        Property property = new Property(name, 1, 1, 10, 1, 1, 1, 1, 1, 1, ColorGroup.Purple);
         assertFalse(property.hasOwner());
 
         property.setOwner(owner);
         assertTrue(property.hasOwner());
         assertEquals(owner, property.getOwner());
 
-        Property property2 = new Property(owner, name, 1, 1, 10, 1, 1, 1, 1, 1, 1);
+        Property property2 = new Property(owner, name, 1, 1, 10, 1, 1, 1, 1, 1, 1, ColorGroup.Purple);
         assertTrue(property2.hasOwner());
         assertEquals(owner, property2.getOwner());
     }
@@ -32,7 +32,7 @@ public class PropertyTest {
         final int price = 10;
         Owner owner = mock(Owner.class);
 
-        Property property = new Property(owner, name, 1, 1, 10, 1, 1, 1, 1, 1, 1);
+        Property property = new Property(owner, name, 1, 1, 10, 1, 1, 1, 1, 1, 1, ColorGroup.Purple);
         assertEquals(price, property.getPrice());
     }
 
@@ -42,7 +42,7 @@ public class PropertyTest {
         final int price = 10;
         Owner owner = mock(Owner.class);
 
-        Property property = new Property(owner, name, 1, 1, 10, 1, 1, 1, 1, 1, 1);
+        Property property = new Property(owner, name, 1, 1, 10, 1, 1, 1, 1, 1, 1, ColorGroup.Purple);
         assertEquals(name, property.getName());
     }
 

@@ -6,6 +6,7 @@ import monopoly.model.Model;
 import monopoly.model.dice.DiceResult;
 import monopoly.model.dice.MultipleDiceResult;
 import monopoly.model.field.Field;
+import monopoly.model.field.Property;
 import monopoly.model.field.UpgradeableField;
 import monopoly.model.player.Player;
 
@@ -21,6 +22,8 @@ public class ViewModel {
     private Map<Player, IntegerProperty> playerPositions;
     private Map<Player, IntegerProperty> playerDiceRollsLeft;
     private Map<Player, ListProperty<monopoly.model.field.Property>> playerProperties;
+
+    private Map<Integer, IntegerProperty> levelProperties;
 
     private StringProperty currentPlayerNameProperty;
 
@@ -81,6 +84,31 @@ public class ViewModel {
         bankMoney = new SimpleIntegerProperty(model.getBankMoney());
         bankHouseCount = new SimpleIntegerProperty(model.getBankHouseCount());
         bankHotelCount = new SimpleIntegerProperty(model.getBankHotelCount());
+
+        levelProperties = new HashMap<Integer, IntegerProperty>() {{
+            put(1, new SimpleIntegerProperty(model.getPropertyAt(1).getLevel()));
+            put(3, new SimpleIntegerProperty(model.getPropertyAt(3).getLevel()));
+            put(6, new SimpleIntegerProperty(model.getPropertyAt(6).getLevel()));
+            put(8, new SimpleIntegerProperty(model.getPropertyAt(8).getLevel()));
+            put(9, new SimpleIntegerProperty(model.getPropertyAt(9).getLevel()));
+            put(11, new SimpleIntegerProperty(model.getPropertyAt(11).getLevel()));
+            put(13, new SimpleIntegerProperty(model.getPropertyAt(13).getLevel()));
+            put(14, new SimpleIntegerProperty(model.getPropertyAt(14).getLevel()));
+            put(16, new SimpleIntegerProperty(model.getPropertyAt(16).getLevel()));
+            put(18, new SimpleIntegerProperty(model.getPropertyAt(18).getLevel()));
+            put(19, new SimpleIntegerProperty(model.getPropertyAt(19).getLevel()));
+            put(21, new SimpleIntegerProperty(model.getPropertyAt(21).getLevel()));
+            put(23, new SimpleIntegerProperty(model.getPropertyAt(23).getLevel()));
+            put(24, new SimpleIntegerProperty(model.getPropertyAt(24).getLevel()));
+            put(26, new SimpleIntegerProperty(model.getPropertyAt(26).getLevel()));
+            put(27, new SimpleIntegerProperty(model.getPropertyAt(27).getLevel()));
+            put(29, new SimpleIntegerProperty(model.getPropertyAt(29).getLevel()));
+            put(31, new SimpleIntegerProperty(model.getPropertyAt(31).getLevel()));
+            put(32, new SimpleIntegerProperty(model.getPropertyAt(32).getLevel()));
+            put(34, new SimpleIntegerProperty(model.getPropertyAt(34).getLevel()));
+            put(37, new SimpleIntegerProperty(model.getPropertyAt(37).getLevel()));
+            put(39, new SimpleIntegerProperty(model.getPropertyAt(39).getLevel()));
+        }};
     }
 
     public int getPlayerMoney(int ind) {
@@ -343,5 +371,66 @@ public class ViewModel {
 
     public void lockPlayerToJail(int ind) {
         model.lockPlayerToJail(ind);
+    }
+
+    public IntegerProperty getLevelProperty(int ind) {
+        return levelProperties.get(ind);
+    }
+
+    public boolean canSellProperty(Property prop) {
+        return model.canSellProperty(prop);
+    }
+
+    public boolean canUpgradeProperty(Property prop) {
+        return model.canUpgradeProperty(prop);
+    }
+
+    public boolean canDowngradeProperty(Property prop) {
+        return model.canDowngradeProperty(prop);
+    }
+
+
+    public boolean currentPlayerHasEnoughMoney(int upgradePrice) {
+        return model.currentPlayerHasEnoughMoney(upgradePrice);
+    }
+
+    public boolean canBankGiveBuilding(Property propToUpgrade) {
+        return model.canBankGiveBuilding(propToUpgrade);
+    }
+
+    public void buyBuilding(Property propToUpgrade) {
+        model.buyBuilding(propToUpgrade);
+
+        playerMoney.get(model.getCurrentPlayer()).set(model.getCurrentPlayer().getMoney());
+        bankMoney.set(model.getBankMoney());
+        bankHouseCount.set(model.getBankHouseCount());
+        bankHotelCount.set(model.getBankHotelCount());
+        for (Map.Entry<Integer, IntegerProperty> e : levelProperties.entrySet()) {
+            levelProperties.get(e.getKey()).setValue(model.getPropertyAt(e.getKey()).getLevel());
+        }
+    }
+
+    public boolean bankHasEnoughMoney(int val) {
+        return model.bankHasEnoughMoney(val);
+    }
+
+    public int getBankHouseCount() {
+        return model.getBankHouseCount();
+    }
+
+    public int getBankHotelCount() {
+        return model.getBankHotelCount();
+    }
+
+    public void sellBuilding(Property propToDowngrade) {
+        model.sellBuilding(propToDowngrade);
+
+        playerMoney.get(model.getCurrentPlayer()).set(model.getCurrentPlayer().getMoney());
+        bankMoney.set(model.getBankMoney());
+        bankHouseCount.set(model.getBankHouseCount());
+        bankHotelCount.set(model.getBankHotelCount());
+        for (Map.Entry<Integer, IntegerProperty> e : levelProperties.entrySet()) {
+            levelProperties.get(e.getKey()).setValue(model.getPropertyAt(e.getKey()).getLevel());
+        }
     }
 }

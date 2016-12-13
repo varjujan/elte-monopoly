@@ -14,6 +14,7 @@ import monopoly.model.player.State;
 import monopoly.model.player.changer.PlayerChanger;
 import monopoly.util.logger.Logger;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -126,6 +127,10 @@ public class Model {
 
     public UpgradeableField getFieldByName(String name) {return board.getFieldByName(name); }
 
+    public Property getPropertyAt(int ind) {
+        return (Property) board.getFieldAt(ind);
+    }
+
     public int getPlayerMoney(int ind) {
         return playerChanger.getPlayerMoney(ind);
     }
@@ -217,5 +222,85 @@ public class Model {
 
     public void lockPlayerToJail(int ind) {
         playerChanger.lockPlayerToJail(ind);
+    }
+
+    public boolean canSellProperty(Property prop) {
+        if (prop.getLevel() > 0) return false;
+        ArrayList<Property> propsFromSameColorGroup = board.getPropsFromColorGroup(prop);
+
+        for (Property p : propsFromSameColorGroup) {
+            if (p.getLevel() > 0) return false;
+        }
+
+        return true;
+    }
+
+    public boolean canUpgradeProperty(Property propToUpgrade) {
+        if (propToUpgrade.getLevel() == 5) return false;
+        ArrayList<Property> propsFromSameColorGroup = board.getPropsFromColorGroup(propToUpgrade);
+
+        for (Property prop : propsFromSameColorGroup) {
+            if (prop.getLevel() < propToUpgrade.getLevel()) return false;
+            if (prop.getOwner() == null) return false;
+            if (prop.getOwner() != null && !prop.getOwner().getName().equals(propToUpgrade.getOwner().getName()))
+                return false;
+        }
+
+        return true;
+    }
+
+    public boolean canDowngradeProperty(Property propToDowngrade) {
+        if (propToDowngrade.getLevel() == 0) return false;
+        ArrayList<Property> propsFromSameColorGroup = board.getPropsFromColorGroup(propToDowngrade);
+
+        for (Property prop : propsFromSameColorGroup) {
+            if (prop.getLevel() > propToDowngrade.getLevel()) return false;
+        }
+
+        return true;
+    }
+
+    public boolean currentPlayerHasEnoughMoney(int upgradePrice) {
+        return playerChanger.currentPlayer().hasEnoughMoneyFor(upgradePrice);
+    }
+
+    public boolean canBankGiveBuilding(Property propToUpgrade) {
+        return bank.canGiveBuilding(propToUpgrade);
+    }
+
+    public void buyBuilding(Property propToUpgrade) {
+        propToUpgrade.upgrade();
+        getCurrentPlayer().reduceMoney(propToUpgrade.getUpgradePrice());
+        bank.increaseMoney(propToUpgrade.getUpgradePrice());
+
+        if (propToUpgrade.getLevel() == 5) {
+            bank.addHouse(4);
+            bank.takeHotel(1);
+        } else {
+            bank.takeHouse(1);
+        }
+    }
+
+    public boolean bankHasEnoughMoney(int val) {
+        return getBank().hasEnoughMoneyFor(val);
+    }
+
+    public void sellBuilding(Property propToDowngrade) {
+        propToDowngrade.downgrade();
+        if (propToDowngrade.getLevel() == 4) {
+            getCurrentPlayer().increaseMoney(propToDowngrade.getUpgradePrice() * 5 / 2);
+            bank.reduceMoney(propToDowngrade.getUpgradePrice() * 5 / 2);
+        } else {
+            getCurrentPlayer().increaseMoney(propToDowngrade.getUpgradePrice() / 2);
+            bank.reduceMoney(propToDowngrade.getUpgradePrice() / 2);
+        }
+
+        if (propToDowngrade.getLevel() == 4) {
+            bank.addHotel(1);
+            bank.takeHouse(4);
+        } else {
+            bank.addHouse(1);
+        }
+
     }
 }

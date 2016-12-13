@@ -7,6 +7,7 @@ import java.util.List;
 
 public class StandardBank implements Bank {
 
+    private String name = "Bank";
     private int money;
     private int houseCount;
     private int hotelCount;
@@ -54,6 +55,11 @@ public class StandardBank implements Bank {
     }
 
     @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
     public void addProperty(Property property) {
         this.properties.add(property);
         property.setOwner(this);
@@ -73,6 +79,18 @@ public class StandardBank implements Bank {
         return houseCount;
     }
 
+    @Override
+    public boolean canGiveBuilding(Property propToUpgrade) {
+        if (propToUpgrade.getLevel() == 4) {
+            if (hotelCount > 0) return true;
+        } else {
+            if (houseCount > 0) return true;
+        }
+
+        return false;
+    }
+
+
     public void setHouseCount(int houseCount) {
         this.houseCount = houseCount;
     }
@@ -85,4 +103,25 @@ public class StandardBank implements Bank {
     public void setHotelcount(int hotelCount) {
         this.hotelCount = hotelCount;
     }
+
+    @Override
+    public void addHouse(int count) {
+        houseCount += count;
+    }
+
+    @Override
+    public void takeHouse(int count) {
+        houseCount -= count;
+    }
+
+    @Override
+    public void addHotel(int count) {
+        hotelCount += count;
+    }
+
+    @Override
+    public void takeHotel(int count) {
+        hotelCount -= count;
+    }
+
 }

@@ -3,6 +3,7 @@ package monopoly.model.field;
 import monopoly.model.Ownable;
 import monopoly.model.Owner;
 
+
 public class Property extends Field implements Ownable, UpgradeableField {
 
     private Owner owner;
@@ -19,8 +20,10 @@ public class Property extends Field implements Ownable, UpgradeableField {
     private int rentLevel4;
     private int rentLevel5;
 
+    private ColorGroup color;
+
     public Property(String name, int upgradePrice, int maxLevel, int price, int rentLevel0, int rentLevel1,
-                    int rentLevel2, int rentLevel3, int rentLevel4, int rentLevel5) {
+                    int rentLevel2, int rentLevel3, int rentLevel4, int rentLevel5, ColorGroup color) {
         super(name);
         this.price = price;
         this.upgradePrice = upgradePrice;
@@ -33,10 +36,11 @@ public class Property extends Field implements Ownable, UpgradeableField {
         this.rentLevel3 = rentLevel3;
         this.rentLevel4 = rentLevel4;
         this.rentLevel5 = rentLevel5;
+        this.color = color;
     }
 
     public Property(Owner owner, String name, int upgradePrice, int maxLevel, int price, int rentLevel0, int rentLevel1,
-                    int rentLevel2, int rentLevel3, int rentLevel4, int rentLevel5) {
+                    int rentLevel2, int rentLevel3, int rentLevel4, int rentLevel5, ColorGroup color) {
         super(name);
         this.owner = owner;
         this.price = price;
@@ -50,6 +54,7 @@ public class Property extends Field implements Ownable, UpgradeableField {
         this.rentLevel3 = rentLevel3;
         this.rentLevel4 = rentLevel4;
         this.rentLevel5 = rentLevel5;
+        this.color = color;
     }
 
     public int getRentValue() {
@@ -71,6 +76,16 @@ public class Property extends Field implements Ownable, UpgradeableField {
         }
 
         return 0;
+    }
+
+    public void upgrade() {
+        if (level == 5) return;
+        level += 1;
+    }
+
+    public void downgrade() {
+        if (level == 0) return;
+        level -= 1;
     }
 
 
@@ -179,5 +194,14 @@ public class Property extends Field implements Ownable, UpgradeableField {
         if(level < 5) return 0;
         else return 1;
     }
+
+    public ColorGroup getColor() {
+        return color;
+    }
+
+    public void setColor(ColorGroup color) {
+        this.color = color;
+    }
+
 
 }

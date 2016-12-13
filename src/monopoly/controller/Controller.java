@@ -23,7 +23,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
-import javafx.scene.input.MouseEvent;
 import monopoly.model.dice.MultipleDiceResult;
 import monopoly.model.field.Property;
 import monopoly.model.field.UpgradeableField;
@@ -32,9 +31,7 @@ import monopoly.viewmodel.ViewModel;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Optional;
-import java.util.Random;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class Controller implements Initializable {
     private final ViewModel viewModel;
@@ -673,7 +670,71 @@ public class Controller implements Initializable {
     @FXML
     private Label propertyW1Label;
 
+    @FXML
+    private Label purple1Label;
 
+    @FXML
+    private Label purple2Label;
+
+    @FXML
+    private Label teal1Label;
+
+    @FXML
+    private Label teal2Label;
+
+    @FXML
+    private Label teal3Label;
+
+    @FXML
+    private Label pink1Label;
+
+    @FXML
+    private Label pink2Label;
+
+    @FXML
+    private Label pink3Label;
+
+    @FXML
+    private Label brown1Label;
+
+    @FXML
+    private Label brown2Label;
+
+    @FXML
+    private Label brown3Label;
+
+    @FXML
+    private Label crimson1Label;
+
+    @FXML
+    private Label crimson2Label;
+
+    @FXML
+    private Label crimson3Label;
+
+    @FXML
+    private Label gold1Label;
+
+    @FXML
+    private Label gold2Label;
+
+    @FXML
+    private Label gold3Label;
+
+    @FXML
+    private Label green1Label;
+
+    @FXML
+    private Label green2Label;
+
+    @FXML
+    private Label green3Label;
+
+    @FXML
+    private Label blue1Label;
+
+    @FXML
+    private Label blue2Label;
 
     //endregion
 
@@ -1011,6 +1072,57 @@ public class Controller implements Initializable {
                 if(prop != null) updatePropertyDescription(prop);
             }
         });
+
+        Map<Integer, Label> houseLabels = new HashMap<>();
+        houseLabels.put(1, purple1Label);
+        houseLabels.put(3, purple2Label);
+        houseLabels.put(6, teal1Label);
+        houseLabels.put(8, teal2Label);
+        houseLabels.put(9, teal3Label);
+        houseLabels.put(11, pink1Label);
+        houseLabels.put(13, pink2Label);
+        houseLabels.put(14, pink3Label);
+        houseLabels.put(16, brown1Label);
+        houseLabels.put(18, brown2Label);
+        houseLabels.put(19, brown3Label);
+        houseLabels.put(21, crimson1Label);
+        houseLabels.put(23, crimson2Label);
+        houseLabels.put(24, crimson3Label);
+        houseLabels.put(26, gold1Label);
+        houseLabels.put(27, gold2Label);
+        houseLabels.put(29, gold3Label);
+        houseLabels.put(31, green1Label);
+        houseLabels.put(32, green2Label);
+        houseLabels.put(34, green3Label);
+        houseLabels.put(37, blue1Label);
+        houseLabels.put(39, blue2Label);
+
+
+        for (Map.Entry<Integer, Label> e : houseLabels.entrySet()) {
+            (viewModel.getLevelProperty(e.getKey())).addListener((obs, oldValue, newValue) -> {
+                switch ((Integer) newValue) {
+                    case 0:
+                        e.getValue().setText("");
+                        break;
+                    case 1:
+                        e.getValue().setText("H x 1");
+                        break;
+                    case 2:
+                        e.getValue().setText("H x 2");
+                        break;
+                    case 3:
+                        e.getValue().setText("H x 3");
+                        break;
+                    case 4:
+                        e.getValue().setText("H x 4");
+                        break;
+                    case 5:
+                        e.getValue().setText("Hotel");
+                        break;
+                }
+            });
+        }
+
     }
 
     private void updatePropertyDescription(UpgradeableField field){
@@ -1204,26 +1316,33 @@ public class Controller implements Initializable {
             showErrorDialog("There is no selected property for the active player!");
         } else {
 
+            String propertyName = null;
+            if (viewModel.getCurrentPlayerIndex() == 0) {
+                propertyName = player0PropertyList.getSelectionModel().getSelectedItem().toString();
+            } else if (viewModel.getCurrentPlayerIndex() == 1) {
+                propertyName = player1PropertyList.getSelectionModel().getSelectedItem().toString();
+            } else if (viewModel.getCurrentPlayerIndex() == 2) {
+                propertyName = player2PropertyList.getSelectionModel().getSelectedItem().toString();
+            } else if (viewModel.getCurrentPlayerIndex() == 3) {
+                propertyName = player3PropertyList.getSelectionModel().getSelectedItem().toString();
+            }
+
+            if (!viewModel.canSellProperty((Property) viewModel.getFieldByName(propertyName))) {
+                showErrorDialog("Sell all buildings on properties in this color-group first!");
+                return;
+            }
+
+
             TextInputDialog dialog = new TextInputDialog("100");
             dialog.setTitle("Sell the property");
             dialog.setHeaderText("How much money do you want for this property?");
             dialog.setContentText("Enter the property price:");
             Optional<String> result = dialog.showAndWait();
 
-            if (result.isPresent() && hasSelected) {
+            if (result.isPresent()) {
                 int resMoney = Integer.parseInt(result.get());
 
                 //Get active players selected property
-                String propertyName = null;
-                if (viewModel.getCurrentPlayerIndex() == 0) {
-                    propertyName = player0PropertyList.getSelectionModel().getSelectedItem().toString();
-                } else if (viewModel.getCurrentPlayerIndex() == 1) {
-                    propertyName = player1PropertyList.getSelectionModel().getSelectedItem().toString();
-                } else if (viewModel.getCurrentPlayerIndex() == 2) {
-                    propertyName = player2PropertyList.getSelectionModel().getSelectedItem().toString();
-                } else if (viewModel.getCurrentPlayerIndex() == 3) {
-                    propertyName = player3PropertyList.getSelectionModel().getSelectedItem().toString();
-                }
 
                 //tempdata
                 java.util.List<String> playerNames = new java.util.ArrayList<String>();
@@ -1258,13 +1377,11 @@ public class Controller implements Initializable {
                         cancelButton.setText("No");
 
                         Optional<ButtonType> resultConf = alert.showAndWait();
-                        if (resultConf.get() == ButtonType.OK) {
+                        if (resultConf.isPresent() && resultConf.get() == ButtonType.OK) {
                             //TODO: viewModel.sellTheProperty(propertyName, buyerName, resMoney);
                         } else {
                             showErrorDialog(buyerName + " does not want to buy this property for " + resMoney + "$");
                         }
-
-
                     } else {
                         showErrorDialog(buyerName + " does not have enough money!");
                     }
@@ -1277,11 +1394,107 @@ public class Controller implements Initializable {
 
     @FXML
     void buyHouseButtonClicked(ActionEvent event) {
+        boolean hasSelected = false;
+        if (viewModel.getCurrentPlayerIndex() == 0) {
+            hasSelected = player0PropertyList.getSelectionModel().getSelectedItem() != null;
+        } else if (viewModel.getCurrentPlayerIndex() == 1) {
+            hasSelected = player1PropertyList.getSelectionModel().getSelectedItem() != null;
+        } else if (viewModel.getCurrentPlayerIndex() == 2) {
+            hasSelected = player2PropertyList.getSelectionModel().getSelectedItem() != null;
+        } else if (viewModel.getCurrentPlayerIndex() == 3) {
+            hasSelected = player3PropertyList.getSelectionModel().getSelectedItem() != null;
+        }
 
+        if (!hasSelected) {
+            showErrorDialog("There is no selected property for the active player!");
+        } else {
+
+            //Get active players selected property
+            String propertyName = "";
+            if (viewModel.getCurrentPlayerIndex() == 0) {
+                propertyName = player0PropertyList.getSelectionModel().getSelectedItem().toString();
+            } else if (viewModel.getCurrentPlayerIndex() == 1) {
+                propertyName = player1PropertyList.getSelectionModel().getSelectedItem().toString();
+            } else if (viewModel.getCurrentPlayerIndex() == 2) {
+                propertyName = player2PropertyList.getSelectionModel().getSelectedItem().toString();
+            } else if (viewModel.getCurrentPlayerIndex() == 3) {
+                propertyName = player3PropertyList.getSelectionModel().getSelectedItem().toString();
+            }
+
+            Property propToUpgrade = (Property) viewModel.getFieldByName(propertyName);
+
+            if (viewModel.canUpgradeProperty((Property) viewModel.getFieldByName(propertyName))) {
+                if (viewModel.currentPlayerHasEnoughMoney(propToUpgrade.getUpgradePrice())) {
+                    if (viewModel.canBankGiveBuilding(propToUpgrade)) {
+                        viewModel.buyBuilding(propToUpgrade);
+                    } else {
+                        showErrorDialog("No house/hotel left in the bank!");
+                    }
+                } else {
+                    showErrorDialog("You don't have enough money to upgrade that property!");
+                }
+            } else {
+                showErrorDialog("Buy every property from this color-group first\n\nAND\n\nBuy houses on properties with fewer houses first");
+            }
+        }
     }
 
     @FXML
     void sellHouseButtonClicked(ActionEvent event) {
+        boolean hasSelected = false;
+        if (viewModel.getCurrentPlayerIndex() == 0) {
+            hasSelected = player0PropertyList.getSelectionModel().getSelectedItem() != null;
+        } else if (viewModel.getCurrentPlayerIndex() == 1) {
+            hasSelected = player1PropertyList.getSelectionModel().getSelectedItem() != null;
+        } else if (viewModel.getCurrentPlayerIndex() == 2) {
+            hasSelected = player2PropertyList.getSelectionModel().getSelectedItem() != null;
+        } else if (viewModel.getCurrentPlayerIndex() == 3) {
+            hasSelected = player3PropertyList.getSelectionModel().getSelectedItem() != null;
+        }
+
+        if (!hasSelected) {
+            showErrorDialog("There is no selected property for the active player!");
+        } else {
+
+            //Get active players selected property
+            String propertyName = null;
+            if (viewModel.getCurrentPlayerIndex() == 0) {
+                propertyName = player0PropertyList.getSelectionModel().getSelectedItem().toString();
+            } else if (viewModel.getCurrentPlayerIndex() == 1) {
+                propertyName = player1PropertyList.getSelectionModel().getSelectedItem().toString();
+            } else if (viewModel.getCurrentPlayerIndex() == 2) {
+                propertyName = player2PropertyList.getSelectionModel().getSelectedItem().toString();
+            } else if (viewModel.getCurrentPlayerIndex() == 3) {
+                propertyName = player3PropertyList.getSelectionModel().getSelectedItem().toString();
+            }
+
+            Property propToDowngrade = (Property) viewModel.getFieldByName(propertyName);
+
+            if (viewModel.canDowngradeProperty(propToDowngrade)) {
+                if (propToDowngrade.getLevel() == 5) {
+                    if (viewModel.bankHasEnoughMoney(propToDowngrade.getUpgradePrice() * 5 / 2)) {
+                        if (viewModel.getBankHouseCount() >= 4) {
+                            viewModel.sellBuilding(propToDowngrade);
+                            //model.getMonopolyLogger().writeToLogger(model.getName(model.getCurrentPlayerIndex()) + " sold a hotel");
+                        } else {
+                            showErrorDialog("The bank has not enough house!");
+                        }
+                    } else {
+                        showErrorDialog("The bank has not enough money to buy back your hotel!");
+                    }
+                } else {
+                    if (viewModel.bankHasEnoughMoney(propToDowngrade.getUpgradePrice() / 2)) {
+                        viewModel.sellBuilding(propToDowngrade);
+                        //model.getMonopolyLogger().writeToLogger(model.getName(model.getCurrentPlayerIndex()) + " sold a house");
+                    } else {
+                        showErrorDialog("The bank has not enough money to buy back your house!");
+                    }
+                }
+
+            } else {
+                showErrorDialog("No buildings to sell\n\nOR\n\nSell other buildings in this color-group first!");
+            }
+        }
 
     }
 
